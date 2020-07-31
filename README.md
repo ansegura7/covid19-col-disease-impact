@@ -7,6 +7,7 @@ Analysis and prediction of the impact of Covid-19 on certain diseases and key in
 
 ## Data
 - SIVIGILA
+- DANE
 
 ## Author
 - Created by Andrés Segura Tinoco
