@@ -4,6 +4,7 @@ Analysis and prediction of the impact of Covid-19 on certain diseases and key in
 ## Indicators / Diseases
 - Maternal Mortality (MM)
 - Infant Mortality (IM)
+- Tuberculosis (TB)
 
 ## Data
 - SIVIGILA
