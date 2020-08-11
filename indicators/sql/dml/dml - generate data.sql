@@ -1,6 +1,8 @@
 USE [AC_C19_DATA]
 GO
-SELECT [indicator],[date],[value]
+
+-- Generate by indicator
+SELECT [date], YEAR([date]) AS [year], MONTH([date]) AS [month], DATEPART(WEEK, [date]) AS [week], [value]
   FROM 
 	  (SELECT [indicator],[date],SUM([value]) AS [value]
 	     FROM [dbo].[indicator_by_departament]
@@ -9,6 +11,7 @@ SELECT [indicator],[date],[value]
  ORDER BY [date];
 GO
 
+-- Generate for all indicators
 SELECT [date],[MM],[IM],[TB]
    FROM 
 	  (SELECT [indicator],[date],SUM([value]) AS [value]
