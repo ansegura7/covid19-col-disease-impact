@@ -11,5 +11,5 @@ Analysis and prediction of the impact of Covid-19 on certain diseases and key in
 - DANE
 
 ## Author
-- Created by Andrés Segura Tinoco
+- Created by <a href="https://github.com/ansegura7">Andrés Segura Tinoco</a> and <a href="https://github.com/vladcuevas">Vladimir Cuevas</a>
 - Created on Jul 25, 2020
