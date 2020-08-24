@@ -45,15 +45,18 @@ def read_csv_file(filename, encoding='utf-8', delimiter=','):
 # Get data from CSV file
 def get_full_data(indicator):
     full_data = []
-    url_file = '../' + indicator + '/data/tb_weekly_data.csv'
+    url_file = '../' + indicator + '/data/raw_data.csv'
     
     raw_data = read_csv_file(url_file)
     
     for row in raw_data[1:]:
         week = 1
         for item in row[5:]:
-            full_data.append(row[:5] + [week, item])
-            week += 1
+            if item.isnumeric():
+                full_data.append(row[:5] + [week, item])
+                week += 1
+            else:
+                break
     
     return full_data
 
@@ -103,7 +106,7 @@ print(">> START PROGRAM: " + str(datetime.now()))
 db_login = get_db_credentials()
 
 # 2. Get data from CSV file
-indicator = '3. tuberculosis'
+indicator = '3-tuberculosis'
 data = get_full_data(indicator)
 
 # 3. Save data into DB
