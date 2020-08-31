@@ -7,6 +7,7 @@ SELECT [date], YEAR([date]) AS [year], MONTH([date]) AS [month], DATEPART(WEEK, 
 	  (SELECT [indicator],[date],SUM([value]) AS [value]
 	     FROM [dbo].[indicator_by_departament]
 		WHERE [indicator] = 'TB'
+		 -- AND [department] = 'CHOCO'
 	    GROUP BY [indicator],[date]) AS t
  ORDER BY [date];
 GO
