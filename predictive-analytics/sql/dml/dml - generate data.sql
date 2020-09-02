@@ -2,13 +2,12 @@ USE [AC_C19_DATA]
 GO
 
 -- Generate by indicator
-SELECT [date], YEAR([date]) AS [year], MONTH([date]) AS [month], DATEPART(WEEK, [date]) AS [week], [value]
-  FROM 
-	  (SELECT [indicator],[date],SUM([value]) AS [value]
-	     FROM [dbo].[indicator_data]
-		WHERE [indicator] = 'TB'
-		 -- AND [department] = 'CHOCO'
-	    GROUP BY [indicator],[date]) AS t
+SELECT [date], [year], MONTH([date]) AS [month], [week], SUM([value]) AS [value]
+  FROM [dbo].[indicator_data]
+ WHERE [indicator] = 'TB'
+   AND [year] >= 2016
+	-- AND [department] = 'CHOCO'
+ GROUP BY [date],[year], MONTH([date]), [week]
  ORDER BY [date];
 GO
 
