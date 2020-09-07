@@ -6,7 +6,7 @@ SELECT [date], [year], MONTH([date]) AS [month], [week], SUM([value]) AS [value]
   FROM [dbo].[indicator_data]
  WHERE [indicator] = 'TB'
    AND [year] >= 2016
-	-- AND [department] = 'CHOCO'
+   AND [department] = 'BOGOTA'
  GROUP BY [date],[year], MONTH([date]), [week]
  ORDER BY [date];
 GO
