@@ -250,10 +250,7 @@ def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
     best_models = dict()
     
     try:
-        for entity, data in data_list.items():
-            if not entity in ['COLOMBIA', 'AMAZONAS', 'ANTIOQUIA']:
-                continue
-            
+        for entity, data in data_list.items():            
             logging.info(' = Entity: ' + entity)
             
             # Cooking time-series data with frequency
