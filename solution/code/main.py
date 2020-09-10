@@ -6,7 +6,8 @@
     Description: Main class of the solution.
 """
 
-# Import Python libraries
+# Import Python 
+import os
 import logging
 import pandas as pd
 import numpy as np
@@ -112,6 +113,18 @@ def group_data_by_period(data):
     
     return gr_data
 
+# Util function - Create a directory if it does not exist
+def create_folder(folder_name):
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+
+# Util function - Save dataframe to CSV file 
+def save_df_to_csv_file(filename, df, index=True):
+    try:
+        df.to_csv(filename, index=index)
+    except Exception as e:
+        logging.error(' - Error: ' + str(e))
+
 ######################
 ### CORE FUNCTIONS ###
 ######################
@@ -132,6 +145,10 @@ def get_data_by_entity(filename):
             entity_data = raw_data[raw_data['entity'] == entity]
             entity_data = group_data_by_period(entity_data)                
             data_list[entity] = entity_data
+            
+            # Save results
+            filename = '../result/' + curr_disease.lower() + '/' + entity.lower() + '_aggr_data.csv'
+            save_df_to_csv_file(filename, entity_data)
     
     return data_list
 
@@ -199,19 +216,19 @@ def arima_grid_search(series_data, perc_test):
                     
                     # Save result
                     scores.append( {'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4), 
-                                    'ts_period': ts_period, 'order': param, 'seasonal_order': param_seasonal} )
+                                    'ts_period': ts_period, 'order': param, 'seasonal_order': param_seasonal, 'method': 'SARIMA'} )
                 
             except Exception as e:
                 logging.error(' - Error: ' + str(e))
     
     # Elapsed time
     elapsed = timeit.default_timer() - start_time
-    logging.info(' - Grid search elapsed time:' + str(elapsed) + ' s')
+    logging.info(' - Grid search elapsed time: ' + str(elapsed) + ' s')
     
     return scores
 
 # Core function - Make predictions
-def make_predictions(model, n_forecast, ci_alpha):
+def make_predictions(curr_disease, entity, model, n_forecast, ci_alpha):
     
     # Get forecast n steps ahead in future (1 year)
     pred = model.get_forecast(steps=n_forecast)
@@ -225,15 +242,16 @@ def make_predictions(model, n_forecast, ci_alpha):
     pred_df['ci_sup'] = pred_ci.iloc[:, 1]
     
     # Save results
-    logging.info(pred_df)
+    filename = '../result/' + curr_disease.lower() + '/' + entity.lower() + '_forecast.csv'
+    save_df_to_csv_file(filename, pred_df)
 
 # Core function - Create models by entities
-def create_models(data_list, perc_test, n_forecast, ci_alpha):
-    result = True
+def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
+    best_models = dict()
     
     try:
         for entity, data in data_list.items():
-            if entity in ['COLOMBIA', 'AMAZONAS', 'ANTIOQUIA', 'BOGOTA DC', 'CHOCO', 'LA GUAJIRA']:
+            if not entity in ['COLOMBIA', 'AMAZONAS', 'ANTIOQUIA']:
                 continue
             
             logging.info(' = Entity: ' + entity)
@@ -253,6 +271,7 @@ def create_models(data_list, perc_test, n_forecast, ci_alpha):
                 
                 # Save best 10 model params
                 n = min(len(scores), 10)
+                logging.info(' = Save best ' + str(n) + ' models')
                 for score in scores[:n]:
                     logging.info(' - ' + str(score))
                 
@@ -261,35 +280,71 @@ def create_models(data_list, perc_test, n_forecast, ci_alpha):
                 model = sm.tsa.statespace.SARIMAX(series_data, order=best_params['order'], seasonal_order=best_params['seasonal_order'], 
                                                   enforce_stationarity=False, enforce_invertibility=False)
                 model = model.fit()
+                best_models[entity] = best_params
                 
                 # Make predictions
-                logging.info(' = Predictions:')
-                make_predictions(model, n_forecast, ci_alpha)
+                logging.info(' = Make predictions')
+                make_predictions(curr_disease, entity, model, n_forecast, ci_alpha)
                 
     except Exception as e:
         logging.error(' - Error: ' + str(e))
-        result = False
+        best_models[entity] = { 'result': str(e) }
     
-    return result
+    return best_models
+
+# Core function - Save to CSV file the hyperparameters of selected models 
+def save_results(curr_disease, data):
+    df = pd.DataFrame.from_dict(data, orient='index')
+    
+    # Populate final dataframe
+    for ix, row in df.iterrows():
+        order = row['order']
+        seasonal_order = row['seasonal_order']
+        df.at[ix, 'p'] = order[0]
+        df.at[ix, 'd'] = order[1]
+        df.at[ix, 'q'] = order[2]
+        df.at[ix, 'Sp'] = seasonal_order[0]
+        df.at[ix, 'Sd'] = seasonal_order[1]
+        df.at[ix, 'Sq'] = seasonal_order[2]
+        df.at[ix, 'freq'] = seasonal_order[3]
+    
+    # Remove unused columns
+    df.drop("order", axis=1, inplace=True)
+    df.drop("seasonal_order", axis=1, inplace=True)
+    
+    # Persist data
+    filename = '../result/' + curr_disease.lower() + '/model_params.csv'
+    save_df_to_csv_file(filename, df)
 
 #####################
 ### START PROGRAM ###
 #####################
 logging.basicConfig(filename="log/log_file.log", level=logging.INFO)
 logging.info('>> START PROGRAM: ' + str(datetime.now()))
-logging.info(' = Disease: TUBERCULOSIS')
-             
-# 1. Get list of datasets by entities
-filename = '../data/tb_dataset.csv'
+
+# 1. Set current disease
+curr_disease = 'TUBERCULOSIS'
+logging.info(' = Disease: ' + curr_disease)
+create_folder('../result/' + curr_disease.lower())
+
+# 2. Get list of datasets by entities
+logging.info(' = Read data by entity - ' + str(datetime.now()))
+filename = '../data/' + curr_disease.lower() + '_dataset.csv'
 data_list = get_data_by_entity(filename)
 
-# 2. Create best model
+# 3. Create best model
+logging.info(' = Create best models - ' + str(datetime.now()))
 perc_test = 0.20
 n_forecast = 13
 ci_alpha = 0.9
-result = create_models(data_list, perc_test, n_forecast, ci_alpha)
+best_models = create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha)
 
-logging.info('>> END PROGRAM: ' + str(datetime.now()))
+# 4. Save hyperparameters of selected models
+logging.info(' = Save hyperparameters of selected models - ' + str(datetime.now()))
+save_results(curr_disease, best_models)
+
+logging.info(">> END PROGRAM: " + str(datetime.now()))
+logging.shutdown()
 #####################
 #### END PROGRAM ####
 #####################
