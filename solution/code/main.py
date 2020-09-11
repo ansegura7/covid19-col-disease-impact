@@ -11,6 +11,7 @@ import os
 import logging
 import pandas as pd
 import numpy as np
+import scipy.stats as ss
 import itertools
 import timeit
 from datetime import datetime
@@ -170,6 +171,7 @@ def arima_smoothing_configs(data_freq):
 def arima_grid_search(series_data, perc_test):
     scores = []
     start_time = timeit.default_timer()
+    method = 'SARIMA'
     
     # Specify to ignore warning messages
     filterwarnings("ignore")
@@ -210,13 +212,18 @@ def arima_grid_search(series_data, perc_test):
                     rmse = (rmse + calc_rmse(y_truth, y_forecasted)) / 2
                     mape = (mape + calc_mape(y_truth, y_forecasted)) / 2
                     
+                    # Compute variation coefficients
+                    ts_var_coef = ss.variation(series_data.values)
+                    pred_var_coef = ss.variation(y_forecasted)
+                    
                     # Compute tracking signal for prediction
                     ci_tolerance = 3.0
                     ts_period = tracking_signal(y_truth, y_forecasted, ci_tolerance)
                     
                     # Save result
-                    scores.append( {'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4), 
-                                    'ts_period': ts_period, 'order': param, 'seasonal_order': param_seasonal, 'method': 'SARIMA'} )
+                    scores.append( {'method': method, 'order': param, 'seasonal_order': param_seasonal,
+                                    'ts_var_coef': round(ts_var_coef, 4), 'pred_var_coef': round(pred_var_coef, 4), 'tracking_signal': ts_period,
+                                    'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)} )
                 
             except Exception as e:
                 logging.error(' - Error: ' + str(e))
@@ -245,12 +252,24 @@ def make_predictions(curr_disease, entity, model, n_forecast, ci_alpha):
     filename = '../result/' + curr_disease.lower() + '/' + entity.lower() + '_forecast.csv'
     save_df_to_csv_file(filename, pred_df)
 
+# Core function - Check if the entity has permission to be processed
+def check_permission(entity):
+    valid_entity = []
+    if len(valid_entity) == 0 or entity in valid_entity:
+        return True
+    return False
+
 # Core function - Create models by entities
 def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
     best_models = dict()
     
     try:
         for entity, data in data_list.items():            
+            
+            # Check permission to be processed
+            if not check_permission(entity):
+                continue
+            
             logging.info(' = Entity: ' + entity)
             
             # Cooking time-series data with frequency
