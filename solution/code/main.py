@@ -154,10 +154,10 @@ def get_data_by_entity(filename):
     return data_list
 
 # Core function - Create a set of SARIMA configs to try
-def arima_smoothing_configs(data_freq):
+def arima_smoothing_configs(data_freq, max_param=3):
     
     # Define the p, d and q parameters to take any value between 0 and 2
-    p = d = q = range(0, 3)
+    p = d = q = range(0, max_param)
 
     # Generate all different combinations of p, q and q triplets
     pdq = list(itertools.product(p, d, q))
@@ -170,8 +170,11 @@ def arima_smoothing_configs(data_freq):
 # Core function - Parameter selection for the ARIMA Time Series model
 def arima_grid_search(series_data, perc_test):
     scores = []
+    
+    # Begin grid search
     start_time = timeit.default_timer()
     method = 'SARIMA'
+    ci_tolerance = 3.0
     
     # Specify to ignore warning messages
     filterwarnings("ignore")
@@ -184,9 +187,11 @@ def arima_grid_search(series_data, perc_test):
     data_freq = 13
     pdq, seasonal_pdq = arima_smoothing_configs(data_freq)
     
+    # Grid search
     for param in pdq:
         for param_seasonal in seasonal_pdq:
             try:
+                # Create and fit model
                 model = sm.tsa.statespace.SARIMAX(series_data, order=param, seasonal_order=param_seasonal, 
                                                   enforce_stationarity=False, enforce_invertibility=False)
                 model = model.fit()
@@ -217,7 +222,6 @@ def arima_grid_search(series_data, perc_test):
                     pred_var_coef = ss.variation(y_forecasted)
                     
                     # Compute tracking signal for prediction
-                    ci_tolerance = 3.0
                     ts_period = tracking_signal(y_truth, y_forecasted, ci_tolerance)
                     
                     # Save result
@@ -228,7 +232,7 @@ def arima_grid_search(series_data, perc_test):
             except Exception as e:
                 logging.error(' - Error: ' + str(e))
     
-    # Elapsed time
+    # End grid search
     elapsed = timeit.default_timer() - start_time
     logging.info(' - Grid search elapsed time: ' + str(elapsed) + ' s')
     
