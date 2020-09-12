@@ -252,6 +252,9 @@ def make_predictions(curr_disease, entity, model, n_forecast, ci_alpha):
     pred_df['ci_inf'] = pred_ci.iloc[:, 0]
     pred_df['ci_sup'] = pred_ci.iloc[:, 1]
     
+    # Replace negative values by zero
+    pred_df[pred_df < 0] = 0
+    
     # Save results
     filename = '../result/' + curr_disease.lower() + '/' + entity.lower() + '_forecast.csv'
     save_df_to_csv_file(filename, pred_df)

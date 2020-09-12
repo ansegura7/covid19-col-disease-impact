@@ -1040,3 +1040,23 @@ INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (2, 0, 0
 INFO:root: = Make predictions
 INFO:root: = Save hyperparameters of selected models - 2020-09-10 15:31:56.768536
 INFO:root:>> END PROGRAM: 2020-09-10 15:31:56.799804
+INFO:root:>> START PROGRAM: 2020-09-12 09:13:19.149474
+INFO:root: = Disease: TUBERCULOSIS
+INFO:root: = Read data by entity - 2020-09-12 09:13:19.150472
+INFO:root: = Create best models - 2020-09-12 09:13:22.293830
+INFO:root: = Entity: ARAUCA
+INFO:root: - Grid search elapsed time: 168.92848370000002 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.2795, 'tracking_signal': 3, 'rmse': 1.4415, 'mape': 20.6999, 'aic': 59.7397, 'bic': 63.3208}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 2, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.2776, 'tracking_signal': 0, 'rmse': 2.0697, 'mape': 26.8038, 'aic': 65.4175, 'bic': 67.8049}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 2, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.2776, 'tracking_signal': 0, 'rmse': 2.0697, 'mape': 26.8038, 'aic': 67.4166, 'bic': 70.2019}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.3266, 'tracking_signal': 3, 'rmse': 1.962, 'mape': 27.5974, 'aic': 59.7091, 'bic': 62.8922}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.3208, 'tracking_signal': 0, 'rmse': 2.0779, 'mape': 28.0041, 'aic': 52.2645, 'bic': 54.0395}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.3072, 'tracking_signal': 3, 'rmse': 2.7913, 'mape': 28.5777, 'aic': 230.8803, 'bic': 234.2074}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (0, 0, 1, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.3072, 'tracking_signal': 3, 'rmse': 2.7913, 'mape': 28.5777, 'aic': 1279.1849, 'bic': 1282.9592}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 0), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.1987, 'tracking_signal': 3, 'rmse': 2.3835, 'mape': 28.6066, 'aic': 60.8756, 'bic': 63.263}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.2077, 'tracking_signal': 3, 'rmse': 2.0141, 'mape': 28.7356, 'aic': 68.1153, 'bic': 71.5096}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.3754, 'pred_var_coef': 0.2241, 'tracking_signal': 3, 'rmse': 2.0559, 'mape': 28.8745, 'aic': 63.527, 'bic': 66.4365}
+INFO:root: = Make predictions
+INFO:root: = Save hyperparameters of selected models - 2020-09-12 09:16:12.362657
+INFO:root:>> END PROGRAM: 2020-09-12 09:16:12.378656
