@@ -43,9 +43,9 @@ def read_csv_file(filename, encoding='utf-8', delimiter=','):
     return data
 
 # Get data from CSV file
-def get_full_data(indicator):
+def get_full_data():
     full_data = []
-    url_file = '../' + indicator + '/data/raw_data.csv'
+    url_file = 'data/raw_data.csv'
     
     raw_data = read_csv_file(url_file)
     
@@ -106,8 +106,7 @@ print(">> START PROGRAM: " + str(datetime.now()))
 db_login = get_db_credentials()
 
 # 2. Get data from CSV file
-indicator = '3-tuberculosis'
-data = get_full_data(indicator)
+data = get_full_data()
 
 # 3. Save data into DB
 db_save_data(db_login, data)
