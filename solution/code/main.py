@@ -130,6 +130,13 @@ def save_df_to_csv_file(filename, df, index=True):
 ### CORE FUNCTIONS ###
 ######################
 
+# Core function - Create results folders
+def create_result_folders(folder_name):
+    folder1 = '../result/' + folder_name.lower()
+    folder2 = folder1 + '/stage'
+    create_folder(folder1)
+    create_folder(folder2)
+
 # Core function - Read the CSV dataset and convert it to a dictionary by entity
 def get_data_by_entity(filename):
     data_list = dict()
@@ -148,7 +155,7 @@ def get_data_by_entity(filename):
             data_list[entity] = entity_data
             
             # Save results
-            filename = '../result/' + curr_disease.lower() + '/' + entity.lower() + '_aggr_data.csv'
+            filename = '../result/' + curr_disease.lower() + '/stage/' + entity.lower() + '_aggr_data.csv'
             save_df_to_csv_file(filename, entity_data)
     
     return data_list
@@ -174,6 +181,7 @@ def arima_grid_search(series_data, perc_test):
     # Begin grid search
     start_time = timeit.default_timer()
     method = 'SARIMA'
+    threshold = 2.0
     ci_tolerance = 3.0
     
     # Specify to ignore warning messages
@@ -224,11 +232,12 @@ def arima_grid_search(series_data, perc_test):
                     # Compute tracking signal for prediction
                     ts_period = tracking_signal(y_truth, y_forecasted, ci_tolerance)
                     
-                    # Save result
-                    scores.append( {'method': method, 'order': param, 'seasonal_order': param_seasonal,
-                                    'ts_var_coef': round(ts_var_coef, 4), 'pred_var_coef': round(pred_var_coef, 4), 'tracking_signal': ts_period,
-                                    'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)} )
-                
+                    # Save result if model MAPE is greater than threshold
+                    if mape > threshold:
+                        scores.append( {'method': method, 'order': param, 'seasonal_order': param_seasonal,
+                                        'ts_var_coef': round(ts_var_coef, 4), 'pred_var_coef': round(pred_var_coef, 4), 'tracking_signal': ts_period,
+                                        'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)} )
+                    
             except Exception as e:
                 logging.error(' - Error: ' + str(e))
     
@@ -346,9 +355,9 @@ logging.basicConfig(filename="log/log_file.log", level=logging.INFO)
 logging.info('>> START PROGRAM: ' + str(datetime.now()))
 
 # 1. Set current disease
-curr_disease = 'TUBERCULOSIS'
+curr_disease = 'INFANT_MORTALITY'
 logging.info(' = Disease: ' + curr_disease)
-create_folder('../result/' + curr_disease.lower())
+create_result_folders(curr_disease)
 
 # 2. Get list of datasets by entities
 logging.info(' = Read data by entity - ' + str(datetime.now()))

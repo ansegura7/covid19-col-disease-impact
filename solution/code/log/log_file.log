@@ -1060,3 +1060,496 @@ INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 0
 INFO:root: = Make predictions
 INFO:root: = Save hyperparameters of selected models - 2020-09-12 09:16:12.362657
 INFO:root:>> END PROGRAM: 2020-09-12 09:16:12.378656
+INFO:root:>> START PROGRAM: 2020-09-14 13:59:32.045496
+INFO:root: = Disease: INFANT_MORTALITY
+INFO:root: = Read data by entity - 2020-09-14 13:59:32.045496
+INFO:root: = Create best models - 2020-09-14 13:59:34.262517
+INFO:root: = Entity: COLOMBIA
+ERROR:root: - Error: math domain error
+INFO:root: - Grid search elapsed time: 157.9813567 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.0888, 'tracking_signal': 0, 'rmse': 28.1615, 'mape': 3.1549, 'aic': 123.888, 'bic': 127.469}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 1, 0, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.0867, 'tracking_signal': 0, 'rmse': 30.3786, 'mape': 3.4223, 'aic': 121.2223, 'bic': 124.1318}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.0882, 'tracking_signal': 0, 'rmse': 30.6956, 'mape': 3.4843, 'aic': 111.4307, 'bic': 114.2159}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (0, 1, 1, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.0784, 'tracking_signal': 0, 'rmse': 33.4263, 'mape': 3.6484, 'aic': 127.3275, 'bic': 129.7521}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.0787, 'tracking_signal': 0, 'rmse': 33.4383, 'mape': 3.6664, 'aic': 129.2508, 'bic': 132.1602}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 1, 1, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.0831, 'tracking_signal': 0, 'rmse': 30.5898, 'mape': 3.6703, 'aic': 118.9626, 'bic': 121.35}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.0709, 'tracking_signal': 5, 'rmse': 32.9606, 'mape': 3.7093, 'aic': 128.4226, 'bic': 131.6058}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.0581, 'tracking_signal': 0, 'rmse': 38.3074, 'mape': 3.9461, 'aic': 133.652, 'bic': 137.5312}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.0581, 'tracking_signal': 0, 'rmse': 38.0209, 'mape': 3.9786, 'aic': 131.6296, 'bic': 135.024}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.0857, 'pred_var_coef': 0.1022, 'tracking_signal': 3, 'rmse': 37.244, 'mape': 4.0589, 'aic': 102.0248, 'bic': 103.7999}
+INFO:root: = Make predictions
+INFO:root: = Entity: AMAZONAS
+INFO:root: - Grid search elapsed time: 99.89077740000002 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.3333, 'tracking_signal': 6, 'rmse': 1.118, 'mape': 31.25, 'aic': 108.1039, 'bic': 113.1362}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.5292, 'tracking_signal': 3, 'rmse': 1.059, 'mape': 33.3333, 'aic': 51.5463, 'bic': 53.6644}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.3521, 'tracking_signal': 5, 'rmse': 1.4347, 'mape': 36.4583, 'aic': 106.3537, 'bic': 113.667}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 0), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.0, 'tracking_signal': 3, 'rmse': 1.4571, 'mape': 39.5833, 'aic': 173.2372, 'bic': 176.5124}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 2, 1), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.0, 'tracking_signal': 3, 'rmse': 1.4571, 'mape': 39.5833, 'aic': 164.5134, 'bic': 169.2639}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.3464, 'tracking_signal': 5, 'rmse': 1.3229, 'mape': 41.6667, 'aic': 105.9407, 'bic': 112.0351}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.378, 'tracking_signal': 0, 'rmse': 0.933, 'mape': 41.6667, 'aic': 47.2383, 'bic': 50.4215}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.0, 'tracking_signal': 3, 'rmse': 1.5206, 'mape': 41.6667, 'aic': 105.0661, 'bic': 111.1605}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.0, 'tracking_signal': 3, 'rmse': 1.5206, 'mape': 41.6667, 'aic': 106.9419, 'bic': 114.2551}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.8008, 'pred_var_coef': 0.378, 'tracking_signal': 0, 'rmse': 0.933, 'mape': 41.6667, 'aic': 45.6846, 'bic': 48.4699}
+INFO:root: = Make predictions
+INFO:root: = Entity: ANTIOQUIA
+INFO:root: - Grid search elapsed time: 135.96469309999998 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.0705, 'tracking_signal': 0, 'rmse': 6.3513, 'mape': 6.9881, 'aic': 105.8091, 'bic': 109.7637}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.0608, 'tracking_signal': 0, 'rmse': 6.69, 'mape': 7.0463, 'aic': 95.6373, 'bic': 99.2184}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.0467, 'tracking_signal': 0, 'rmse': 6.9973, 'mape': 7.1032, 'aic': 96.5392, 'bic': 99.7224}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.0351, 'tracking_signal': 0, 'rmse': 7.2392, 'mape': 7.4264, 'aic': 92.9394, 'bic': 95.3267}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.0351, 'tracking_signal': 0, 'rmse': 7.2532, 'mape': 7.5226, 'aic': 94.9339, 'bic': 97.7192}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.0177, 'tracking_signal': 5, 'rmse': 7.3361, 'mape': 7.7073, 'aic': 282.6544, 'bic': 290.709}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.034, 'tracking_signal': 5, 'rmse': 7.4429, 'mape': 7.8314, 'aic': 94.1165, 'bic': 96.9017}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.0374, 'tracking_signal': 0, 'rmse': 7.6435, 'mape': 8.0614, 'aic': 96.1113, 'bic': 99.2944}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.0152, 'tracking_signal': 0, 'rmse': 8.2082, 'mape': 8.261, 'aic': 283.0845, 'bic': 289.5282}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 2, 2), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.1214, 'pred_var_coef': 0.0218, 'tracking_signal': 5, 'rmse': 8.0033, 'mape': 8.4083, 'aic': 201.9428, 'bic': 206.8183}
+INFO:root: = Make predictions
+INFO:root: = Entity: ARAUCA
+INFO:root: - Grid search elapsed time: 120.0784865 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.3735, 'tracking_signal': 3, 'rmse': 0.7866, 'mape': 10.372, 'aic': 46.4291, 'bic': 49.2144}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.2524, 'tracking_signal': 0, 'rmse': 1.271, 'mape': 19.8214, 'aic': 55.6195, 'bic': 59.5741}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.294, 'tracking_signal': 0, 'rmse': 1.5324, 'mape': 24.7768, 'aic': 52.7471, 'bic': 55.9303}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.2475, 'tracking_signal': 0, 'rmse': 1.118, 'mape': 24.8512, 'aic': 49.3443, 'bic': 51.765}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.4308, 'tracking_signal': 0, 'rmse': 1.4186, 'mape': 26.2202, 'aic': 52.4418, 'bic': 56.321}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.4157, 'tracking_signal': 0, 'rmse': 1.4489, 'mape': 26.2202, 'aic': 52.0506, 'bic': 55.6316}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.4286, 'tracking_signal': 4, 'rmse': 1.8854, 'mape': 26.2351, 'aic': 57.1259, 'bic': 59.9506}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.3232, 'tracking_signal': 0, 'rmse': 1.5969, 'mape': 28.0655, 'aic': 58.204, 'bic': 61.5984}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.5274, 'tracking_signal': 4, 'rmse': 1.9619, 'mape': 29.003, 'aic': 58.2507, 'bic': 61.6404}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.5633, 'pred_var_coef': 0.293, 'tracking_signal': 0, 'rmse': 1.6202, 'mape': 29.4643, 'aic': 54.6512, 'bic': 57.5607}
+INFO:root: = Make predictions
+INFO:root: = Entity: ATLANTICO
+INFO:root: - Grid search elapsed time: 145.27832050000006 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.0966, 'tracking_signal': 3, 'rmse': 7.2718, 'mape': 10.2698, 'aic': 78.5152, 'bic': 80.6333}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.0966, 'tracking_signal': 3, 'rmse': 7.2718, 'mape': 10.2698, 'aic': 78.5098, 'bic': 80.6279}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.0966, 'tracking_signal': 3, 'rmse': 7.2718, 'mape': 10.2698, 'aic': 80.5098, 'bic': 82.9305}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.0237, 'tracking_signal': 3, 'rmse': 8.4275, 'mape': 11.4167, 'aic': 82.5121, 'bic': 84.3276}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.0419, 'tracking_signal': 3, 'rmse': 8.9302, 'mape': 11.5489, 'aic': 88.951, 'bic': 92.1341}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.0439, 'tracking_signal': 3, 'rmse': 8.9365, 'mape': 11.5762, 'aic': 91.0019, 'bic': 94.583}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.0264, 'tracking_signal': 3, 'rmse': 8.4716, 'mape': 11.6097, 'aic': 91.1148, 'bic': 93.9001}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.0419, 'tracking_signal': 3, 'rmse': 8.9345, 'mape': 11.6567, 'aic': 87.0011, 'bic': 89.7863}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.044, 'tracking_signal': 3, 'rmse': 9.0544, 'mape': 11.6579, 'aic': 82.4764, 'bic': 84.8971}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.1736, 'pred_var_coef': 0.1023, 'tracking_signal': 3, 'rmse': 8.2471, 'mape': 11.663, 'aic': 74.5291, 'bic': 76.1069}
+INFO:root: = Make predictions
+INFO:root: = Entity: BOGOTA
+INFO:root: - Grid search elapsed time: 153.81270490000009 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.0297, 'tracking_signal': 0, 'rmse': 4.451, 'mape': 3.7173, 'aic': 97.4848, 'bic': 101.3641}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.044, 'tracking_signal': 0, 'rmse': 4.8077, 'mape': 3.8889, 'aic': 84.9678, 'bic': 88.151}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.0195, 'tracking_signal': 6, 'rmse': 4.3286, 'mape': 4.0069, 'aic': 83.4226, 'bic': 85.81}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.0337, 'tracking_signal': 0, 'rmse': 5.219, 'mape': 4.061, 'aic': 90.2237, 'bic': 93.618}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.0204, 'tracking_signal': 0, 'rmse': 4.7158, 'mape': 4.0711, 'aic': 85.7842, 'bic': 88.5695}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.0454, 'tracking_signal': 0, 'rmse': 5.0825, 'mape': 4.0961, 'aic': 83.188, 'bic': 85.9732}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.0169, 'tracking_signal': 5, 'rmse': 4.8541, 'mape': 4.1392, 'aic': 188.9005, 'bic': 194.9949}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.0589, 'tracking_signal': 6, 'rmse': 5.5176, 'mape': 4.2373, 'aic': 85.0629, 'bic': 88.2461}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.0318, 'tracking_signal': 0, 'rmse': 5.0918, 'mape': 4.2832, 'aic': 190.5163, 'bic': 197.8295}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 2, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.1461, 'pred_var_coef': 0.0139, 'tracking_signal': 0, 'rmse': 5.7825, 'mape': 4.3394, 'aic': 175.2803, 'bic': 180.7355}
+INFO:root: = Make predictions
+INFO:root: = Entity: BOLIVAR
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+INFO:root: - Grid search elapsed time: 162.033677 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.157, 'tracking_signal': 0, 'rmse': 2.5076, 'mape': 6.1961, 'aic': 74.0226, 'bic': 77.9019}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.157, 'tracking_signal': 0, 'rmse': 2.5509, 'mape': 6.4679, 'aic': 72.203, 'bic': 75.5973}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.1532, 'tracking_signal': 0, 'rmse': 2.6526, 'mape': 6.7523, 'aic': 68.4227, 'bic': 71.208}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.1532, 'tracking_signal': 0, 'rmse': 2.7581, 'mape': 7.1203, 'aic': 72.377, 'bic': 75.958}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.1713, 'tracking_signal': 0, 'rmse': 3.01, 'mape': 7.2357, 'aic': 88.9388, 'bic': 92.3285}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.1591, 'tracking_signal': 0, 'rmse': 3.1988, 'mape': 7.7098, 'aic': 91.2586, 'bic': 94.0834}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.2065, 'tracking_signal': 0, 'rmse': 3.065, 'mape': 8.0849, 'aic': 99.9083, 'bic': 103.298}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.1683, 'tracking_signal': 0, 'rmse': 3.1173, 'mape': 8.1009, 'aic': 93.226, 'bic': 96.6157}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.1554, 'tracking_signal': 0, 'rmse': 3.2208, 'mape': 8.3792, 'aic': 90.8667, 'bic': 94.8213}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2399, 'pred_var_coef': 0.1573, 'tracking_signal': 0, 'rmse': 3.181, 'mape': 8.7793, 'aic': 78.8963, 'bic': 82.2906}
+INFO:root: = Make predictions
+INFO:root: = Entity: BOYACA
+INFO:root: - Grid search elapsed time: 143.07002450000005 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.2587, 'tracking_signal': 0, 'rmse': 3.4036, 'mape': 25.227, 'aic': 68.8921, 'bic': 71.6154}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.2661, 'tracking_signal': 0, 'rmse': 3.7393, 'mape': 27.529, 'aic': 68.1908, 'bic': 70.6114}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.2782, 'tracking_signal': 0, 'rmse': 3.528, 'mape': 28.9211, 'aic': 65.0824, 'bic': 67.2004}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (0, 1, 2, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.293, 'tracking_signal': 8, 'rmse': 4.0917, 'mape': 29.1352, 'aic': 12.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (1, 1, 2, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.293, 'tracking_signal': 8, 'rmse': 4.0917, 'mape': 29.1352, 'aic': 14.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.293, 'tracking_signal': 8, 'rmse': 4.0917, 'mape': 29.1352, 'aic': 12.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (2, 1, 1, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.293, 'tracking_signal': 8, 'rmse': 4.0917, 'mape': 29.1352, 'aic': 14.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (2, 1, 2, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.293, 'tracking_signal': 8, 'rmse': 4.0917, 'mape': 29.1352, 'aic': 16.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.4216, 'tracking_signal': 3, 'rmse': 4.6585, 'mape': 29.8071, 'aic': 65.5128, 'bic': 66.8933}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (0, 1, 1, 13), 'ts_var_coef': 0.3015, 'pred_var_coef': 0.6005, 'tracking_signal': 3, 'rmse': 3.8162, 'mape': 30.0284, 'aic': 64.0026, 'bic': 65.8181}
+INFO:root: = Make predictions
+INFO:root: = Entity: CALDAS
+INFO:root: - Grid search elapsed time: 127.51641519999998 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.4569, 'tracking_signal': 3, 'rmse': 4.7566, 'mape': 29.3651, 'aic': 8.0, 'bic': -inf}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.4551, 'tracking_signal': 6, 'rmse': 4.6139, 'mape': 30.7341, 'aic': 10.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.4767, 'tracking_signal': 6, 'rmse': 4.6722, 'mape': 31.4286, 'aic': 10.0, 'bic': -inf}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.4397, 'tracking_signal': 3, 'rmse': 4.7566, 'mape': 32.2817, 'aic': 14.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.1536, 'tracking_signal': 0, 'rmse': 2.6465, 'mape': 32.73, 'aic': 65.3028, 'bic': 68.6972}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.4925, 'tracking_signal': 6, 'rmse': 4.9466, 'mape': 33.0014, 'aic': 12.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.1536, 'tracking_signal': 0, 'rmse': 2.6893, 'mape': 33.355, 'aic': 66.6666, 'bic': 70.5459}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 0), 'seasonal_order': (0, 1, 0, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.3386, 'tracking_signal': 7, 'rmse': 4.3157, 'mape': 34.8268, 'aic': 154.5102, 'bic': 155.7683}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 0), 'seasonal_order': (0, 1, 2, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.3386, 'tracking_signal': 7, 'rmse': 4.3157, 'mape': 34.8268, 'aic': 6.0, 'bic': -inf}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 0), 'seasonal_order': (1, 1, 2, 13), 'ts_var_coef': 0.3432, 'pred_var_coef': 0.3386, 'tracking_signal': 7, 'rmse': 4.3157, 'mape': 34.8268, 'aic': 8.0, 'bic': -inf}
+INFO:root: = Make predictions
+INFO:root: = Entity: CAQUETA
+INFO:root: - Grid search elapsed time: 129.28847650000012 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.3299, 'tracking_signal': 3, 'rmse': 1.3009, 'mape': 20.4241, 'aic': 45.6066, 'bic': 48.0272}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.4581, 'tracking_signal': 3, 'rmse': 1.5545, 'mape': 22.8199, 'aic': 45.9967, 'bic': 48.1147}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.1601, 'tracking_signal': 3, 'rmse': 1.7529, 'mape': 27.6637, 'aic': 72.7639, 'bic': 76.7185}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 0), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.3077, 'tracking_signal': 0, 'rmse': 1.5611, 'mape': 29.0699, 'aic': 49.1067, 'bic': 50.6196}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 0), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.3077, 'tracking_signal': 0, 'rmse': 1.5611, 'mape': 29.0699, 'aic': 51.1067, 'bic': 52.9222}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 0), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.3077, 'tracking_signal': 0, 'rmse': 1.5611, 'mape': 29.0699, 'aic': 53.1067, 'bic': 55.2248}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.117, 'tracking_signal': 3, 'rmse': 1.7861, 'mape': 29.0774, 'aic': 69.8758, 'bic': 73.7551}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.0872, 'tracking_signal': 4, 'rmse': 1.6321, 'mape': 29.1741, 'aic': 48.0873, 'bic': 50.508}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.275, 'tracking_signal': 5, 'rmse': 1.5324, 'mape': 29.2857, 'aic': 49.8965, 'bic': 52.0146}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.4466, 'pred_var_coef': 0.275, 'tracking_signal': 5, 'rmse': 1.5324, 'mape': 29.2857, 'aic': 47.8962, 'bic': 49.7117}
+INFO:root: = Make predictions
+INFO:root: = Entity: CASANARE
+INFO:root: - Grid search elapsed time: 120.10143310000012 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.2887, 'tracking_signal': 6, 'rmse': 1.0607, 'mape': 33.75, 'aic': 58.6424, 'bic': 62.0321}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.5411, 'tracking_signal': 0, 'rmse': 0.933, 'mape': 33.75, 'aic': 44.0333, 'bic': 45.8083}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.3333, 'tracking_signal': 0, 'rmse': 1.2437, 'mape': 35.4167, 'aic': 50.0392, 'bic': 53.4336}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.3333, 'tracking_signal': 0, 'rmse': 1.2437, 'mape': 35.4167, 'aic': 51.832, 'bic': 55.7112}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.1918, 'tracking_signal': 0, 'rmse': 1.3903, 'mape': 39.1667, 'aic': 51.806, 'bic': 54.2306}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.2035, 'tracking_signal': 0, 'rmse': 1.0893, 'mape': 40.0, 'aic': 58.3411, 'bic': 62.2958}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.2966, 'tracking_signal': 0, 'rmse': 1.309, 'mape': 41.6667, 'aic': 50.9024, 'bic': 54.0856}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.2966, 'tracking_signal': 0, 'rmse': 1.309, 'mape': 41.6667, 'aic': 52.1335, 'bic': 55.7146}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 2, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.2651, 'tracking_signal': 5, 'rmse': 1.5453, 'mape': 42.0833, 'aic': 48.5964, 'bic': 49.977}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.4507, 'pred_var_coef': 0.4738, 'tracking_signal': 3, 'rmse': 2.1211, 'mape': 42.7083, 'aic': 66.2776, 'bic': 68.5374}
+INFO:root: = Make predictions
+INFO:root: = Entity: CAUCA
+INFO:root: - Grid search elapsed time: 133.22427190000008 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.1357, 'tracking_signal': 0, 'rmse': 2.6686, 'mape': 11.3619, 'aic': 64.2193, 'bic': 67.0045}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.0552, 'tracking_signal': 0, 'rmse': 3.0248, 'mape': 12.4445, 'aic': 141.5842, 'bic': 147.2617}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.093, 'tracking_signal': 0, 'rmse': 2.8614, 'mape': 12.4461, 'aic': 147.3951, 'bic': 154.208}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.1031, 'tracking_signal': 0, 'rmse': 2.8179, 'mape': 12.808, 'aic': 75.3692, 'bic': 78.5645}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.0583, 'tracking_signal': 0, 'rmse': 3.221, 'mape': 12.8107, 'aic': 78.8414, 'bic': 81.6662}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.0583, 'tracking_signal': 0, 'rmse': 3.2496, 'mape': 13.1083, 'aic': 77.4738, 'bic': 79.7336}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.0488, 'tracking_signal': 0, 'rmse': 3.1623, 'mape': 13.2141, 'aic': 78.65, 'bic': 82.0444}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.1118, 'tracking_signal': 0, 'rmse': 2.8997, 'mape': 13.2309, 'aic': 73.9004, 'bic': 77.855}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.0734, 'tracking_signal': 0, 'rmse': 3.1914, 'mape': 13.3865, 'aic': 71.1996, 'bic': 73.5869}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2191, 'pred_var_coef': 0.0934, 'tracking_signal': 0, 'rmse': 2.9031, 'mape': 13.5129, 'aic': 148.7044, 'bic': 156.6529}
+INFO:root: = Make predictions
+INFO:root: = Entity: CESAR
+INFO:root: - Grid search elapsed time: 134.90280010000015 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.1165, 'tracking_signal': 0, 'rmse': 3.6332, 'mape': 10.8566, 'aic': 96.5137, 'bic': 100.4683}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.145, 'tracking_signal': 0, 'rmse': 4.635, 'mape': 11.3447, 'aic': 84.4517, 'bic': 87.846}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.1427, 'tracking_signal': 0, 'rmse': 4.5839, 'mape': 11.5314, 'aic': 90.8092, 'bic': 94.6885}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.1542, 'tracking_signal': 0, 'rmse': 4.6573, 'mape': 11.5418, 'aic': 87.265, 'bic': 91.1443}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.1327, 'tracking_signal': 0, 'rmse': 4.3414, 'mape': 11.843, 'aic': 77.7926, 'bic': 80.5778}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.1327, 'tracking_signal': 0, 'rmse': 4.3414, 'mape': 11.843, 'aic': 79.7924, 'bic': 82.9755}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.1327, 'tracking_signal': 0, 'rmse': 4.3414, 'mape': 11.843, 'aic': 79.7921, 'bic': 82.9752}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.1327, 'tracking_signal': 0, 'rmse': 4.3414, 'mape': 11.843, 'aic': 81.7965, 'bic': 85.3776}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.1462, 'tracking_signal': 0, 'rmse': 3.6481, 'mape': 13.1426, 'aic': 166.4137, 'bic': 173.2267}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2017, 'pred_var_coef': 0.3544, 'tracking_signal': 0, 'rmse': 5.0144, 'mape': 13.7412, 'aic': 82.49, 'bic': 85.2753}
+INFO:root: = Make predictions
+INFO:root: = Entity: CHOCO
+INFO:root: - Grid search elapsed time: 123.8544389000001 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1782, 'tracking_signal': 4, 'rmse': 2.9148, 'mape': 16.2252, 'aic': 151.2891, 'bic': 156.3215}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1412, 'tracking_signal': 4, 'rmse': 2.9854, 'mape': 17.0586, 'aic': 78.5763, 'bic': 81.966}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1803, 'tracking_signal': 3, 'rmse': 3.2437, 'mape': 17.4017, 'aic': 76.2998, 'bic': 79.6895}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1147, 'tracking_signal': 4, 'rmse': 3.2013, 'mape': 17.6996, 'aic': 75.3717, 'bic': 78.7661}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1555, 'tracking_signal': 5, 'rmse': 2.9784, 'mape': 17.9961, 'aic': 76.9876, 'bic': 79.8124}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1937, 'tracking_signal': 3, 'rmse': 2.8785, 'mape': 18.2182, 'aic': 72.2611, 'bic': 75.6555}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1937, 'tracking_signal': 3, 'rmse': 2.8785, 'mape': 18.2182, 'aic': 74.2373, 'bic': 78.1165}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1065, 'tracking_signal': 4, 'rmse': 3.0162, 'mape': 18.3486, 'aic': 146.1786, 'bic': 152.2729}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1595, 'tracking_signal': 3, 'rmse': 3.2707, 'mape': 18.4433, 'aic': 74.3198, 'bic': 77.1445}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.263, 'pred_var_coef': 0.1595, 'tracking_signal': 3, 'rmse': 3.2707, 'mape': 18.4433, 'aic': 74.3412, 'bic': 77.7355}
+INFO:root: = Make predictions
+INFO:root: = Entity: CORDOBA
+INFO:root: - Grid search elapsed time: 186.8757059999998 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.1036, 'tracking_signal': 5, 'rmse': 4.5405, 'mape': 9.9598, 'aic': 76.5764, 'bic': 79.3617}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.1493, 'tracking_signal': 3, 'rmse': 4.5876, 'mape': 9.996, 'aic': 78.1294, 'bic': 80.9147}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.1238, 'tracking_signal': 0, 'rmse': 3.9388, 'mape': 10.6181, 'aic': 80.3381, 'bic': 83.1234}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.095, 'tracking_signal': 0, 'rmse': 3.8441, 'mape': 10.7094, 'aic': 79.2909, 'bic': 83.2455}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.0758, 'tracking_signal': 6, 'rmse': 4.629, 'mape': 10.7278, 'aic': 84.7288, 'bic': 88.1185}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 2, 2), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.0918, 'tracking_signal': 8, 'rmse': 4.7393, 'mape': 10.7483, 'aic': 178.1062, 'bic': 182.9817}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 2, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.1328, 'tracking_signal': 4, 'rmse': 4.9423, 'mape': 10.7555, 'aic': 80.7133, 'bic': 83.6228}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.1038, 'tracking_signal': 0, 'rmse': 4.0618, 'mape': 10.7974, 'aic': 75.6283, 'bic': 79.5075}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.0738, 'tracking_signal': 0, 'rmse': 4.1589, 'mape': 10.8085, 'aic': 87.3139, 'bic': 90.7036}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.1684, 'pred_var_coef': 0.0839, 'tracking_signal': 6, 'rmse': 4.5327, 'mape': 10.857, 'aic': 78.7921, 'bic': 81.9753}
+INFO:root: = Make predictions
+INFO:root: = Entity: CUNDINAMARCA
+INFO:root: - Grid search elapsed time: 135.53153870000006 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (0, 1, 1, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.2566, 'tracking_signal': 0, 'rmse': 3.1289, 'mape': 10.2809, 'aic': 57.9483, 'bic': 59.1316}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.2444, 'tracking_signal': 0, 'rmse': 3.1592, 'mape': 10.839, 'aic': 94.5714, 'bic': 97.7667}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.2216, 'tracking_signal': 0, 'rmse': 3.7947, 'mape': 11.3084, 'aic': 158.1421, 'bic': 165.2104}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.2135, 'tracking_signal': 0, 'rmse': 3.4716, 'mape': 11.5365, 'aic': 64.1618, 'bic': 65.9369}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (0, 1, 1, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.2223, 'tracking_signal': 0, 'rmse': 3.5705, 'mape': 11.7287, 'aic': 65.6021, 'bic': 67.4176}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.2622, 'tracking_signal': 0, 'rmse': 3.8129, 'mape': 11.7344, 'aic': 65.0429, 'bic': 66.4235}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.1925, 'tracking_signal': 0, 'rmse': 3.6857, 'mape': 11.8861, 'aic': 68.1894, 'bic': 70.3075}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.2006, 'tracking_signal': 0, 'rmse': 3.9754, 'mape': 12.1025, 'aic': 92.7064, 'bic': 95.2627}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 1, 0, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.2048, 'tracking_signal': 0, 'rmse': 3.8822, 'mape': 12.2056, 'aic': 74.3335, 'bic': 76.7209}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 1, 0, 13), 'ts_var_coef': 0.2252, 'pred_var_coef': 0.1895, 'tracking_signal': 0, 'rmse': 4.2288, 'mape': 12.3277, 'aic': 80.2639, 'bic': 83.1734}
+INFO:root: = Make predictions
+INFO:root: = Entity: GUAINIA
+INFO:root: - Grid search elapsed time: 143.65830830000004 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 0.8921, 'tracking_signal': 0, 'rmse': 0.1768, 'mape': 6.25, 'aic': 44.4321, 'bic': 46.8567}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 0.8921, 'tracking_signal': 0, 'rmse': 0.1768, 'mape': 6.25, 'aic': 46.4321, 'bic': 49.3416}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 0.8921, 'tracking_signal': 0, 'rmse': 0.1768, 'mape': 6.25, 'aic': 48.4321, 'bic': 51.8265}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.3536, 'mape': 12.5, 'aic': 45.3751, 'bic': 47.6349}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.3536, 'mape': 12.5, 'aic': 47.3751, 'bic': 50.1998}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.3536, 'mape': 12.5, 'aic': 49.3751, 'bic': 52.7648}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.3536, 'mape': 12.5, 'aic': 43.629, 'bic': 46.4538}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.3536, 'mape': 12.5, 'aic': 45.3264, 'bic': 48.7161}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.3536, 'mape': 12.5, 'aic': 45.9417, 'bic': 49.336}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.9861, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.3536, 'mape': 12.5, 'aic': 45.5199, 'bic': 48.9095}
+INFO:root: = Make predictions
+INFO:root: = Entity: GUAVIARE
+INFO:root: - Grid search elapsed time: 108.0626344000002 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 0), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': nan, 'tracking_signal': 3, 'rmse': 1.6583, 'mape': 50.0, 'aic': 160.8141, 'bic': 162.4776}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 0), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': nan, 'tracking_signal': 3, 'rmse': 1.6583, 'mape': 50.0, 'aic': 60.9142, 'bic': 62.6091}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': nan, 'tracking_signal': 3, 'rmse': 1.6197, 'mape': 53.125, 'aic': 52.2878, 'bic': 54.2773}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': 1.1136, 'tracking_signal': 7, 'rmse': 1.0863, 'mape': 53.125, 'aic': 47.2691, 'bic': 50.0544}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': 0.6851, 'tracking_signal': 0, 'rmse': 1.0303, 'mape': 56.25, 'aic': 49.7389, 'bic': 52.922}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': 0.6851, 'tracking_signal': 0, 'rmse': 1.0303, 'mape': 56.25, 'aic': 52.5182, 'bic': 55.9125}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': 0.6851, 'tracking_signal': 0, 'rmse': 1.0303, 'mape': 56.25, 'aic': 54.1805, 'bic': 58.0597}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': 0.378, 'tracking_signal': 0, 'rmse': 1.2988, 'mape': 59.375, 'aic': 55.5731, 'bic': 58.4825}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': 0.8819, 'tracking_signal': 0, 'rmse': 1.1124, 'mape': 59.375, 'aic': 45.3412, 'bic': 47.7285}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.9155, 'pred_var_coef': 1.291, 'tracking_signal': 6, 'rmse': 1.4552, 'mape': 59.375, 'aic': 145.1175, 'bic': 150.0302}
+INFO:root: = Make predictions
+INFO:root: = Entity: HUILA
+ERROR:root: - Error: math domain error
+INFO:root: - Grid search elapsed time: 115.99276289999989 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.1997, 'tracking_signal': 0, 'rmse': 2.7987, 'mape': 14.165, 'aic': 83.158, 'bic': 86.3533}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.2304, 'tracking_signal': 0, 'rmse': 2.6552, 'mape': 14.3824, 'aic': 81.8703, 'bic': 84.4265}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.2067, 'tracking_signal': 0, 'rmse': 3.0467, 'mape': 15.2669, 'aic': 84.919, 'bic': 88.1143}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.2212, 'tracking_signal': 0, 'rmse': 2.8479, 'mape': 15.3654, 'aic': 68.0123, 'bic': 71.5933}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.2758, 'tracking_signal': 0, 'rmse': 2.7658, 'mape': 15.4525, 'aic': 77.5509, 'bic': 81.5055}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.2281, 'tracking_signal': 0, 'rmse': 2.8975, 'mape': 15.487, 'aic': 78.6065, 'bic': 81.9962}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.2261, 'tracking_signal': 0, 'rmse': 2.9145, 'mape': 15.7523, 'aic': 68.1935, 'bic': 71.5878}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.2261, 'tracking_signal': 0, 'rmse': 2.9145, 'mape': 15.7523, 'aic': 65.9227, 'bic': 68.8322}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.2261, 'tracking_signal': 0, 'rmse': 2.9145, 'mape': 15.7523, 'aic': 67.9227, 'bic': 71.3171}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2887, 'pred_var_coef': 0.2241, 'tracking_signal': 0, 'rmse': 2.9644, 'mape': 15.9293, 'aic': 153.8081, 'bic': 160.8764}
+INFO:root: = Make predictions
+INFO:root: = Entity: LA GUAJIRA
+INFO:root: - Grid search elapsed time: 136.47158609999997 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.1643, 'tracking_signal': 3, 'rmse': 2.9577, 'mape': 6.503, 'aic': 81.5543, 'bic': 85.4335}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.1828, 'tracking_signal': 0, 'rmse': 3.0405, 'mape': 7.1401, 'aic': 76.3179, 'bic': 79.899}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.239, 'tracking_signal': 0, 'rmse': 3.8187, 'mape': 7.4931, 'aic': 56.244, 'bic': 58.9673}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 0), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.1186, 'tracking_signal': 3, 'rmse': 4.3875, 'mape': 7.5425, 'aic': 8.0, 'bic': -inf}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.1314, 'tracking_signal': 0, 'rmse': 3.7499, 'mape': 7.9717, 'aic': 14.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.1343, 'tracking_signal': 6, 'rmse': 3.9997, 'mape': 8.3199, 'aic': 10.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 0), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.2796, 'tracking_signal': 0, 'rmse': 4.1538, 'mape': 8.6263, 'aic': 59.8382, 'bic': 61.3511}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.1421, 'tracking_signal': 0, 'rmse': 4.07, 'mape': 8.7053, 'aic': 12.0, 'bic': -inf}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.1347, 'tracking_signal': 0, 'rmse': 3.9497, 'mape': 8.7148, 'aic': 12.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2297, 'pred_var_coef': 0.1911, 'tracking_signal': 0, 'rmse': 4.1209, 'mape': 9.0295, 'aic': 81.6313, 'bic': 85.0257}
+INFO:root: = Make predictions
+INFO:root: = Entity: MAGDALENA
+INFO:root: - Grid search elapsed time: 144.50167750000037 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.1536, 'tracking_signal': 0, 'rmse': 3.8106, 'mape': 11.3012, 'aic': 154.3772, 'bic': 162.3256}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.164, 'tracking_signal': 3, 'rmse': 6.0562, 'mape': 13.6292, 'aic': 100.6222, 'bic': 104.5769}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.201, 'tracking_signal': 3, 'rmse': 5.4725, 'mape': 13.8041, 'aic': 95.3079, 'bic': 98.6976}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.201, 'tracking_signal': 3, 'rmse': 5.5138, 'mape': 13.8682, 'aic': 93.3835, 'bic': 96.2082}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.1782, 'tracking_signal': 3, 'rmse': 6.071, 'mape': 14.0458, 'aic': 98.6158, 'bic': 102.0055}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (0, 0, 1, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.1115, 'tracking_signal': 4, 'rmse': 4.9298, 'mape': 14.4216, 'aic': 154.0758, 'bic': 160.8888}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.1634, 'tracking_signal': 3, 'rmse': 5.7056, 'mape': 14.637, 'aic': 76.4159, 'bic': 78.8366}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 1, 0, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.185, 'tracking_signal': 4, 'rmse': 6.944, 'mape': 14.8946, 'aic': 14.0, 'bic': nan}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.1612, 'tracking_signal': 3, 'rmse': 5.5655, 'mape': 15.3348, 'aic': 94.1424, 'bic': 96.9671}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2119, 'pred_var_coef': 0.1755, 'tracking_signal': 3, 'rmse': 5.9806, 'mape': 15.3379, 'aic': 77.9175, 'bic': 80.6408}
+INFO:root: = Make predictions
+INFO:root: = Entity: META
+INFO:root: - Grid search elapsed time: 135.13931970000021 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (0, 0, 1, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.1425, 'tracking_signal': 3, 'rmse': 3.6881, 'mape': 20.012, 'aic': 137.2171, 'bic': 142.8946}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.1425, 'tracking_signal': 3, 'rmse': 3.6881, 'mape': 20.012, 'aic': 139.2111, 'bic': 146.024}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.1758, 'tracking_signal': 3, 'rmse': 3.8565, 'mape': 20.5898, 'aic': 77.055, 'bic': 80.4494}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 2, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.1652, 'tracking_signal': 3, 'rmse': 3.6994, 'mape': 21.0017, 'aic': 73.1658, 'bic': 75.9511}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.116, 'tracking_signal': 3, 'rmse': 3.6784, 'mape': 21.2638, 'aic': 75.5593, 'bic': 78.4687}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.172, 'tracking_signal': 3, 'rmse': 3.7123, 'mape': 21.4361, 'aic': 76.7215, 'bic': 79.6309}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.116, 'tracking_signal': 3, 'rmse': 3.7225, 'mape': 21.5745, 'aic': 138.6789, 'bic': 144.3564}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 2, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.1453, 'tracking_signal': 3, 'rmse': 4.0466, 'mape': 21.6961, 'aic': 144.4723, 'bic': 151.0185}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 2, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.114, 'tracking_signal': 3, 'rmse': 4.7823, 'mape': 21.895, 'aic': 67.5497, 'bic': 69.1274}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.293, 'pred_var_coef': 0.1574, 'tracking_signal': 3, 'rmse': 3.8786, 'mape': 21.9098, 'aic': 75.5574, 'bic': 77.982}
+INFO:root: = Make predictions
+INFO:root: = Entity: NARIÑO
+INFO:root: - Grid search elapsed time: 126.28117960000009 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (0, 0, 1, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.1749, 'tracking_signal': 0, 'rmse': 3.0575, 'mape': 14.5794, 'aic': 149.8729, 'bic': 156.6859}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.1502, 'tracking_signal': 0, 'rmse': 2.7448, 'mape': 14.9567, 'aic': 55.6167, 'bic': 57.3917}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.1282, 'tracking_signal': 0, 'rmse': 2.8936, 'mape': 15.0423, 'aic': 148.3026, 'bic': 155.9399}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.1227, 'tracking_signal': 0, 'rmse': 3.223, 'mape': 15.2611, 'aic': 70.4738, 'bic': 71.9867}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.1211, 'tracking_signal': 0, 'rmse': 3.1522, 'mape': 15.8049, 'aic': 149.1722, 'bic': 157.1207}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.0811, 'tracking_signal': 0, 'rmse': 3.2692, 'mape': 16.1521, 'aic': 153.4231, 'bic': 160.236}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.1497, 'tracking_signal': 0, 'rmse': 3.4083, 'mape': 16.6797, 'aic': 74.1055, 'bic': 76.4928}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.0904, 'tracking_signal': 0, 'rmse': 3.4278, 'mape': 16.6797, 'aic': 246.6726, 'bic': 253.0067}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.1219, 'tracking_signal': 8, 'rmse': 3.815, 'mape': 16.6977, 'aic': 75.7659, 'bic': 78.5512}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (0, 0, 1, 13), 'ts_var_coef': 0.2663, 'pred_var_coef': 0.0887, 'tracking_signal': 0, 'rmse': 3.5871, 'mape': 16.7839, 'aic': 152.0228, 'bic': 157.7003}
+INFO:root: = Make predictions
+INFO:root: = Entity: NORTE SANTANDER
+INFO:root: - Grid search elapsed time: 147.6543557 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.1388, 'tracking_signal': 0, 'rmse': 2.5452, 'mape': 10.5579, 'aic': 67.47, 'bic': 70.1932}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.1245, 'tracking_signal': 0, 'rmse': 2.7481, 'mape': 13.2023, 'aic': 66.5827, 'bic': 69.0034}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.1267, 'tracking_signal': 0, 'rmse': 2.8609, 'mape': 13.8273, 'aic': 70.1114, 'bic': 72.8967}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.1038, 'tracking_signal': 0, 'rmse': 3.8473, 'mape': 14.4462, 'aic': 164.2787, 'bic': 171.592}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.1265, 'tracking_signal': 0, 'rmse': 3.5727, 'mape': 14.4473, 'aic': 85.0189, 'bic': 88.4132}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.1387, 'tracking_signal': 0, 'rmse': 3.5596, 'mape': 14.7676, 'aic': 75.3543, 'bic': 78.1396}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.1387, 'tracking_signal': 0, 'rmse': 3.5596, 'mape': 14.7676, 'aic': 77.3543, 'bic': 80.5375}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 2, 2), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.0506, 'tracking_signal': 4, 'rmse': 3.9719, 'mape': 15.3418, 'aic': 235.6934, 'bic': 241.9148}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.0263, 'tracking_signal': 3, 'rmse': 4.4567, 'mape': 15.7374, 'aic': 85.6432, 'bic': 88.0678}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (0, 0, 1, 13), 'ts_var_coef': 0.2569, 'pred_var_coef': 0.1561, 'tracking_signal': 0, 'rmse': 3.4984, 'mape': 15.7489, 'aic': 147.3369, 'bic': 154.1499}
+INFO:root: = Make predictions
+INFO:root: = Entity: PUTUMAYO
+INFO:root: - Grid search elapsed time: 136.77391239999997 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.2062, 'tracking_signal': 0, 'rmse': 0.683, 'mape': 15.625, 'aic': 47.1609, 'bic': 51.1155}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.2062, 'tracking_signal': 0, 'rmse': 0.7392, 'mape': 17.7083, 'aic': 45.8413, 'bic': 49.7206}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.2474, 'tracking_signal': 0, 'rmse': 0.7739, 'mape': 18.75, 'aic': 31.6688, 'bic': 33.4439}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.2551, 'tracking_signal': 0, 'rmse': 0.7739, 'mape': 19.7917, 'aic': 45.6385, 'bic': 49.0282}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.202, 'tracking_signal': 0, 'rmse': 0.7739, 'mape': 19.7917, 'aic': 43.2541, 'bic': 46.4373}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.2551, 'tracking_signal': 0, 'rmse': 0.7739, 'mape': 19.7917, 'aic': 44.7396, 'bic': 48.134}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.202, 'tracking_signal': 0, 'rmse': 0.7739, 'mape': 19.7917, 'aic': 45.0014, 'bic': 48.5825}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.1667, 'tracking_signal': 0, 'rmse': 0.8213, 'mape': 20.3125, 'aic': 51.8614, 'bic': 54.6467}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.2474, 'tracking_signal': 0, 'rmse': 0.8213, 'mape': 20.3125, 'aic': 28.8758, 'bic': 30.9939}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.4536, 'pred_var_coef': 0.2821, 'tracking_signal': 3, 'rmse': 0.8062, 'mape': 20.8333, 'aic': 45.0229, 'bic': 47.9324}
+INFO:root: = Make predictions
+INFO:root: = Entity: QUINDIO
+INFO:root: - Grid search elapsed time: 156.76895389999981 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 1), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1571, 'tracking_signal': 0, 'rmse': 0.866, 'mape': 10.2381, 'aic': 55.045, 'bic': 57.4323}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1111, 'tracking_signal': 0, 'rmse': 0.8953, 'mape': 11.0119, 'aic': 61.2672, 'bic': 65.1465}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1019, 'tracking_signal': 8, 'rmse': 1.0193, 'mape': 11.131, 'aic': 61.0347, 'bic': 64.4291}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 1, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1019, 'tracking_signal': 8, 'rmse': 0.9007, 'mape': 11.8006, 'aic': 1130.4552, 'bic': 1137.5236}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1571, 'tracking_signal': 0, 'rmse': 0.9007, 'mape': 11.8006, 'aic': 44.3442, 'bic': 46.7649}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1111, 'tracking_signal': 0, 'rmse': 1.0, 'mape': 11.9048, 'aic': 59.2527, 'bic': 62.0775}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1111, 'tracking_signal': 0, 'rmse': 1.0, 'mape': 11.9048, 'aic': 61.1107, 'bic': 64.5004}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1591, 'tracking_signal': 0, 'rmse': 1.054, 'mape': 12.381, 'aic': 59.2112, 'bic': 62.1207}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1047, 'tracking_signal': 0, 'rmse': 0.9007, 'mape': 12.4256, 'aic': 53.8949, 'bic': 56.6802}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.4074, 'pred_var_coef': 0.1019, 'tracking_signal': 0, 'rmse': 1.0945, 'mape': 13.2143, 'aic': 59.9181, 'bic': 62.8275}
+INFO:root: = Make predictions
+INFO:root: = Entity: RISARALDA
+INFO:root: - Grid search elapsed time: 144.12502859999995 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.1278, 'tracking_signal': 0, 'rmse': 1.4777, 'mape': 10.8045, 'aic': 61.3996, 'bic': 64.7939}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.1174, 'tracking_signal': 3, 'rmse': 1.6643, 'mape': 11.2834, 'aic': 67.3, 'bic': 70.1248}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.1083, 'tracking_signal': 3, 'rmse': 2.0762, 'mape': 11.7298, 'aic': 68.1494, 'bic': 70.4092}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.1393, 'tracking_signal': 0, 'rmse': 1.3363, 'mape': 11.7469, 'aic': 65.8654, 'bic': 69.82}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.1245, 'tracking_signal': 8, 'rmse': 1.7321, 'mape': 12.1934, 'aic': 59.6953, 'bic': 62.0827}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.1398, 'tracking_signal': 3, 'rmse': 1.9202, 'mape': 12.4937, 'aic': 66.6962, 'bic': 69.1207}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.1398, 'tracking_signal': 3, 'rmse': 1.9202, 'mape': 12.4937, 'aic': 70.6962, 'bic': 74.0905}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 2, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.1793, 'tracking_signal': 3, 'rmse': 1.9044, 'mape': 12.7246, 'aic': 57.4941, 'bic': 59.3096}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.1185, 'tracking_signal': 0, 'rmse': 1.6719, 'mape': 12.9915, 'aic': 128.9518, 'bic': 135.7647}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 1), 'seasonal_order': (0, 0, 1, 13), 'ts_var_coef': 0.3174, 'pred_var_coef': 0.0912, 'tracking_signal': 0, 'rmse': 1.5611, 'mape': 13.2395, 'aic': 132.2179, 'bic': 136.9301}
+INFO:root: = Make predictions
+INFO:root: = Entity: SAN ANDRES
+INFO:root: - Grid search elapsed time: 112.32658760000004 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.866, 'mape': 39.2857, 'aic': 50.3838, 'bic': 52.7712}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': 0.0, 'tracking_signal': 0, 'rmse': 0.7015, 'mape': 41.0714, 'aic': 59.5494, 'bic': 62.4588}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': 1.0, 'tracking_signal': 3, 'rmse': 0.7488, 'mape': 45.5357, 'aic': 41.5211, 'bic': 43.2962}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': 0.5, 'tracking_signal': 0, 'rmse': 0.7015, 'mape': 47.3214, 'aic': 48.48, 'bic': 50.9045}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': 0.5, 'tracking_signal': 0, 'rmse': 0.7015, 'mape': 47.3214, 'aic': 50.48, 'bic': 53.3894}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': 0.5, 'tracking_signal': 0, 'rmse': 0.7015, 'mape': 47.3214, 'aic': 52.48, 'bic': 55.8743}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': 0.6851, 'tracking_signal': 3, 'rmse': 0.8062, 'mape': 50.4464, 'aic': 51.2544, 'bic': 54.4497}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': nan, 'tracking_signal': 3, 'rmse': 1.054, 'mape': 53.125, 'aic': 54.7196, 'bic': 57.5049}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': 0.6851, 'tracking_signal': 3, 'rmse': 0.8536, 'mape': 53.5714, 'aic': 102.3918, 'bic': 108.4862}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (1, 1, 0, 13), 'ts_var_coef': 1.0034, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.992, 'mape': 53.5714, 'aic': 48.9485, 'bic': 50.938}
+INFO:root: = Make predictions
+INFO:root: = Entity: SANTANDER
+INFO:root: - Grid search elapsed time: 128.9672373999997 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1601, 'tracking_signal': 0, 'rmse': 2.6885, 'mape': 14.3547, 'aic': 74.4473, 'bic': 77.2326}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1471, 'tracking_signal': 0, 'rmse': 3.0205, 'mape': 14.4012, 'aic': 82.1023, 'bic': 85.492}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1521, 'tracking_signal': 0, 'rmse': 3.1267, 'mape': 14.7302, 'aic': 84.0631, 'bic': 88.0178}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1741, 'tracking_signal': 0, 'rmse': 2.8702, 'mape': 14.8142, 'aic': 144.2128, 'bic': 150.103}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1441, 'tracking_signal': 0, 'rmse': 3.1489, 'mape': 15.2941, 'aic': 77.0399, 'bic': 79.9494}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1441, 'tracking_signal': 0, 'rmse': 3.1489, 'mape': 15.2941, 'aic': 79.0399, 'bic': 82.4343}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1441, 'tracking_signal': 0, 'rmse': 3.1489, 'mape': 15.2941, 'aic': 81.0399, 'bic': 84.9192}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1713, 'tracking_signal': 0, 'rmse': 3.1426, 'mape': 15.4605, 'aic': 76.8163, 'bic': 80.3973}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1441, 'tracking_signal': 0, 'rmse': 3.1798, 'mape': 15.623, 'aic': 79.0488, 'bic': 82.4431}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2349, 'pred_var_coef': 0.1628, 'tracking_signal': 0, 'rmse': 3.0719, 'mape': 15.8756, 'aic': 74.9219, 'bic': 78.105}
+INFO:root: = Make predictions
+INFO:root: = Entity: SUCRE
+ERROR:root: - Error: math domain error
+INFO:root: - Grid search elapsed time: 132.60899709999967 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.0833, 'tracking_signal': 4, 'rmse': 4.1826, 'mape': 14.8764, 'aic': 80.7203, 'bic': 83.9035}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.1795, 'tracking_signal': 3, 'rmse': 3.5149, 'mape': 15.1813, 'aic': 71.8433, 'bic': 74.6286}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.1795, 'tracking_signal': 3, 'rmse': 3.5149, 'mape': 15.1813, 'aic': 73.8433, 'bic': 77.0264}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.1658, 'tracking_signal': 3, 'rmse': 3.6227, 'mape': 15.8212, 'aic': 70.7443, 'bic': 73.4676}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.1854, 'tracking_signal': 3, 'rmse': 3.7312, 'mape': 15.8841, 'aic': 73.9354, 'bic': 76.3599}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.1854, 'tracking_signal': 3, 'rmse': 3.7312, 'mape': 15.8841, 'aic': 75.9354, 'bic': 78.8448}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.1936, 'tracking_signal': 3, 'rmse': 3.6481, 'mape': 15.9239, 'aic': 75.5634, 'bic': 78.4728}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.1786, 'tracking_signal': 4, 'rmse': 3.7398, 'mape': 16.2748, 'aic': 70.9374, 'bic': 73.3248}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.1786, 'tracking_signal': 4, 'rmse': 3.7398, 'mape': 16.2748, 'aic': 72.9374, 'bic': 75.7227}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2068, 'pred_var_coef': 0.1786, 'tracking_signal': 4, 'rmse': 3.7398, 'mape': 16.2748, 'aic': 74.9374, 'bic': 78.1205}
+INFO:root: = Make predictions
+INFO:root: = Entity: TOLIMA
+INFO:root: - Grid search elapsed time: 152.1298983000006 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.1895, 'tracking_signal': 0, 'rmse': 1.4944, 'mape': 7.164, 'aic': 54.7325, 'bic': 58.6118}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.1876, 'tracking_signal': 0, 'rmse': 1.511, 'mape': 7.5316, 'aic': 52.8678, 'bic': 56.2621}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.17, 'tracking_signal': 0, 'rmse': 1.5275, 'mape': 7.9926, 'aic': 51.4393, 'bic': 55.0204}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.194, 'tracking_signal': 0, 'rmse': 1.9682, 'mape': 9.3942, 'aic': 60.5151, 'bic': 63.4245}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.194, 'tracking_signal': 0, 'rmse': 1.9682, 'mape': 9.3942, 'aic': 62.5151, 'bic': 65.9095}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.194, 'tracking_signal': 0, 'rmse': 1.9682, 'mape': 9.3942, 'aic': 64.5151, 'bic': 68.3944}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 1, 0, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.1852, 'tracking_signal': 0, 'rmse': 2.0897, 'mape': 9.5613, 'aic': 63.9196, 'bic': 66.829}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 2, 2), 'seasonal_order': (0, 1, 1, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.1972, 'tracking_signal': 0, 'rmse': 2.4503, 'mape': 10.2437, 'aic': 53.4817, 'bic': 54.4678}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (0, 1, 1, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.1972, 'tracking_signal': 0, 'rmse': 2.4503, 'mape': 10.2437, 'aic': 55.4816, 'bic': 56.6649}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.2576, 'pred_var_coef': 0.1761, 'tracking_signal': 0, 'rmse': 2.1592, 'mape': 10.6134, 'aic': 61.7932, 'bic': 64.5165}
+INFO:root: = Make predictions
+INFO:root: = Entity: VALLE DEL CAUCA
+INFO:root: - Grid search elapsed time: 185.00739090000025 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.0854, 'tracking_signal': 0, 'rmse': 6.702, 'mape': 9.9825, 'aic': 87.8036, 'bic': 90.191}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.051, 'tracking_signal': 5, 'rmse': 6.58, 'mape': 10.06, 'aic': 97.6421, 'bic': 101.5214}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.0626, 'tracking_signal': 0, 'rmse': 6.7445, 'mape': 10.5909, 'aic': 88.1138, 'bic': 90.8991}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.0688, 'tracking_signal': 0, 'rmse': 5.7436, 'mape': 10.6464, 'aic': 90.7256, 'bic': 94.1199}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.0685, 'tracking_signal': 6, 'rmse': 7.2236, 'mape': 10.7809, 'aic': 101.8193, 'bic': 105.774}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.0695, 'tracking_signal': 0, 'rmse': 6.9892, 'mape': 10.8359, 'aic': 89.7101, 'bic': 92.8933}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.0763, 'tracking_signal': 0, 'rmse': 7.0828, 'mape': 10.9176, 'aic': 87.7404, 'bic': 90.5257}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (0, 0, 2, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.0374, 'tracking_signal': 5, 'rmse': 6.8871, 'mape': 11.1567, 'aic': 96.5703, 'bic': 98.9948}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.0241, 'tracking_signal': 5, 'rmse': 6.9319, 'mape': 11.1569, 'aic': 173.5188, 'bic': 181.7652}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.1643, 'pred_var_coef': 0.047, 'tracking_signal': 0, 'rmse': 7.1961, 'mape': 11.2623, 'aic': 103.0791, 'bic': 106.4688}
+INFO:root: = Make predictions
+INFO:root: = Entity: VAUPES
+INFO:root: - Grid search elapsed time: 110.69108619999952 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (1, 0, 0, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 0.7746, 'tracking_signal': 3, 'rmse': 0.992, 'mape': 31.9444, 'aic': 84.2545, 'bic': 89.13}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 0.5, 'tracking_signal': 3, 'rmse': 0.7739, 'mape': 33.3333, 'aic': 46.2153, 'bic': 50.1699}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 0.5, 'tracking_signal': 3, 'rmse': 0.8213, 'mape': 34.7222, 'aic': 46.4673, 'bic': 49.8617}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 0.5, 'tracking_signal': 3, 'rmse': 0.8213, 'mape': 34.7222, 'aic': 48.4673, 'bic': 52.3466}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 1.1136, 'tracking_signal': 3, 'rmse': 0.9007, 'mape': 35.4167, 'aic': 47.1568, 'bic': 50.5465}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 0.5774, 'tracking_signal': 3, 'rmse': 1.0267, 'mape': 37.5, 'aic': 86.1857, 'bic': 92.2801}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 2, 2), 'seasonal_order': (2, 0, 1, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 0.5329, 'tracking_signal': 3, 'rmse': 0.8213, 'mape': 38.1944, 'aic': 49.7698, 'bic': 52.6792}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (0, 0, 0, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 1.0, 'tracking_signal': 3, 'rmse': 1.0267, 'mape': 38.1944, 'aic': 114.76, 'bic': 119.6728}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 0.5, 'tracking_signal': 3, 'rmse': 0.9354, 'mape': 40.2778, 'aic': 46.011, 'bic': 49.4053}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.8585, 'pred_var_coef': 0.5, 'tracking_signal': 3, 'rmse': 0.9354, 'mape': 40.2778, 'aic': 43.9474, 'bic': 46.8568}
+INFO:root: = Make predictions
+INFO:root: = Entity: VICHADA
+INFO:root: - Grid search elapsed time: 126.17528230000062 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.4843, 'tracking_signal': 3, 'rmse': 0.5, 'mape': 9.7222, 'aic': 60.9482, 'bic': 63.7729}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.4843, 'tracking_signal': 3, 'rmse': 0.5, 'mape': 9.7222, 'aic': 54.7372, 'bic': 58.1315}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.4724, 'tracking_signal': 0, 'rmse': 0.6036, 'mape': 16.4931, 'aic': 46.4896, 'bic': 49.6728}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 1), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.6124, 'tracking_signal': 3, 'rmse': 0.866, 'mape': 20.1389, 'aic': 47.5574, 'bic': 49.497}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.6124, 'tracking_signal': 3, 'rmse': 0.866, 'mape': 20.1389, 'aic': 47.1128, 'bic': 49.5374}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 0), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.3536, 'tracking_signal': 3, 'rmse': 0.933, 'mape': 20.1389, 'aic': 113.3261, 'bic': 119.4205}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (1, 1, 1, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.6186, 'tracking_signal': 3, 'rmse': 0.7071, 'mape': 20.6597, 'aic': 44.8851, 'bic': 46.8746}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 0, 2), 'seasonal_order': (2, 0, 2, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.5545, 'tracking_signal': 3, 'rmse': 0.7488, 'mape': 21.1806, 'aic': 45.1566, 'bic': 47.9419}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (1, 0, 1, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.3536, 'tracking_signal': 3, 'rmse': 0.933, 'mape': 21.1806, 'aic': 114.7496, 'bic': 122.0629}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (2, 0, 0, 13), 'ts_var_coef': 0.6584, 'pred_var_coef': 0.5487, 'tracking_signal': 3, 'rmse': 0.6124, 'mape': 21.1806, 'aic': 38.0938, 'bic': 41.4881}
+INFO:root: = Make predictions
+INFO:root: = Save hyperparameters of selected models - 2020-09-14 15:17:23.263359
+INFO:root:>> END PROGRAM: 2020-09-14 15:17:23.294359
