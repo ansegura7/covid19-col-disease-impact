@@ -141,22 +141,25 @@ def create_result_folders(folder_name):
 def get_data_by_entity(filename):
     data_list = dict()
     
-    # Read data from CSV dataset
-    raw_data = pd.read_csv(filename, parse_dates=['date'])
-    
-    # Filter data by entity
-    if len(raw_data):
-        entity_list = raw_data['entity'].unique()
+    # Validation
+    if os.path.exists(filename):
         
-        # Filtering and grouping data by entity
-        for entity in entity_list:
-            entity_data = raw_data[raw_data['entity'] == entity]
-            entity_data = group_data_by_period(entity_data)                
-            data_list[entity] = entity_data
+        # Read data from CSV dataset
+        raw_data = pd.read_csv(filename, parse_dates=['date'])
+        
+        # Filter data by entity
+        if len(raw_data):
+            entity_list = raw_data['entity'].unique()
             
-            # Save results
-            filename = '../result/' + curr_disease.lower() + '/stage/' + entity.lower() + '_aggr_data.csv'
-            save_df_to_csv_file(filename, entity_data)
+            # Filtering and grouping data by entity
+            for entity in entity_list:
+                entity_data = raw_data[raw_data['entity'] == entity]
+                entity_data = group_data_by_period(entity_data)                
+                data_list[entity] = entity_data
+                
+                # Save results
+                filename = '../result/' + curr_disease.lower() + '/stage/' + entity.lower() + '_aggr_data.csv'
+                save_df_to_csv_file(filename, entity_data)
     
     return data_list
 
@@ -357,7 +360,7 @@ logging.basicConfig(filename="log/log_file.log", level=logging.INFO)
 logging.info('>> START PROGRAM: ' + str(datetime.now()))
 
 # 1. Set current disease
-disease_list = ['INFANT_MORTALITY', 'TUBERCULOSIS']
+disease_list = ['SUICIDE_ATTEMPT', 'INFANT_MORTALITY', 'TUBERCULOSIS']
 curr_disease = disease_list[0]
 logging.info(' = Disease: ' + curr_disease)
 create_result_folders(curr_disease)
