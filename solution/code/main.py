@@ -181,7 +181,7 @@ def arima_grid_search(series_data, perc_test):
     # Begin grid search
     start_time = timeit.default_timer()
     method = 'SARIMA'
-    threshold = 2.0
+    threshold = 4.0
     ci_tolerance = 3.0
     
     # Specify to ignore warning messages
@@ -268,13 +268,6 @@ def make_predictions(curr_disease, entity, model, n_forecast, ci_alpha):
     filename = '../result/' + curr_disease.lower() + '/' + entity.lower() + '_forecast.csv'
     save_df_to_csv_file(filename, pred_df)
 
-# Core function - Check if the entity has permission to be processed
-def check_permission(entity):
-    valid_entity = []
-    if len(valid_entity) == 0 or entity in valid_entity:
-        return True
-    return False
-
 # Core function - Create models by entities
 def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
     best_models = dict()
@@ -326,27 +319,36 @@ def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
 
 # Core function - Save to CSV file the hyperparameters of selected models 
 def save_results(curr_disease, data):
-    df = pd.DataFrame.from_dict(data, orient='index')
     
-    # Populate final dataframe
-    for ix, row in df.iterrows():
-        order = row['order']
-        seasonal_order = row['seasonal_order']
-        df.at[ix, 'p'] = order[0]
-        df.at[ix, 'd'] = order[1]
-        df.at[ix, 'q'] = order[2]
-        df.at[ix, 'Sp'] = seasonal_order[0]
-        df.at[ix, 'Sd'] = seasonal_order[1]
-        df.at[ix, 'Sq'] = seasonal_order[2]
-        df.at[ix, 'freq'] = seasonal_order[3]
-    
-    # Remove unused columns
-    df.drop("order", axis=1, inplace=True)
-    df.drop("seasonal_order", axis=1, inplace=True)
-    
-    # Persist data
-    filename = '../result/' + curr_disease.lower() + '/model_params.csv'
-    save_df_to_csv_file(filename, df)
+    if len(data):
+        df = pd.DataFrame.from_dict(data, orient='index')
+        
+        # Populate final dataframe
+        for ix, row in df.iterrows():
+            order = row['order']
+            seasonal_order = row['seasonal_order']
+            df.at[ix, 'p'] = order[0]
+            df.at[ix, 'd'] = order[1]
+            df.at[ix, 'q'] = order[2]
+            df.at[ix, 'Sp'] = seasonal_order[0]
+            df.at[ix, 'Sd'] = seasonal_order[1]
+            df.at[ix, 'Sq'] = seasonal_order[2]
+            df.at[ix, 'freq'] = seasonal_order[3]
+        
+        # Remove unused columns
+        df.drop("order", axis=1, inplace=True)
+        df.drop("seasonal_order", axis=1, inplace=True)
+        
+        # Persist data
+        filename = '../result/' + curr_disease.lower() + '/model_params.csv'
+        save_df_to_csv_file(filename, df)
+
+# Core function - Check if the entity has permission to be processed
+def check_permission(entity):
+    valid_entity = []
+    if len(valid_entity) == 0 or entity in valid_entity:
+        return True
+    return False
 
 #####################
 ### START PROGRAM ###
@@ -355,7 +357,8 @@ logging.basicConfig(filename="log/log_file.log", level=logging.INFO)
 logging.info('>> START PROGRAM: ' + str(datetime.now()))
 
 # 1. Set current disease
-curr_disease = 'INFANT_MORTALITY'
+disease_list = ['INFANT_MORTALITY', 'TUBERCULOSIS']
+curr_disease = disease_list[0]
 logging.info(' = Disease: ' + curr_disease)
 create_result_folders(curr_disease)
 
