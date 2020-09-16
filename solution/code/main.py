@@ -360,7 +360,7 @@ logging.basicConfig(filename="log/log_file.log", level=logging.INFO)
 logging.info('>> START PROGRAM: ' + str(datetime.now()))
 
 # 1. Set current disease
-disease_list = ['SUICIDE_ATTEMPT', 'INFANT_MORTALITY', 'TUBERCULOSIS']
+disease_list = ['EXT_MATERNAL_MORBIDITY', 'SUICIDE_ATTEMPT', 'INFANT_MORTALITY', 'TUBERCULOSIS']
 curr_disease = disease_list[0]
 logging.info(' = Disease: ' + curr_disease)
 create_result_folders(curr_disease)
