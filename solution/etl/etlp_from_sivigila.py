@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-    Created By: Andres Segura Tinoco
-    Created On: Aug 10, 2020
+    Created by: Andres Segura Tinoco
     Version: 1.0.0
+    Created on: Aug 10, 2020
     Description: ETL Process
 """
 

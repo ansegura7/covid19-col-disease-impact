@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-    Created By: Andres Segura Tinoco
-    Created On: Sep 09, 2020
-    Version: 1.0.0
+    Created by: Andres Segura Tinoco
+    Version: 1.1.0
+    Created on: Sep 09, 2020
+    Updated on: Sep 17, 2020
     Description: Main class of the solution.
 """
 
@@ -149,6 +150,7 @@ def get_data_by_entity(filename):
         
         # Filter data by entity
         if len(raw_data):
+            full_data = pd.DataFrame(columns=['date', 'entity', 'year', 'period', 'value'])
             entity_list = raw_data['entity'].unique()
             
             # Filtering and grouping data by entity
@@ -157,10 +159,19 @@ def get_data_by_entity(filename):
                 entity_data = group_data_by_period(entity_data)                
                 data_list[entity] = entity_data
                 
-                # Save results
-                filename = '../result/' + curr_disease.lower() + '/stage/' + entity.lower() + '_aggr_data.csv'
-                save_df_to_csv_file(filename, entity_data)
+                # Keep entity data
+                temp_data = entity_data.copy()
+                temp_data.reset_index(level=0, inplace=True)
+                temp_data['entity'] = entity
+                temp_data = temp_data.reindex(columns=full_data.columns)
+                full_data = full_data.append(temp_data)
+                print(entity, '->', len(temp_data), '=', len(full_data))
+            
+            # Save results
+            filename = '../result/' + curr_disease.lower() + '/result_data.csv'
+            save_df_to_csv_file(filename, full_data)
     
+    # Return dict of entity, data pairs
     return data_list
 
 # Core function - Create a set of SARIMA configs to try
