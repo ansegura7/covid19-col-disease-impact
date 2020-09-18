@@ -76,8 +76,8 @@ def db_save_data(db_login, data_list):
         
         # Insert many rows
         query = '''
-                    INSERT INTO [dbo].[indicator_data]
-                           ([indicator],[sub_indicator],[entity],[department],[year],[week],[value])
+                    INSERT INTO [dbo].[events_data]
+                           ([event],[sub_event],[entity],[department],[year],[week],[value])
                     VALUES (?, ?, ?, ?, ?, ?, ?);
                 '''
         
