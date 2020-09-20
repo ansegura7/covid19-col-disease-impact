@@ -247,7 +247,7 @@ def arima_grid_search(series_data, perc_test):
                     ts_period = tracking_signal(y_truth, y_forecasted, ci_tolerance)
                     
                     # Save result if model MAPE is greater than threshold
-                    if mape > threshold:
+                    if mape > threshold and not np.isnan(pred_var_coef):
                         scores.append( {'method': method, 'order': param, 'seasonal_order': param_seasonal,
                                         'ts_var_coef': round(ts_var_coef, 4), 'pred_var_coef': round(pred_var_coef, 4), 'tracking_signal': ts_period,
                                         'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)} )
@@ -371,7 +371,7 @@ logging.basicConfig(filename="log/log_file.log", level=logging.INFO)
 logging.info('>> START PROGRAM: ' + str(datetime.now()))
 
 # 1. Set current disease
-disease_list = ['EXT_MATERNAL_MORBIDITY', 'SUICIDE_ATTEMPT', 'INFANT_MORTALITY', 'TUBERCULOSIS']
+disease_list = ['TUBERCULOSIS', 'TUBERCULOSIS_CAP', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'EXT_MATERNAL_MORBIDITY']
 curr_disease = disease_list[0]
 logging.info(' = Disease: ' + curr_disease)
 create_result_folders(curr_disease)
