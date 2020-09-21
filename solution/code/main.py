@@ -239,17 +239,20 @@ def arima_grid_search(series_data, perc_test):
                     rmse = (rmse + calc_rmse(y_truth, y_forecasted)) / 2
                     mape = (mape + calc_mape(y_truth, y_forecasted)) / 2
                     
-                    # Compute variation coefficients
+                    # Compute variation coefficient difference
                     ts_var_coef = ss.variation(series_data.values)
                     pred_var_coef = ss.variation(y_forecasted)
+                    vc_diff = ts_var_coef
+                    if not np.isnan(pred_var_coef):
+                        vc_diff = abs(ts_var_coef - pred_var_coef)
                     
                     # Compute tracking signal for prediction
                     ts_period = tracking_signal(y_truth, y_forecasted, ci_tolerance)
                     
                     # Save result if model MAPE is greater than threshold
-                    if mape > threshold and not np.isnan(pred_var_coef):
+                    if mape > threshold:
                         scores.append( {'method': method, 'order': param, 'seasonal_order': param_seasonal,
-                                        'ts_var_coef': round(ts_var_coef, 4), 'pred_var_coef': round(pred_var_coef, 4), 'tracking_signal': ts_period,
+                                        'var_coef_diff': round(vc_diff, 4), 'tracking_signal': ts_period,
                                         'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)} )
                     
             except Exception as e:
