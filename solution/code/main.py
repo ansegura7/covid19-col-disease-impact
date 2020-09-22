@@ -16,89 +16,20 @@ import scipy.stats as ss
 import itertools
 import timeit
 from datetime import datetime
-from math import sqrt, ceil, log
+from math import ceil
 from warnings import filterwarnings
+
+# Import custom libraries
+import util_lib as ul
 
 # Import Time Series libraries
 import statsmodels.api as sm
-from scipy import stats
-from sklearn.metrics import mean_squared_error
 
 ######################
-### UTIL FUNCTIONS ###
+### CORE FUNCTIONS ###
 ######################
 
-# Util function - Calculate confidence interval
-def get_interval(y, y_pred, pi=0.99):
-    n = len(y)
-    
-    # Get standard deviation of y_test
-    sum_errs = np.sum((y - y_pred)**2) / (n - 2)
-    stdev = np.sqrt(sum_errs)
-    
-    # Get interval from standard deviation
-    one_minus_pi = 1 - pi
-    ppf_lookup = 1 - (one_minus_pi / 2)
-    z_score = stats.norm.ppf(ppf_lookup)
-    interval = z_score * stdev
-    
-    return interval
-
-# Util function - Calculate the percentage error
-def percentage_error(actual, predicted):
-    res = np.empty(actual.shape)
-    for j in range(actual.shape[0]):
-        if actual[j] != 0:
-            res[j] = (actual[j] - predicted[j]) / actual[j]
-        else:
-            res[j] = predicted[j] / np.mean(actual)
-    return res
-
-# Util function - Calculate root mean squared error or RMSE
-def calc_rmse(actual, predicted):
-    return sqrt(mean_squared_error(actual, predicted))
-
-# Util function - Calculate mean absolute percentage error or MAPE
-def calc_mape(y_true, y_pred): 
-    return np.mean(np.abs(percentage_error(np.asarray(y_true), np.asarray(y_pred)))) * 100
-
-# Util function - Calculate AIC for regression
-def calc_aic(actual, predicted, k=1):
-    n = len(actual)
-    mse = mean_squared_error(actual, predicted)
-    aic = n * log(mse) + 2 * k
-    return aic
-
-# Util function - Calculate BIC for regression
-def calc_bic(actual, predicted, k=1):
-    n = len(actual)
-    mse = mean_squared_error(actual, predicted)
-    bic = n * log(mse) + k * log(n)
-    return bic
-
-# Util function - Tracking signal monitors any forecasts
-def tracking_signal(y_truth, y_forecasted, ci_tolerance):
-    ts_period = 0
-    cv = 0
-    ce = 0
-    
-    # Tracking signal calculation
-    for i in range(len(y_truth)):
-        v = abs(y_truth[i] - y_forecasted[i])
-        cv += v
-        dma = cv / (i + 1)
-        e = y_truth[i] - y_forecasted[i]
-        ce += e
-        ts = ce / dma
-        
-        # Stop
-        if ts >= ci_tolerance:
-            ts_period = i + 1
-            break
-        
-    return ts_period
-
-# Util function - Group data by period
+# Core function - Group data by period
 def group_data_by_period(data):
     
     # Grouping by epidemiological period
@@ -115,32 +46,15 @@ def group_data_by_period(data):
     
     return gr_data
 
-# Util function - Create a directory if it does not exist
-def create_folder(folder_name):
-    if not os.path.exists(folder_name):
-        os.makedirs(folder_name)
-
-# Util function - Save dataframe to CSV file 
-def save_df_to_csv_file(filename, df, index=True):
-    try:
-        df.to_csv(filename, index=index)
-    except Exception as e:
-        logging.error(' - Error: ' + str(e))
-
-######################
-### CORE FUNCTIONS ###
-######################
-
 # Core function - Create results folders
 def create_result_folders(folder_name):
-    folder1 = '../result/' + folder_name.lower()
-    folder2 = folder1 + '/stage'
-    create_folder(folder1)
-    create_folder(folder2)
+    folder_path = '../result/' + folder_name.lower()
+    ul.create_folder(folder_path)
 
 # Core function - Read the CSV dataset and convert it to a dictionary by entity
 def get_data_by_entity(filename):
     data_list = dict()
+    full_data = pd.DataFrame(columns=['date', 'entity', 'year', 'period', 'value'])
     
     # Validation
     if os.path.exists(filename):
@@ -150,29 +64,27 @@ def get_data_by_entity(filename):
         
         # Filter data by entity
         if len(raw_data):
-            full_data = pd.DataFrame(columns=['date', 'entity', 'year', 'period', 'value'])
             entity_list = raw_data['entity'].unique()
             
             # Filtering and grouping data by entity
             for entity in entity_list:
-                entity_data = raw_data[raw_data['entity'] == entity]
-                entity_data = group_data_by_period(entity_data)                
-                data_list[entity] = entity_data
                 
-                # Keep entity data
-                temp_data = entity_data.copy()
-                temp_data.reset_index(level=0, inplace=True)
-                temp_data['entity'] = entity
-                temp_data = temp_data.reindex(columns=full_data.columns)
-                full_data = full_data.append(temp_data)
-                print(entity, '->', len(temp_data), '=', len(full_data))
-            
-            # Save results
-            filename = '../result/' + curr_disease.lower() + '/result_data.csv'
-            save_df_to_csv_file(filename, full_data)
+                # Check permission to be processed
+                if check_permission(entity):
+                    entity_data = raw_data[raw_data['entity'] == entity]
+                    entity_data = group_data_by_period(entity_data)        
+                    data_list[entity] = entity_data
+                    
+                    # Keep entity data
+                    temp_data = entity_data.copy()
+                    temp_data.reset_index(inplace=True)
+                    temp_data['entity'] = entity
+                    temp_data = temp_data.reindex(columns=full_data.columns)
+                    full_data = full_data.append(temp_data)
+                    print(entity, '->', len(temp_data), '=', len(full_data))
     
     # Return dict of entity, data pairs
-    return data_list
+    return data_list, full_data
 
 # Core function - Create a set of SARIMA configs to try
 def arima_smoothing_configs(data_freq, max_param=3):
@@ -228,16 +140,16 @@ def arima_grid_search(series_data, perc_test):
                     y_forecasted = np.array([max(round(p), 0) for p in pred_basic.predicted_mean])
                     
                     # Compute the errors 1
-                    rmse = calc_rmse(y_truth, y_forecasted)
-                    mape = calc_mape(y_truth, y_forecasted)
+                    rmse = ul.calc_rmse(y_truth, y_forecasted)
+                    mape = ul.calc_mape(y_truth, y_forecasted)
                     
                     # Validate prediction with Dynamic Forecast
                     pred_dynamic = model.get_prediction(start=start_date, dynamic=True, full_results=True)
                     y_forecasted = np.array([max(round(p), 0) for p in pred_dynamic.predicted_mean])
                     
                     # Compute the errors 2
-                    rmse = (rmse + calc_rmse(y_truth, y_forecasted)) / 2
-                    mape = (mape + calc_mape(y_truth, y_forecasted)) / 2
+                    rmse = (rmse + ul.calc_rmse(y_truth, y_forecasted)) / 2
+                    mape = (mape + ul.calc_mape(y_truth, y_forecasted)) / 2
                     
                     # Compute variation coefficient difference
                     ts_var_coef = ss.variation(series_data.values)
@@ -247,7 +159,7 @@ def arima_grid_search(series_data, perc_test):
                         vc_diff = abs(ts_var_coef - pred_var_coef)
                     
                     # Compute tracking signal for prediction
-                    ts_period = tracking_signal(y_truth, y_forecasted, ci_tolerance)
+                    ts_period = ul.tracking_signal(y_truth, y_forecasted, ci_tolerance)
                     
                     # Save result if model MAPE is greater than threshold
                     if mape > threshold:
@@ -265,41 +177,38 @@ def arima_grid_search(series_data, perc_test):
     return scores
 
 # Core function - Make predictions
-def make_predictions(curr_disease, entity, model, n_forecast, ci_alpha):
+def make_predictions(entity, model, n_forecast, ci_alpha, year):
     
     # Get forecast n steps ahead in future (1 year)
     pred = model.get_forecast(steps=n_forecast)
     y_forecasted = np.array([max(round(p), 0) for p in pred.predicted_mean])
+    pred_ci = pred.conf_int(alpha=(1 - ci_alpha))
     
-    # Get confidence intervals of forecasts
-    pred_df = pd.DataFrame(y_forecasted, columns=['forecast'])
-    pred_df = pred_df.set_index(pred.predicted_mean.index)
-    pred_ci = pred.conf_int(alpha=1-ci_alpha)
-    pred_df['ci_inf'] = pred_ci.iloc[:, 0]
-    pred_df['ci_sup'] = pred_ci.iloc[:, 1]
+    # Create forecast data with confidence intervals
+    fr_data = {'date': pred.predicted_mean.index, 'entity': entity, 'year': year, 'period': np.arange(1, n_forecast + 1), 
+               'forecast': y_forecasted, 'ci_inf': pred_ci.iloc[:, 0].values, 'ci_sup': pred_ci.iloc[:, 1].values}
+    
+    # Create Dataframe
+    pred_df = pd.DataFrame(fr_data)
     
     # Replace negative values by zero
-    pred_df[pred_df < 0] = 0
+    num_data = pred_df._get_numeric_data()
+    num_data[num_data < 0] = 0
     
-    # Save results
-    filename = '../result/' + curr_disease.lower() + '/' + entity.lower() + '_forecast.csv'
-    save_df_to_csv_file(filename, pred_df)
+    # Return prediction dataframe
+    return pred_df
 
 # Core function - Create models by entities
 def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
     best_models = dict()
+    model_data = pd.DataFrame(columns=['date', 'entity', 'forecast', 'ci_inf', 'ci_sup'])
     
     try:
-        for entity, data in data_list.items():            
-            
-            # Check permission to be processed
-            if not check_permission(entity):
-                continue
-            
+        for entity, data in data_list.items():
             logging.info(' = Entity: ' + entity)
             
             # Cooking time-series data with frequency
-            filter_date = pd.to_datetime('2020-01-01').date()
+            filter_date = pd.to_datetime('2019-12-27').date()
             series_data = data['value']
             series_data = series_data.loc[series_data.index < filter_date]
             series_data = series_data.asfreq(freq='4W')
@@ -326,19 +235,22 @@ def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
                 
                 # Make predictions
                 logging.info(' = Make predictions')
-                make_predictions(curr_disease, entity, model, n_forecast, ci_alpha)
+                year = 2020
+                pred_df = make_predictions(entity, model, n_forecast, ci_alpha, year)
+                model_data = model_data.append(pred_df)
                 
     except Exception as e:
         logging.error(' - Error: ' + str(e))
         best_models[entity] = { 'result': str(e) }
     
-    return best_models
+    return best_models, model_data
 
 # Core function - Save to CSV file the hyperparameters of selected models 
-def save_results(curr_disease, data):
+def save_results(curr_disease, best_models, full_data):
     
-    if len(data):
-        df = pd.DataFrame.from_dict(data, orient='index')
+    # Save best models
+    if len(best_models):
+        df = pd.DataFrame.from_dict(best_models, orient='index')
         
         # Populate final dataframe
         for ix, row in df.iterrows():
@@ -358,7 +270,12 @@ def save_results(curr_disease, data):
         
         # Persist data
         filename = '../result/' + curr_disease.lower() + '/model_params.csv'
-        save_df_to_csv_file(filename, df)
+        ul.save_df_to_csv_file(filename, df)
+
+    # Save model data results
+    if len(full_data):
+        filename = '../result/' + curr_disease.lower() + '/result_data.csv'
+        ul.save_df_to_csv_file(filename, full_data, True)
 
 # Core function - Check if the entity has permission to be processed
 def check_permission(entity):
@@ -374,7 +291,7 @@ logging.basicConfig(filename="log/log_file.log", level=logging.INFO)
 logging.info('>> START PROGRAM: ' + str(datetime.now()))
 
 # 1. Set current disease
-disease_list = ['TUBERCULOSIS', 'TUBERCULOSIS_CAP', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'EXT_MATERNAL_MORBIDITY']
+disease_list = ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'EXT_MATERNAL_MORBIDITY']
 curr_disease = disease_list[0]
 logging.info(' = Disease: ' + curr_disease)
 create_result_folders(curr_disease)
@@ -382,18 +299,19 @@ create_result_folders(curr_disease)
 # 2. Get list of datasets by entities
 logging.info(' = Read data by entity - ' + str(datetime.now()))
 filename = '../data/' + curr_disease.lower() + '_dataset.csv'
-data_list = get_data_by_entity(filename)
+data_list, base_data = get_data_by_entity(filename)
 
 # 3. Create best model
 logging.info(' = Create best models - ' + str(datetime.now()))
 perc_test = 0.20
 n_forecast = 13
 ci_alpha = 0.9
-best_models = create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha)
+best_models, model_data = create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha)
 
 # 4. Save hyperparameters of selected models
-logging.info(' = Save hyperparameters of selected models - ' + str(datetime.now()))
-save_results(curr_disease, best_models)
+logging.info(' = Save selected models results - ' + str(datetime.now()))
+full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
+save_results(curr_disease, best_models, full_data)
 
 logging.info(">> END PROGRAM: " + str(datetime.now()))
 logging.shutdown()
