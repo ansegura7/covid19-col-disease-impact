@@ -10,6 +10,7 @@
 # Import Python
 import os
 import numpy as np
+import pandas as pd
 from math import sqrt, log
 from scipy import stats
 from sklearn.metrics import mean_squared_error
