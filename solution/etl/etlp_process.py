@@ -3,7 +3,8 @@
     Created by: Andres Segura Tinoco
     Version: 1.0.0
     Created on: Aug 10, 2020
-    Description: ETL Process
+    Updated on: Sep 23, 2020
+    Description: ETL Process (SIVIGILA)
 """
 
 # Database libraries
@@ -60,7 +61,7 @@ def get_full_data():
     
     return full_data
 
-def db_save_data(db_login, data_list):
+def db_save_data(db_login, data_list, save_type):
     
     if len(data_list) == 0:
         print(' - No data to save')
@@ -75,11 +76,19 @@ def db_save_data(db_login, data_list):
         cursor = cnxn.cursor()
         
         # Insert many rows
-        query = '''
-                    INSERT INTO [dbo].[events_data]
-                           ([event],[sub_event],[entity],[department],[year],[week],[value])
-                    VALUES (?, ?, ?, ?, ?, ?, ?);
-                '''
+        query = ''
+        if save_type == 'CAPITAL':
+            query = '''
+                        INSERT INTO [dbo].[events_data_by_capital]
+                               ([event],[sub_event],[capital],[department],[year],[week],[value])
+                        VALUES (?, ?, ?, ?, ?, ?, ?);
+                    '''
+        else:
+            query = '''
+                        INSERT INTO [dbo].[events_data]
+                               ([event],[sub_event],[entity],[department],[year],[week],[value])
+                        VALUES (?, ?, ?, ?, ?, ?, ?);
+                    '''
         
         cnxn.autocommit = False
         cursor.fast_executemany = True
@@ -109,7 +118,8 @@ db_login = get_db_credentials()
 data = get_full_data()
 
 # 3. Save data into DB
-db_save_data(db_login, data)
+save_type = 'CAPITAL'
+db_save_data(db_login, data, save_type )
 
 print(">> END PROGRAM: " + str(datetime.now()))
 #####################
