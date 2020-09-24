@@ -59,6 +59,15 @@ def get_data_by_entity(filename):
     # Validation
     if os.path.exists(filename):
         
+        # Read divipola dictionary
+        divipola_code = dict()
+        divipola_data = pd.read_csv('config/divipola.csv')
+        
+        for ix, row in divipola_data.iterrows():
+            entity = row['entity']
+            code = row['divipola']
+            divipola_code[entity] = code
+        
         # Read data from CSV dataset
         raw_data = pd.read_csv(filename, parse_dates=['date'])
         
@@ -70,18 +79,22 @@ def get_data_by_entity(filename):
             for entity in entity_list:
                 
                 # Check permission to be processed
-                if check_permission(entity):
+                if check_permission(entity) and entity in divipola_code.keys():
+                    entity_code = str(divipola_code[entity]).zfill(5)
+                    
                     entity_data = raw_data[raw_data['entity'] == entity]
                     entity_data = group_data_by_period(entity_data)        
-                    data_list[entity] = entity_data
+                    data_list[entity_code] = entity_data
                     
                     # Keep entity data
                     temp_data = entity_data.copy()
                     temp_data.reset_index(inplace=True)
-                    temp_data['entity'] = entity
+                    temp_data['entity'] = entity_code
                     temp_data = temp_data.reindex(columns=full_data.columns)
                     full_data = full_data.append(temp_data)
-                    print(entity, '->', len(temp_data), '=', len(full_data))
+                    print((entity, entity_code), '->', len(temp_data), '=', len(full_data))
+                else:
+                    logging.info(' = Entity without permission to be processed')
     
     # Return dict of entity, data pairs
     return data_list, full_data
