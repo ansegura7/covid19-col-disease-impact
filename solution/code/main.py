@@ -94,7 +94,7 @@ def get_data_by_entity(filename):
                     full_data = full_data.append(temp_data)
                     print((entity, entity_code), '->', len(temp_data), '=', len(full_data))
                 else:
-                    logging.info(' = Entity without permission to be processed')
+                    logging.info(' = Entity without permission to be processed: ' + entity)
     
     # Return dict of entity, data pairs
     return data_list, full_data
