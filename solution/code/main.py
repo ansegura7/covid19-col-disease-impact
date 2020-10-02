@@ -175,7 +175,7 @@ def arima_grid_search(series_data, perc_test):
                     ts_period = ul.tracking_signal(y_truth, y_forecasted, ci_tolerance)
                     
                     # Save result if model MAPE is greater than threshold
-                    if mape > threshold:
+                    if mape > threshold and ts_period > 0:
                         scores.append( {'method': method, 'order': param, 'seasonal_order': param_seasonal,
                                         'var_coef_diff': round(vc_diff, 4), 'tracking_signal': ts_period,
                                         'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)} )
