@@ -303,28 +303,34 @@ def check_permission(entity):
 logging.basicConfig(filename="log/log_file.log", level=logging.INFO)
 logging.info('>> START PROGRAM: ' + str(datetime.now()))
 
-# 1. Set current disease
-disease_list = ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'EXT_MATERNAL_MORBIDITY']
-curr_disease = disease_list[0]
-logging.info(' = Disease: ' + curr_disease)
-create_result_folders(curr_disease)
+# 1. Read config params
+yaml_path = 'config\config.yml'
+setup_params = ul.get_dict_from_yaml(yaml_path)
+event_list = setup_params['event_list'] 
+algo_type = setup_params['algo_type']
+perc_test = setup_params['perc_test']
+n_forecast = setup_params['n_forecast']
+ci_alpha = setup_params['ci_alpha']
 
-# 2. Get list of datasets by entities
+# 2. Set current event (disease)
+curr_event = event_list[0]
+logging.info(' = Event: ' + curr_event)
+create_result_folders(curr_event)
+
+# 3. Get list of datasets by entities
 logging.info(' = Read data by entity - ' + str(datetime.now()))
-filename = '../data/' + curr_disease.lower() + '_dataset.csv'
+filename = '../data/' + curr_event.lower() + '_dataset.csv'
 data_list, base_data = get_data_by_entity(filename)
 
-# 3. Create best model
-logging.info(' = Create best models - ' + str(datetime.now()))
-perc_test = 0.20
-n_forecast = 13
-ci_alpha = 0.9
-best_models, model_data = create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha)
+# 4. Create best model
+curr_algo = algo_type[0]
+logging.info(' = Create best models >> ' + curr_algo + ' - '+ str(datetime.now()))
+best_models, model_data = create_models(curr_event, data_list, perc_test, n_forecast, ci_alpha)
 
-# 4. Save hyperparameters of selected models
+# 5. Save hyperparameters of selected models
 logging.info(' = Save selected models results - ' + str(datetime.now()))
 full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
-save_results(curr_disease, best_models, full_data)
+save_results(curr_event, best_models, full_data)
 
 logging.info(">> END PROGRAM: " + str(datetime.now()))
 logging.shutdown()

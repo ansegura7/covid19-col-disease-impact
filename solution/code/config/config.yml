@@ -1,0 +1,5 @@
+event_list: ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'EXT_MATERNAL_MORBIDITY']
+algo_type: ['PARTIAL', 'FULL']
+perc_test: 0.20
+n_forecast: 13
+ci_alpha: 0.9

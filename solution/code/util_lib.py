@@ -9,6 +9,7 @@
 
 # Import Python
 import os
+import yaml
 import numpy as np
 import pandas as pd
 from math import sqrt, log
@@ -88,6 +89,16 @@ def tracking_signal(y_truth, y_forecasted, ci_tolerance):
             break
         
     return ts_period
+
+# Util function - Read dict from yaml file
+def get_dict_from_yaml(yaml_path):
+    result = dict()
+    
+    with open(yaml_path) as f:
+        yaml_file = f.read()
+        result = yaml.load(yaml_file, Loader=yaml.FullLoader)
+    
+    return result
 
 # Util function - Create a directory if it does not exist
 def create_folder(folder_name):
