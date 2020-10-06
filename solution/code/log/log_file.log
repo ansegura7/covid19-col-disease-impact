@@ -5419,3 +5419,96 @@ INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (0, 0, 1
 INFO:root: = Make predictions
 INFO:root: = Save selected models results - 2020-09-25 12:12:10.160902
 INFO:root:>> END PROGRAM: 2020-09-25 12:12:10.406901
+INFO:root:>> START PROGRAM: 2020-10-06 08:24:03.327242
+INFO:root: = Event: TUBERCULOSIS
+INFO:root: = Read data by entity - 2020-10-06 08:24:03.337324
+INFO:root: = Entity without permission to be processed: AMAZONAS
+INFO:root: = Entity without permission to be processed: ANTIOQUIA
+INFO:root: = Entity without permission to be processed: ARAUCA
+INFO:root: = Entity without permission to be processed: ATLANTICO
+INFO:root: = Entity without permission to be processed: BOLIVAR
+INFO:root: = Entity without permission to be processed: BOYACA
+INFO:root: = Entity without permission to be processed: CALDAS
+INFO:root: = Entity without permission to be processed: CAQUETA
+INFO:root: = Entity without permission to be processed: CASANARE
+INFO:root: = Entity without permission to be processed: CAUCA
+INFO:root: = Entity without permission to be processed: CESAR
+INFO:root: = Entity without permission to be processed: CHOCO
+INFO:root: = Entity without permission to be processed: CORDOBA
+INFO:root: = Entity without permission to be processed: CUNDINAMARCA
+INFO:root: = Entity without permission to be processed: GUAINIA
+INFO:root: = Entity without permission to be processed: GUAVIARE
+INFO:root: = Entity without permission to be processed: HUILA
+INFO:root: = Entity without permission to be processed: LA GUAJIRA
+INFO:root: = Entity without permission to be processed: MAGDALENA
+INFO:root: = Entity without permission to be processed: META
+INFO:root: = Entity without permission to be processed: NARIÑO
+INFO:root: = Entity without permission to be processed: NORTE SANTANDER
+INFO:root: = Entity without permission to be processed: PUTUMAYO
+INFO:root: = Entity without permission to be processed: QUINDIO
+INFO:root: = Entity without permission to be processed: RISARALDA
+INFO:root: = Entity without permission to be processed: SAN ANDRES
+INFO:root: = Entity without permission to be processed: SANTANDER
+INFO:root: = Entity without permission to be processed: SUCRE
+INFO:root: = Entity without permission to be processed: TOLIMA
+INFO:root: = Entity without permission to be processed: VALLE DEL CAUCA
+INFO:root: = Entity without permission to be processed: VAUPES
+INFO:root: = Entity without permission to be processed: VICHADA
+INFO:root: = Entity without permission to be processed: ARAUCA CAP
+INFO:root: = Entity without permission to be processed: ARMENIA
+INFO:root: = Entity without permission to be processed: BARRANQUILLA
+INFO:root: = Entity without permission to be processed: BOGOTA DC
+INFO:root: = Entity without permission to be processed: BUCARAMANGA
+INFO:root: = Entity without permission to be processed: CALI
+INFO:root: = Entity without permission to be processed: CARTAGENA
+INFO:root: = Entity without permission to be processed: CUCUTA
+INFO:root: = Entity without permission to be processed: FLORENCIA
+INFO:root: = Entity without permission to be processed: IBAGUE
+INFO:root: = Entity without permission to be processed: LETICIA
+INFO:root: = Entity without permission to be processed: MANIZALES
+INFO:root: = Entity without permission to be processed: MEDELLIN
+INFO:root: = Entity without permission to be processed: MITU
+INFO:root: = Entity without permission to be processed: MOCOA
+INFO:root: = Entity without permission to be processed: MONTERIA
+INFO:root: = Entity without permission to be processed: NEIVA
+INFO:root: = Entity without permission to be processed: PASTO
+INFO:root: = Entity without permission to be processed: PEREIRA
+INFO:root: = Entity without permission to be processed: POPAYAN
+INFO:root: = Entity without permission to be processed: PUERTO CARREÑO
+INFO:root: = Entity without permission to be processed: PUERTO INIRIDA
+INFO:root: = Entity without permission to be processed: QUIBDO
+INFO:root: = Entity without permission to be processed: RIOHACHA
+INFO:root: = Entity without permission to be processed: SAN ANDRES CAP
+INFO:root: = Entity without permission to be processed: SAN JOSE DEL GUAVIARE
+INFO:root: = Entity without permission to be processed: SANTA MARTA
+INFO:root: = Entity without permission to be processed: SINCELEJO
+INFO:root: = Entity without permission to be processed: TUNJA
+INFO:root: = Entity without permission to be processed: VALLEDUPAR
+INFO:root: = Entity without permission to be processed: VILLAVICENCIO
+INFO:root: = Entity without permission to be processed: YOPAL
+INFO:root: = Create best models >> FULL - 2020-10-06 08:24:03.552617
+INFO:root: = Entity: 00000
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+ERROR:root: - Error: math domain error
+INFO:root: - Grid search elapsed time: 459.32474600000023 s
+INFO:root: = Save best 10 models
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 2), 'seasonal_order': (1, 0, 2, 13), 'var_coef_diff': 0.0939, 'tracking_signal': 5, 'rmse': 53.9713, 'mape': 4.0529, 'aic': 146.916, 'bic': 150.7953}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 2, 13), 'var_coef_diff': 0.0818, 'tracking_signal': 5, 'rmse': 62.348, 'mape': 5.3518, 'aic': 174.4963, 'bic': 179.6088}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'var_coef_diff': 0.0723, 'tracking_signal': 3, 'rmse': 66.1522, 'mape': 6.0804, 'aic': 156.4076, 'bic': 161.4921}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (2, 0, 1, 13), 'var_coef_diff': 0.0636, 'tracking_signal': 3, 'rmse': 72.3332, 'mape': 6.4629, 'aic': 155.6365, 'bic': 159.5912}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 1), 'seasonal_order': (2, 0, 0, 13), 'var_coef_diff': 0.0632, 'tracking_signal': 3, 'rmse': 72.2517, 'mape': 6.473, 'aic': 153.6398, 'bic': 157.0295}
+INFO:root: - {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'var_coef_diff': 0.0597, 'tracking_signal': 3, 'rmse': 71.2053, 'mape': 6.4771, 'aic': 154.1781, 'bic': 158.1328}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 0), 'seasonal_order': (2, 0, 0, 13), 'var_coef_diff': 0.0457, 'tracking_signal': 3, 'rmse': 79.4945, 'mape': 6.4795, 'aic': 152.9373, 'bic': 155.762}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 0), 'seasonal_order': (2, 0, 1, 13), 'var_coef_diff': 0.0489, 'tracking_signal': 3, 'rmse': 75.9756, 'mape': 6.489, 'aic': 154.8264, 'bic': 158.2161}
+INFO:root: - {'method': 'SARIMA', 'order': (2, 2, 0), 'seasonal_order': (2, 0, 2, 13), 'var_coef_diff': 0.0505, 'tracking_signal': 3, 'rmse': 74.666, 'mape': 6.5194, 'aic': 156.803, 'bic': 160.7576}
+INFO:root: - {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (2, 0, 2, 13), 'var_coef_diff': 0.0661, 'tracking_signal': 3, 'rmse': 74.0541, 'mape': 6.7153, 'aic': 155.321, 'bic': 159.8406}
+INFO:root: = Make predictions
+INFO:root: = Save selected models results - 2020-10-06 08:31:44.164218
+INFO:root:>> END PROGRAM: 2020-10-06 08:31:44.213219

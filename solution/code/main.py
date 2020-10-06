@@ -212,7 +212,7 @@ def make_predictions(entity, model, n_forecast, ci_alpha, year):
     return pred_df
 
 # Core function - Create models by entities
-def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
+def create_models(curr_event, data_list, curr_algo, perc_test, n_forecast, ci_alpha):
     best_models = dict()
     model_data = pd.DataFrame(columns=['date', 'entity', 'forecast', 'ci_inf', 'ci_sup'])
     
@@ -221,10 +221,13 @@ def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
             logging.info(' = Entity: ' + entity)
             
             # Cooking time-series data with frequency
-            filter_date = pd.to_datetime('2019-12-27').date()
             series_data = data['value']
-            series_data = series_data.loc[series_data.index < filter_date]
             series_data = series_data.asfreq(freq='4W')
+
+            # Filter data (Partial mode)            
+            if curr_algo == 'PARTIAL':
+                filter_date = pd.to_datetime('2019-12-27').date()
+                series_data = series_data.loc[series_data.index < filter_date]            
             
             # Training and testing process
             scores = arima_grid_search(series_data, perc_test)
@@ -259,7 +262,7 @@ def create_models(curr_disease, data_list, perc_test, n_forecast, ci_alpha):
     return best_models, model_data
 
 # Core function - Save to CSV file the hyperparameters of selected models 
-def save_results(curr_disease, best_models, full_data):
+def save_results(curr_event, curr_algo, best_models, full_data):
     
     # Save best models
     if len(best_models):
@@ -282,18 +285,17 @@ def save_results(curr_disease, best_models, full_data):
         df.drop("seasonal_order", axis=1, inplace=True)
         
         # Persist data
-        filename = '../result/' + curr_disease.lower() + '/model_params.csv'
+        filename = '../result/' + curr_event.lower() + '/model_params_' + curr_algo.lower() + '.csv'
         ul.save_df_to_csv_file(filename, df)
 
     # Save model data results
     if len(full_data):
-        filename = '../result/' + curr_disease.lower() + '/result_data.csv'
+        filename = '../result/' + curr_event.lower() + '/result_data_' + curr_algo.lower() + '.csv'
         ul.save_df_to_csv_file(filename, full_data, True)
 
 # Core function - Check if the entity has permission to be processed
 def check_permission(entity):
-    valid_entity = []
-    if len(valid_entity) == 0 or entity in valid_entity:
+    if len(entity_filter) == 0 or entity in entity_filter:
         return True
     return False
 
@@ -306,7 +308,8 @@ logging.info('>> START PROGRAM: ' + str(datetime.now()))
 # 1. Read config params
 yaml_path = 'config\config.yml'
 setup_params = ul.get_dict_from_yaml(yaml_path)
-event_list = setup_params['event_list'] 
+entity_filter = setup_params['entity_filter']
+event_list = setup_params['event_list']
 algo_type = setup_params['algo_type']
 perc_test = setup_params['perc_test']
 n_forecast = setup_params['n_forecast']
@@ -325,12 +328,12 @@ data_list, base_data = get_data_by_entity(filename)
 # 4. Create best model
 curr_algo = algo_type[0]
 logging.info(' = Create best models >> ' + curr_algo + ' - '+ str(datetime.now()))
-best_models, model_data = create_models(curr_event, data_list, perc_test, n_forecast, ci_alpha)
+best_models, model_data = create_models(curr_event, data_list, curr_algo, perc_test, n_forecast, ci_alpha)
 
 # 5. Save hyperparameters of selected models
 logging.info(' = Save selected models results - ' + str(datetime.now()))
 full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
-save_results(curr_event, best_models, full_data)
+save_results(curr_event, curr_algo, best_models, full_data)
 
 logging.info(">> END PROGRAM: " + str(datetime.now()))
 logging.shutdown()
