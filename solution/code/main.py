@@ -3,7 +3,7 @@
     Created by: Andres Segura Tinoco
     Version: 1.1.0
     Created on: Sep 09, 2020
-    Updated on: Oct 06, 2020
+    Updated on: Sep 17, 2020
     Description: Main class of the solution.
 """
 
@@ -120,6 +120,8 @@ def arima_grid_search(series_data, perc_test):
     # Begin grid search
     start_time = timeit.default_timer()
     method = 'SARIMA'
+    threshold = 4.0
+    ci_tolerance = 3.0
     
     # Specify to ignore warning messages
     filterwarnings("ignore")
@@ -312,8 +314,6 @@ algo_type = setup_params['algo_type']
 perc_test = setup_params['perc_test']
 n_forecast = setup_params['n_forecast']
 ci_alpha = setup_params['ci_alpha']
-threshold = setup_params['mape_threshold']
-ci_tolerance = setup_params['ci_tolerance']
 
 # 2. Set current event (disease)
 curr_event = event_list[0]
@@ -326,7 +326,7 @@ filename = '../data/' + curr_event.lower() + '_dataset.csv'
 data_list, base_data = get_data_by_entity(filename)
 
 # 4. Create best model
-curr_algo = algo_type[1]
+curr_algo = algo_type[0]
 logging.info(' = Create best models >> ' + curr_algo + ' - '+ str(datetime.now()))
 best_models, model_data = create_models(curr_event, data_list, curr_algo, perc_test, n_forecast, ci_alpha)
 
