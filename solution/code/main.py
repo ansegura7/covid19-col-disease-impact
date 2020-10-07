@@ -221,10 +221,10 @@ def create_models(curr_event, data_list, curr_algo, perc_test, n_forecast, ci_al
             # Cooking time-series data with frequency
             series_data = data['value']
             series_data = series_data.asfreq(freq='4W')
-
-            # Filter data (Partial mode)            
+            
+            # Filter data (Partial mode)   
             if curr_algo == 'PARTIAL':
-                filter_date = pd.to_datetime('2019-12-27').date()
+                filter_date = pd.to_datetime('2019-12-27')
                 series_data = series_data.loc[series_data.index < filter_date]            
             
             # Training and testing process
@@ -326,7 +326,7 @@ filename = '../data/' + curr_event.lower() + '_dataset.csv'
 data_list, base_data = get_data_by_entity(filename)
 
 # 4. Create best model
-curr_algo = algo_type[1]
+curr_algo = algo_type[0]
 logging.info(' = Create best models >> ' + curr_algo + ' - '+ str(datetime.now()))
 best_models, model_data = create_models(curr_event, data_list, curr_algo, perc_test, n_forecast, ci_alpha)
 
