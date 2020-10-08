@@ -169,8 +169,8 @@ def arima_grid_search(series_data, perc_test):
                     if not np.isnan(pred_var_coef):
                         vc_diff = abs(ts_var_coef - pred_var_coef)
                     
-                    # Compute tracking signal for prediction
-                    ts_period = ul.tracking_signal(y_truth, y_forecasted, ci_tolerance)
+                    # Compute tracking signal (TS) for prediction
+                    ts_period = ul.tracking_signal(y_truth, y_forecasted, ts_tolerance)
                     
                     # Save result if model MAPE is greater than threshold
                     if mape > threshold and ts_period > 0:
@@ -313,7 +313,7 @@ perc_test = setup_params['perc_test']
 n_forecast = setup_params['n_forecast']
 ci_alpha = setup_params['ci_alpha']
 threshold = setup_params['mape_threshold']
-ci_tolerance = setup_params['ci_tolerance']
+ts_tolerance = setup_params['ts_tolerance']
 
 # 2. Set current event (disease)
 curr_event = event_list[0]

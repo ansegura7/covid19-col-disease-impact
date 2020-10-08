@@ -5,4 +5,4 @@ perc_test: 0.20
 n_forecast: 13
 ci_alpha: 0.9
 mape_threshold: 4.0
-ci_tolerance: 3.0
+ts_tolerance: 4.0
