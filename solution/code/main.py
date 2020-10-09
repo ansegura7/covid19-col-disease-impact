@@ -315,6 +315,10 @@ ci_alpha = setup_params['ci_alpha']
 threshold = setup_params['mape_threshold']
 ts_tolerance = setup_params['ts_tolerance']
 
+# Save execution params
+logging.info(' = Engine params")
+logging.info(setup_params)
+
 # 2. Set current event (disease)
 curr_event = event_list[0]
 logging.info(' = Event: ' + curr_event)

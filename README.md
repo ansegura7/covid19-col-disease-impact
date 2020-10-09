@@ -16,7 +16,7 @@ Main sources:
 ## Program setup
 The behavior of the predictive engine is configured from an input YALM file.
 
-``` json
+```python
 entity_filter: []
 event_list: ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'EXT_MATERNAL_MORBIDITY']
 algo_type: ['PARTIAL', 'FULL']
