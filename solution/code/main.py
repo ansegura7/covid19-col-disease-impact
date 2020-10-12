@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     Created by: Andres Segura Tinoco
-    Version: 1.1.0
+    Version: 1.2.0
     Created on: Sep 09, 2020
     Updated on: Oct 06, 2020
     Description: Main class of the solution.
@@ -316,7 +316,7 @@ threshold = setup_params['mape_threshold']
 ts_tolerance = setup_params['ts_tolerance']
 
 # Save execution params
-logging.info(' = Engine params")
+logging.info(' = Engine params')
 logging.info(setup_params)
 
 # 2. Set current event (disease)
