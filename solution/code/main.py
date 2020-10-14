@@ -178,45 +178,46 @@ def save_results(curr_event, curr_algo, best_models, full_data):
 #####################
 ### START PROGRAM ###
 #####################
-
-# 0. Program variables
-log_path = 'log/log_file.log'
-yaml_path = 'config/config.yml'
-logging.basicConfig(filename=log_path, level=logging.INFO)
-logging.info('>> START PROGRAM: ' + str(datetime.now()))
-
-# 1. Read config params
-setup_params = ul.get_dict_from_yaml(yaml_path)
-event_list = setup_params['event_list']
-algo_type = setup_params['algo_type']
-entity_filter = setup_params['entity_filter']
-
-# Save execution params
-logging.info(' = Engine params')
-logging.info(setup_params)
-
-# 2. Set current event (disease)
-curr_event = event_list[0].lower()
-logging.info(' = Event: ' + curr_event)
-create_result_folders(curr_event)
-
-# 3. Get list of datasets by entities
-logging.info(' = Read data by entity - ' + str(datetime.now()))
-filename = '../data/' + curr_event + '_dataset.csv'
-data_list, base_data = get_data_by_entity(filename, entity_filter)
-
-# 4. Create best model
-curr_algo = algo_type[0].lower()
-logging.info(' = Create best models >> ' + curr_algo + ' - '+ str(datetime.now()))
-best_models, model_data = parallel_create_models(data_list, curr_algo, setup_params)
-
-# 5. Save hyperparameters of selected models
-logging.info(' = Save selected models results - ' + str(datetime.now()))
-full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
-save_results(curr_event, curr_algo, best_models, full_data)
-
-logging.info(">> END PROGRAM: " + str(datetime.now()))
-logging.shutdown()
+if __name__ == "__main__":
+    
+    # 0. Program variables
+    log_path = 'log/log_file.log'
+    yaml_path = 'config/config.yml'
+    logging.basicConfig(filename=log_path, level=logging.INFO)
+    logging.info('>> START PROGRAM: ' + str(datetime.now()))
+    
+    # 1. Read config params
+    setup_params = ul.get_dict_from_yaml(yaml_path)
+    event_list = setup_params['event_list']
+    algo_type = setup_params['algo_type']
+    entity_filter = setup_params['entity_filter']
+    
+    # Save execution params
+    logging.info(' = Engine params')
+    logging.info(setup_params)
+    
+    # 2. Set current event (disease)
+    curr_event = event_list[0].lower()
+    logging.info(' = Event: ' + curr_event)
+    create_result_folders(curr_event)
+    
+    # 3. Get list of datasets by entities
+    logging.info(' = Read data by entity - ' + str(datetime.now()))
+    filename = '../data/' + curr_event + '_dataset.csv'
+    data_list, base_data = get_data_by_entity(filename, entity_filter)
+    
+    # 4. Create best model
+    curr_algo = algo_type[0].lower()
+    logging.info(' = Create best models >> ' + curr_algo + ' - '+ str(datetime.now()))
+    best_models, model_data = parallel_create_models(data_list, curr_algo, setup_params)
+    
+    # 5. Save hyperparameters of selected models
+    logging.info(' = Save selected models results - ' + str(datetime.now()))
+    full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
+    save_results(curr_event, curr_algo, best_models, full_data)
+    
+    logging.info(">> END PROGRAM: " + str(datetime.now()))
+    logging.shutdown()
 #####################
 #### END PROGRAM ####
 #####################
