@@ -46,7 +46,7 @@ def read_csv_file(filename, encoding='utf-8', delimiter=','):
 # Get data from CSV file
 def get_full_data():
     full_data = []
-    url_file = 'data/raw_data.csv'
+    url_file = 'data/raw_data_sivigila.csv'
     
     raw_data = read_csv_file(url_file)
     
@@ -61,6 +61,7 @@ def get_full_data():
     
     return full_data
 
+# Save data to database
 def db_save_data(db_login, data_list, save_type):
     
     if len(data_list) == 0:
