@@ -45,22 +45,34 @@ def read_csv_file(filename, encoding='utf-8', delimiter=','):
     return data
 
 # Get data from CSV file
-def get_full_data():
+def get_full_data(var_column):
     full_data = []
     url_file = 'data/raw_data_syspro.csv'
     
+    # Reading data from file
     raw_data = read_csv_file(url_file)
     
+    # Grouping data
     if len(raw_data) > 1:
         df = pd.DataFrame.from_records(raw_data[1:], columns=raw_data[0])
         df['date'] = pd.to_datetime(df['date'])
+        
         for ix, row in df.iterrows():
             curr_date = row['date']
-            df.at[ix, 'date'] = curr_date.year
-            df.at[ix, 'week'] = curr_date.strftime("%U")
+            df.at[ix, 'year'] = curr_date.year
+            df.at[ix, 'week'] = int(curr_date.strftime("%U"))
         
-        full_data = df
+        # Grouping data
+        gr_data = df.drop(columns=['chapter', 'group', 'group', 'diagnosis', 'cod', 'com', 'municipality', 'event_type'])
+        gr_data[var_column] = gr_data[var_column].astype(int)
+        gr_data['week'] = gr_data['week'].astype(int)
+        gr_data = gr_data.groupby(['﻿indicator', 'sub_indicator', 'department', 'year', 'week']).agg({var_column:'sum'})
+        gr_data.reset_index(inplace=True)
+        gr_data = gr_data.sort_values(by=['year', 'week', 'department'], ascending=True)
         
+        full_data = gr_data.pivot(index=['﻿indicator', 'sub_indicator', 'department', 'year'], columns='week', values=var_column)
+    
+    # Return data
     return full_data
 
 # Save data to database
@@ -118,7 +130,8 @@ print(">> START PROGRAM: " + str(datetime.now()))
 db_login = get_db_credentials()
 
 # 2. Get data from CSV file
-data = get_full_data()
+var_column = 'rips_num_attentions'
+data = get_full_data(var_column)
 
 # 3. Save data into DB
 save_type = ''
