@@ -168,7 +168,7 @@ def create_models(entity, data, curr_algo, perc_test, mape_threshold, ts_toleran
                                               enforce_stationarity=False, enforce_invertibility=False).fit()
             
             # Make predictions
-            #logging.info(' = Make predictions for: ' + entity)
+            logging.info(' = Make predictions for: ' + entity)
             year = 2020
             pred_df = make_predictions(entity, model, n_forecast, ci_alpha, year)
         
