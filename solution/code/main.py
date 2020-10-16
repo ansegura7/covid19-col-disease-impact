@@ -99,7 +99,7 @@ def create_models(args):
     return pe.create_models(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7])
 
 # Core function - Create SARIMA model in Parallel
-def parallel_create_models(data_list, curr_algo, kwargs):
+def parallel_create_models(data_list, curr_analysis, kwargs):
     best_models = dict()
     model_data = pd.DataFrame(columns=['date', 'entity', 'forecast', 'ci_inf', 'ci_sup'])
     
@@ -114,7 +114,7 @@ def parallel_create_models(data_list, curr_algo, kwargs):
     # Create list of params for threads
     params = []
     for entity, data in data_list.items():
-        params.append([entity, data, curr_algo, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha])
+        params.append([entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha])
     
     # Start compute cycle
     try:
@@ -144,7 +144,7 @@ def parallel_create_models(data_list, curr_algo, kwargs):
     return best_models, model_data
 
 # Core function - Save to CSV file the hyperparameters of selected models 
-def save_results(curr_event, curr_algo, best_models, full_data):
+def save_results(curr_event, curr_analysis, best_models, full_data):
     
     # Save best models
     if len(best_models):
@@ -167,12 +167,12 @@ def save_results(curr_event, curr_algo, best_models, full_data):
         df.drop("seasonal_order", axis=1, inplace=True)
         
         # Persist data
-        filename = '../result/' + curr_event + '/model_params_' + curr_algo + '.csv'
+        filename = '../result/' + curr_event + '/model_params_' + curr_analysis + '.csv'
         ul.save_df_to_csv_file(filename, df)
     
     # Save model data results
     if len(full_data):
-        filename = '../result/' + curr_event + '/result_data_' + curr_algo + '.csv'
+        filename = '../result/' + curr_event + '/result_data_' + curr_analysis + '.csv'
         ul.save_df_to_csv_file(filename, full_data, True)
 
 #####################
@@ -189,32 +189,39 @@ if __name__ == "__main__":
     # 1. Read config params
     setup_params = ul.get_dict_from_yaml(yaml_path)
     event_list = setup_params['event_list']
-    algo_type = setup_params['algo_type']
+    analysis_list = setup_params['analysis_list']
     entity_filter = setup_params['entity_filter']
     
     # Save execution params
     logging.info(' = Engine params')
     logging.info(setup_params)
     
-    # 2. Set current event (disease)
-    curr_event = event_list[0].lower()
-    logging.info(' = Event: ' + curr_event)
-    create_result_folders(curr_event)
-    
-    # 3. Get list of datasets by entities
-    logging.info(' = Read data by entity - ' + str(datetime.now()))
-    filename = '../data/' + curr_event + '_dataset.csv'
-    data_list, base_data = get_data_by_entity(filename, entity_filter)
-    
-    # 4. Create best model
-    curr_algo = algo_type[0].lower()
-    logging.info(' = Create best models >> ' + curr_algo + ' - '+ str(datetime.now()))
-    best_models, model_data = parallel_create_models(data_list, curr_algo, setup_params)
-    
-    # 5. Save hyperparameters of selected models
-    logging.info(' = Save selected models results - ' + str(datetime.now()))
-    full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
-    save_results(curr_event, curr_algo, best_models, full_data)
+    # 2. Loop through entities 
+    for curr_event in event_list:
+        curr_event = curr_event.lower()
+        logging.info(' = Event: ' + curr_event)
+        
+        # 3. Create result folders
+        create_result_folders(curr_event)
+        
+        # 4. Get list of datasets by entities
+        logging.info(' = Read data by entity - ' + str(datetime.now()))
+        filename = '../data/' + curr_event + '_dataset.csv'
+        data_list, base_data = get_data_by_entity(filename, entity_filter)
+        
+        # 5. Loop through entities 
+        for curr_analysis in analysis_list:
+            curr_analysis = curr_analysis.lower()
+            logging.info(' = Analysis: ' + curr_analysis)
+            
+            # 6. Create best model
+            logging.info(' = Create best models >> ' + curr_analysis + ' - '+ str(datetime.now()))
+            best_models, model_data = parallel_create_models(data_list, curr_analysis, setup_params)
+            
+            # 7. Save hyperparameters of selected models
+            logging.info(' = Save selected models results - ' + str(datetime.now()))
+            full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
+            save_results(curr_event, curr_analysis, best_models, full_data)
     
     logging.info(">> END PROGRAM: " + str(datetime.now()))
     logging.shutdown()

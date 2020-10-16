@@ -17,15 +17,15 @@ Main sources:
 The behavior of the predictive engine is configured from an input YALM file.
 
 ```python
-event_list: ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'EXT_MATERNAL_MORBIDITY']
-algo_type: ['PARTIAL', 'FULL']
-entity_filter: ['COLOMBIA', 'ANTIOQUIA', 'CUNDINAMARCA', 'MEDELLIN', 'BOGOTA DC', 'CALI', 'BARRANQUILLA', 'BOYACA']
-n_process: 1
-perc_test: 0.20
-mape_threshold: 4.0
-ts_tolerance: 4.0
-n_forecast: 13
-ci_alpha: 0.9
+event_list: ['TUBERCULOSIS']  # ['INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'EXT_MATERNAL_MORBIDITY']
+analysis_list: ['PARTIAL']    # ['PARTIAL', 'FULL']
+entity_filter: []             # ['COLOMBIA', 'ANTIOQUIA', 'CUNDINAMARCA', 'MEDELLIN', 'BOGOTA DC', 'CALI', 'BARRANQUILLA', 'BOYACA']
+n_process: 1                  # 2, 4, 8
+perc_test: 0.20               # 0.1, 0.3
+mape_threshold: 4.0           # 5.0, 10.0
+ts_tolerance: 4.0             # 3.0, 5.0
+n_forecast: 13                # 6
+ci_alpha: 0.9                 # 0.8, 0.95
 ```
 
 ## Dependencies
