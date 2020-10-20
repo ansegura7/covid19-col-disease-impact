@@ -108,21 +108,22 @@ def db_save_data(db_login, data_list, save_type):
     print(' - End of bulk insert: ' + str(datetime.now()))
 
 #####################
-### Start Program ###
+### START PROGRAM ###
 #####################
-print(">> START PROGRAM: " + str(datetime.now()))
-
-# 1. Get database credentials
-db_login = get_db_credentials()
-
-# 2. Get data from CSV file
-data = get_full_data()
-
-# 3. Save data into DB
-save_type = 'CAPITAL'
-db_save_data(db_login, data, save_type )
-
-print(">> END PROGRAM: " + str(datetime.now()))
+if __name__ == "__main__":
+    print(">> START PROGRAM: " + str(datetime.now()))
+    
+    # 1. Get database credentials
+    db_login = get_db_credentials()
+    
+    # 2. Get data from CSV file
+    data = get_full_data()
+    
+    # 3. Save data into DB
+    save_type = 'CAPITAL'
+    db_save_data(db_login, data, save_type)
+    
+    print(">> END PROGRAM: " + str(datetime.now()))
 #####################
 #### End Program ####
 #####################
