@@ -45,7 +45,7 @@ def read_csv_file(filename, encoding='utf-8', delimiter=','):
     return data
 
 # Get data from CSV file
-def get_full_data(var_column):
+def get_full_data(var_column, zero=0):
     full_data = []
     url_file = 'data/raw_data_syspro.csv'
     
@@ -54,16 +54,21 @@ def get_full_data(var_column):
     
     # Grouping data
     if len(raw_data) > 1:
-        print(raw_data[0])
         df = pd.DataFrame.from_records(raw_data[1:], columns=raw_data[0])
         df['date'] = pd.to_datetime(df['date'])
-        
+
+        # Validate year-week pairs        
         for ix, row in df.iterrows():
             curr_date = row['date']
-            df.at[ix, 'year'] = curr_date.year
-            df.at[ix, 'week'] = int(curr_date.strftime("%U"))
+            curr_week = int(row['week'])
+            
+            if curr_week < 53:
+                df.at[ix, 'year'] = curr_date.year
+            else:
+                df.at[ix, 'year'] = curr_date.year + 1
+                df.at[ix, 'week'] = 1
         
-        # Grouping data
+        # Grouping data by entity-year-week
         gr_data = df.drop(columns=['chapter', 'group', 'group', 'diagnosis', 'cod', 'com', 'municipality', 'event_type'])
         gr_data[var_column] = gr_data[var_column].astype(int)
         gr_data['week'] = gr_data['week'].astype(int)
@@ -71,7 +76,7 @@ def get_full_data(var_column):
         gr_data.reset_index(inplace=True)
         gr_data = gr_data.sort_values(by=['department', 'year', 'week'], ascending=True)
         
-        # Complete data
+        # Complete data with zero input param
         if len(gr_data):
             entity_list = gr_data['department'].unique()
             year_list = [2017, 2018, 2019, 2020]
@@ -85,14 +90,24 @@ def get_full_data(var_column):
                     for week in week_list:
                         if year < 2020 or week < 17:
                             if len(entity_data[(entity_data['year'] == year) & (entity_data['week'] == week)]) == 0:
-                                gr_data.loc[len(gr_data)] = ['DM', 'DIABETES MELLITUS', entity, year, week, 0]
+                                gr_data.loc[len(gr_data)] = ['DM', 'DIABETES MELLITUS', entity, year, week, zero]
+        
+            # Show results
+            print('>> Total rows:', len(gr_data))
+            for entity in entity_list:
+            	entity_data = gr_data[gr_data['department'] == entity]
+            	print(' - Entity:', entity, ', rows:', len(entity_data))
         
         # Save and sort temp data
-        full_data = gr_data
-        full_data['entity'] = full_data['department']
-        full_data = full_data.reindex(columns=['event', 'sub_event', 'entity', 'department', 'year', 'week', var_column])
-        full_data = full_data.sort_values(by=['department', 'year', 'week'], ascending=True)
-    
+        temp_data = gr_data
+        temp_data['entity'] = temp_data['department']
+        temp_data = temp_data.reindex(columns=['event', 'sub_event', 'entity', 'department', 'year', 'week', var_column])
+        temp_data = temp_data.sort_values(by=['department', 'year', 'week'], ascending=True)
+        
+        # Final conversion: from dataframe to array list
+        for ix, row in temp_data.iterrows():
+            full_data.append([row['event'], row['sub_event'], row['entity'], row['department'], row['year'], row['week'], row[var_column]])
+        
     # Return data
     return full_data
 
@@ -153,7 +168,8 @@ if __name__ == "__main__":
     
     # 2. Get data from CSV file
     var_column = 'rips_num_attentions'
-    data = get_full_data(var_column)
+    zero = -1
+    data = get_full_data(var_column, zero)
     
     # 3. Save data into DB
     save_type = ''
