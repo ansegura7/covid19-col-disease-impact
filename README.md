@@ -19,9 +19,9 @@ Main sources:
 The behavior of the predictive engine is configured from an input YALM file.
 
 ```python
-event_list: ['TUBERCULOSIS']       # ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'EXT_MATERNAL_MORBIDITY']
+event_list: ['TUBERCULOSIS']       # ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'DIABETES_MELLITUS']
 analysis_list: ['PARTIAL', 'FULL'] # ['PARTIAL', 'FULL']
-entity_filter: []                  # ['COLOMBIA', 'ANTIOQUIA', 'CUNDINAMARCA', 'MEDELLIN', 'BOGOTA DC', 'CALI', 'BARRANQUILLA']
+entity_filter: []                  # ['COLOMBIA', 'BOGOTA DC', 'ANTIOQUIA', 'CUNDINAMARCA', 'MEDELLIN', 'BARRANQUILLA']
 n_process: 1                       # 2, 4, 8
 perc_test: 0.20                    # 0.1, 0.3
 mape_threshold: 4.0                # 5.0, 10.0

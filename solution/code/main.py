@@ -148,6 +148,7 @@ def save_results(curr_event, curr_analysis, best_models, full_data):
     
     # Save best models
     if len(best_models):
+        best_models = {k: v for k, v in best_models.items() if v is not None}
         df = pd.DataFrame.from_dict(best_models, orient='index')
         
         # Populate final dataframe
