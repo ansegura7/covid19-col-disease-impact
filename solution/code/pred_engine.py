@@ -55,15 +55,15 @@ def arima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance):
     # Calculation params
     method = 'SARIMA'
     data_freq = 13
-    pdq, seasonal_pdq = arima_smoothing_configs(data_freq)
+    max_param = 3
+    pdq, seasonal_pdq = arima_smoothing_configs(data_freq, max_param)
     
     # Grid search
     for param in pdq:
-        for param_seasonal in seasonal_pdq:
+        for sparam in seasonal_pdq:
             try:
                 # Create and fit model
-                model = sm.tsa.statespace.SARIMAX(series_data, order=param, seasonal_order=param_seasonal, 
-                                                  enforce_stationarity=False, enforce_invertibility=False)
+                model = sm.tsa.statespace.SARIMAX(series_data, order=param, seasonal_order=sparam, enforce_stationarity=False, enforce_invertibility=False)
                 model = model.fit()
                 
                 if model.aic > 0 or model.bic > 0:
@@ -99,7 +99,7 @@ def arima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance):
                     
                     # Save result if model MAPE is greater than threshold
                     if mape > mape_threshold and ts_period > 0:
-                        scores.append( {'method': method, 'order': param, 'seasonal_order': param_seasonal,
+                        scores.append( {'method': method, 'order': param, 'seasonal_order': sparam,
                                         'var_coef_diff': round(vc_diff, 4), 'tracking_signal': ts_period,
                                         'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)} )
                     
