@@ -114,11 +114,28 @@ def save_df_to_csv_file(filename, df, index=True):
         result = ' - Error: ' + str(e)
     return result
 
+# Util function - Check if column exists in df from a list of columns
+def df_columns_exists(df, column_list):
+    result = False
+    
+    if df and len(column_list):
+        result = True
+        for col in column_list:
+            if col not in df.columns:
+                return False
+    
+    return result
+
 # Util function - Concat 2 dataframes, which is outer join by default
 def merge_data(df1, df2, index):
-    df1 = df1.set_index(index)
-    df2 = df2.set_index(index)
-    return pd.concat([df1, df2], axis=1)
+    df = pd.DataFrame()
+    
+    if df_columns_exists(df1, index) and df_columns_exists(df2, index):
+        df1 = df1.set_index(index)
+        df2 = df2.set_index(index)
+        df = pd.concat([df1, df2], axis=1)
+    
+    return df
 
 ##########################
 ### End Util Functions ###

@@ -12,37 +12,110 @@ import logging
 import pandas as pd
 import numpy as np
 import scipy.stats as ss
-import itertools
 import timeit
+import statsmodels.api as sm
 from math import ceil
 from warnings import filterwarnings
 
+# Import Parallel libraries
+from multiprocessing import cpu_count
+from joblib import Parallel
+from joblib import delayed
+
 # Import custom libraries
 import util_lib as ul
-
-# Import Time Series libraries
-import statsmodels.api as sm
 
 # Global variables
 log_path = 'log/log_file.log'
 logging.basicConfig(filename=log_path, level=logging.INFO)
 
 # Core function - Create a set of SARIMA configs to try
-def arima_smoothing_configs(data_freq, max_param=3):
+def sarima_configs(seasonal=[13]):
+    models = []
     
-    # Define the p, d and q parameters to take any value between 0 and 2
-    p = d = q = range(0, max_param)
-
-    # Generate all different combinations of p, q and q triplets
-    pdq = list(itertools.product(p, d, q))
-
-    # Generate all different combinations of seasonal p, q and q triplets
-    seasonal_pdq  = [(x[0], x[1], x[2], data_freq) for x in list(itertools.product(p, d, q))]
+    # Define config lists
+    p_params = [0, 1, 2]
+    d_params = [0, 1]
+    q_params = [0, 1, 2]
+    P_params = [0, 1, 2]
+    D_params = [0, 1]
+    Q_params = [0, 1, 2]
+    m_params = seasonal
+    t_params = ['n','c','t','ct']
     
-    return pdq, seasonal_pdq
+    # Create config instances
+    for p in p_params:
+        for d in d_params:
+            for q in q_params:
+                for P in P_params:
+                    for D in D_params:
+                        for Q in Q_params:
+                            for m in m_params:
+                                for t in t_params:
+                                    cfg = [(p,d,q), (P,D,Q,m), t]
+                                    models.append(cfg)
+    
+    return models
 
+# Core function - Score a model
+def sarima_score_model(series_data, start_date, config, mape_threshold, ts_tolerance):
+    result = {}
+    method = 'SARIMA'
+    
+    try:
+        # Create and fit model
+        order, sorder, trend = config
+        model = sm.tsa.statespace.SARIMAX(series_data, order=order, seasonal_order=sorder, trend=trend, 
+                                          enforce_stationarity=False, enforce_invertibility=False)
+        model = model.fit()
+        
+        if model.aic > 0 or model.bic > 0:
+            
+            # Extract the predicted and true values of our time series
+            y_truth = series_data[start_date:]
+            
+            # Validate prediction One-step ahead Forecast
+            pred_basic = model.get_prediction(start=start_date, dynamic=False)
+            y_forecasted = np.array([max(round(p), 0) for p in pred_basic.predicted_mean])
+            
+            # Compute the errors 1
+            rmse = ul.calc_rmse(y_truth, y_forecasted)
+            mape = ul.calc_mape(y_truth, y_forecasted)
+            
+            # Validate prediction with Dynamic Forecast
+            pred_dynamic = model.get_prediction(start=start_date, dynamic=True, full_results=True)
+            y_forecasted = np.array([max(round(p), 0) for p in pred_dynamic.predicted_mean])
+            
+            # Compute the errors 2
+            # rmse = (0.4 * rmse + 0.6 * ul.calc_rmse(y_truth, y_forecasted)) / 2
+            # mape = (0.4 * mape + 0.6 * ul.calc_mape(y_truth, y_forecasted)) / 2
+            rmse = (rmse + ul.calc_rmse(y_truth, y_forecasted)) / 2
+            mape = (mape + ul.calc_mape(y_truth, y_forecasted)) / 2
+            
+            # Compute variation coefficient difference
+            ts_var_coef = ss.variation(series_data.values)
+            pred_var_coef = ss.variation(y_forecasted)
+            vc_diff = ts_var_coef
+            if not np.isnan(pred_var_coef):
+                vc_diff = abs(ts_var_coef - pred_var_coef)
+            
+            # Compute tracking signal (TS) for prediction
+            ts_period = ul.tracking_signal(y_truth, y_forecasted, ts_tolerance)
+            
+            # Save result if model MAPE is greater than threshold
+            if mape > mape_threshold and ts_period > 0:
+                result = {'method': method, 'order': order, 'seasonal_order': sorder, 'trend': trend, 
+                          'var_coef_diff': round(vc_diff, 4), 'tracking_signal': ts_period,
+                          'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)}
+            
+    except Exception as e:
+        result = {}
+        print(' - Grid Search Error: ' + str(e))
+        
+    return result
+    
 # Core function - Parameter selection for the ARIMA Time Series model
-def arima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance):
+def sarima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance, parallel=False):
     scores = []
     
     # Specify to ignore warning messages
@@ -53,58 +126,22 @@ def arima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance):
     start_date = series_data.index[ix_test]
     
     # Calculation params
-    method = 'SARIMA'
     data_freq = 13
-    max_param = 3
-    pdq, seasonal_pdq = arima_smoothing_configs(data_freq, max_param)
+    pdq_params = sarima_configs(seasonal=[data_freq])
+    print(' = n params:', len(pdq_params))
     
     # Grid search
-    for param in pdq:
-        for sparam in seasonal_pdq:
-            try:
-                # Create and fit model
-                model = sm.tsa.statespace.SARIMAX(series_data, order=param, seasonal_order=sparam, enforce_stationarity=False, enforce_invertibility=False)
-                model = model.fit()
-                
-                if model.aic > 0 or model.bic > 0:
-                    
-                    # Extract the predicted and true values of our time series
-                    y_truth = series_data[start_date:]
-                    
-                    # Validate prediction One-step ahead Forecast
-                    pred_basic = model.get_prediction(start=start_date, dynamic=False)
-                    y_forecasted = np.array([max(round(p), 0) for p in pred_basic.predicted_mean])
-                    
-                    # Compute the errors 1
-                    rmse = ul.calc_rmse(y_truth, y_forecasted)
-                    mape = ul.calc_mape(y_truth, y_forecasted)
-                    
-                    # Validate prediction with Dynamic Forecast
-                    pred_dynamic = model.get_prediction(start=start_date, dynamic=True, full_results=True)
-                    y_forecasted = np.array([max(round(p), 0) for p in pred_dynamic.predicted_mean])
-                    
-                    # Compute the errors 2
-                    rmse = (rmse + ul.calc_rmse(y_truth, y_forecasted)) / 2
-                    mape = (mape + ul.calc_mape(y_truth, y_forecasted)) / 2
-                    
-                    # Compute variation coefficient difference
-                    ts_var_coef = ss.variation(series_data.values)
-                    pred_var_coef = ss.variation(y_forecasted)
-                    vc_diff = ts_var_coef
-                    if not np.isnan(pred_var_coef):
-                        vc_diff = abs(ts_var_coef - pred_var_coef)
-                    
-                    # Compute tracking signal (TS) for prediction
-                    ts_period = ul.tracking_signal(y_truth, y_forecasted, ts_tolerance)
-                    
-                    # Save result if model MAPE is greater than threshold
-                    if mape > mape_threshold and ts_period > 0:
-                        scores.append( {'method': method, 'order': param, 'seasonal_order': sparam,
-                                        'var_coef_diff': round(vc_diff, 4), 'tracking_signal': ts_period,
-                                        'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)} )
-                    
-            except Exception as e:
-                print(' - Grid Search Error: ' + str(e))
+    if parallel:
+        # Execute configs in parallel
+        executor = Parallel(n_jobs=cpu_count(), backend='multiprocessing')
+        tasks = (delayed(sarima_score_model)(series_data, start_date, params, mape_threshold, ts_tolerance) for params in pdq_params)
+        scores = executor(tasks)
+    else:
+        # Execute configs in sequence
+        for params in pdq_params:
+            score = sarima_score_model(series_data, start_date, params, mape_threshold, ts_tolerance)
+            if len(score) > 0:
+                scores.append(score)
     
     return scores
 
@@ -149,9 +186,10 @@ def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tol
         
         # Begin grid search: Training and testing process
         start_time = timeit.default_timer()
-        scores = arima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance)
+        scores = sarima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance, parallel=False)
         elapsed = timeit.default_timer() - start_time
-        logging.info(' - Grid search elapsed time: ' + str(elapsed) + ' s, for: ' + entity)
+        print(' = n scores:', len(scores))
+        logging.info(' - Grid search elapsed time: ' + str(elapsed) + ' s, for: ' + entity, ', n models:', len(scores))
     
         # Create best model
         if len(scores):
@@ -165,7 +203,7 @@ def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tol
             # Create best model
             best_params = scores[0]
             model = sm.tsa.statespace.SARIMAX(series_data, order=best_params['order'], seasonal_order=best_params['seasonal_order'], 
-                                              enforce_stationarity=False, enforce_invertibility=False).fit()
+                                              trend=best_params['trend'], enforce_stationarity=False, enforce_invertibility=False).fit()
             
             # Make predictions
             logging.info(' = Make predictions for: ' + entity)

@@ -95,8 +95,9 @@ def get_data_by_entity(filename, entity_filter):
 
 # Core function - Mask to the predictive engine
 def create_models(args):
-    print(' = Entity: ' + args[0] + ' - ' + str(datetime.now()))
-    return pe.create_models(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7])
+    entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha = args
+    print(' = Entity: ' + entity + ' - ' + str(datetime.now()))
+    return pe.create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha)
 
 # Core function - Create SARIMA model in Parallel
 def parallel_create_models(data_list, curr_analysis, kwargs):
@@ -147,7 +148,7 @@ def parallel_create_models(data_list, curr_analysis, kwargs):
 def save_results(curr_event, curr_analysis, best_models, full_data):
     
     # Save best models
-    if len(best_models):
+    if best_models and len(best_models):
         best_models = {k: v for k, v in best_models.items() if v is not None}
         df = pd.DataFrame.from_dict(best_models, orient='index')
         
@@ -172,7 +173,7 @@ def save_results(curr_event, curr_analysis, best_models, full_data):
         ul.save_df_to_csv_file(filename, df)
     
     # Save model data results
-    if len(full_data):
+    if full_data and len(full_data):
         filename = '../result/' + curr_event + '/result_data_' + curr_analysis + '.csv'
         ul.save_df_to_csv_file(filename, full_data, True)
 
