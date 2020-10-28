@@ -133,15 +133,16 @@ def sarima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance, par
     # Grid search
     if parallel:
         # Execute configs in parallel
-        executor = Parallel(n_jobs=cpu_count(), backend='multiprocessing')
+        n_cpu = cpu_count() - 1
+        executor = Parallel(n_jobs=n_cpu, backend='multiprocessing')
         tasks = (delayed(sarima_score_model)(series_data, start_date, params, mape_threshold, ts_tolerance) for params in pdq_params)
         scores = executor(tasks)
     else:
         # Execute configs in sequence
-        for params in pdq_params:
-            score = sarima_score_model(series_data, start_date, params, mape_threshold, ts_tolerance)
-            if len(score) > 0:
-                scores.append(score)
+        scores = [sarima_score_model(series_data, start_date, params, mape_threshold, ts_tolerance) for params in pdq_params]
+    
+    # Remove empty results
+    scores = [score for score in scores if len(score)]
     
     return scores
 
@@ -189,7 +190,7 @@ def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tol
         scores = sarima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance, parallel=False)
         elapsed = timeit.default_timer() - start_time
         print(' = n scores:', len(scores))
-        logging.info(' - Grid search elapsed time: ' + str(elapsed) + ' s, for: ' + entity, ', n models:', len(scores))
+        logging.info(' - Grid search elapsed time: ' + str(elapsed) + ' s, for: ' + entity + ', n models: ' +  str(len(scores)))
     
         # Create best model
         if len(scores):

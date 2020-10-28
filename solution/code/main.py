@@ -129,9 +129,9 @@ def parallel_create_models(data_list, curr_analysis, kwargs):
                 result_data = executor.map(create_models, params)
             logging.info(' - End parallel cycle')
         else:
-            logging.info(' - Start sequential  cycle')
+            logging.info(' - Start sequential cycle')
             result_data = [create_models(param) for param in params]
-            logging.info(' - End sequential  cycle')
+            logging.info(' - End sequential cycle')
         
         # Save results in save-mode
         for entity, best_params, pred_df in result_data:
@@ -148,8 +148,8 @@ def parallel_create_models(data_list, curr_analysis, kwargs):
 def save_results(curr_event, curr_analysis, best_models, full_data):
     
     # Save best models
-    if best_models and len(best_models):
-        best_models = {k: v for k, v in best_models.items() if v is not None}
+    best_models = {k: v for k, v in best_models.items() if v is not None}
+    if len(best_models):
         df = pd.DataFrame.from_dict(best_models, orient='index')
         
         # Populate final dataframe
@@ -173,7 +173,7 @@ def save_results(curr_event, curr_analysis, best_models, full_data):
         ul.save_df_to_csv_file(filename, df)
     
     # Save model data results
-    if full_data and len(full_data):
+    if full_data is not None and len(full_data):
         filename = '../result/' + curr_event + '/result_data_' + curr_analysis + '.csv'
         ul.save_df_to_csv_file(filename, full_data, True)
 

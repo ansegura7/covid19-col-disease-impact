@@ -118,7 +118,7 @@ def save_df_to_csv_file(filename, df, index=True):
 def df_columns_exists(df, column_list):
     result = False
     
-    if df and len(column_list):
+    if df is not None and len(column_list):
         result = True
         for col in column_list:
             if col not in df.columns:
