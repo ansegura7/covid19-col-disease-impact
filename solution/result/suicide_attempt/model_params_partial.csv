@@ -1,0 +1,2 @@
+,method,trend,var_coef_diff,tracking_signal,rmse,mape,aic,bic,p,d,q,Sp,Sd,Sq,freq
+00000,SARIMA,n,0.0643,6,119.5192,4.0088,311.2718,317.1621,1.0,0.0,1.0,1.0,0.0,1.0,13.0

@@ -9202,12 +9202,19 @@ INFO:root: = Make predictions for: 00000
 INFO:root: - End sequential cycle
 INFO:root: = Save selected models results - 2020-10-28 06:41:01.802499
 INFO:root:>> END PROGRAM: 2020-10-28 06:41:01.838517
-INFO:root:>> START PROGRAM: 2020-10-28 06:43:43.442505
+INFO:root:>> START PROGRAM: 2020-10-28 06:57:12.221321
 INFO:root: = Engine params
 INFO:root:{'event_list': ['SUICIDE_ATTEMPT'], 'analysis_list': ['PARTIAL'], 'entity_filter': ['COLOMBIA'], 'n_process': 1, 'perc_test': 0.2, 'mape_threshold': 4.0, 'ts_tolerance': 4.0, 'n_forecast': 13, 'ci_alpha': 0.9}
 INFO:root: = Event: suicide_attempt
-INFO:root: = Read data by entity - 2020-10-28 06:43:43.442505
+INFO:root: = Read data by entity - 2020-10-28 06:57:12.221321
 INFO:root: = Analysis: partial
-INFO:root: = Create best models >> partial - 2020-10-28 06:43:43.551881
+INFO:root: = Create best models >> partial - 2020-10-28 06:57:12.346329
 INFO:root: - Start sequential cycle
 INFO:root: = Entity: 00000
+INFO:root: - Grid search elapsed time: 385.3047949 s, for: 00000, n models: 219
+INFO:root: = Save best 10 models for: 00000
+INFO:root:[{'method': 'SARIMA', 'order': (1, 0, 1), 'seasonal_order': (1, 0, 1, 13), 'trend': 'n', 'var_coef_diff': 0.0643, 'tracking_signal': 6, 'rmse': 119.5192, 'mape': 4.0088, 'aic': 311.2718, 'bic': 317.1621}, {'method': 'SARIMA', 'order': (0, 1, 1), 'seasonal_order': (0, 1, 0, 13), 'trend': 't', 'var_coef_diff': 0.0432, 'tracking_signal': 7, 'rmse': 133.2846, 'mape': 4.0259, 'aic': 299.1789, 'bic': 302.5854}, {'method': 'SARIMA', 'order': (1, 1, 2), 'seasonal_order': (0, 1, 0, 13), 'trend': 'n', 'var_coef_diff': 0.0429, 'tracking_signal': 7, 'rmse': 133.2322, 'mape': 4.027, 'aic': 289.5102, 'bic': 293.8744}, {'method': 'SARIMA', 'order': (2, 1, 2), 'seasonal_order': (1, 0, 1, 13), 'trend': 'ct', 'var_coef_diff': 0.0575, 'tracking_signal': 7, 'rmse': 118.4184, 'mape': 4.0349, 'aic': 290.9047, 'bic': 300.7241}, {'method': 'SARIMA', 'order': (1, 0, 2), 'seasonal_order': (1, 0, 1, 13), 'trend': 'ct', 'var_coef_diff': 0.0916, 'tracking_signal': 7, 'rmse': 112.9187, 'mape': 4.0424, 'aic': 306.061, 'bic': 315.1449}, {'method': 'SARIMA', 'order': (2, 1, 1), 'seasonal_order': (0, 1, 0, 13), 'trend': 't', 'var_coef_diff': 0.0432, 'tracking_signal': 7, 'rmse': 133.4288, 'mape': 4.0432, 'aic': 303.1626, 'bic': 308.8401}, {'method': 'SARIMA', 'order': (1, 1, 1), 'seasonal_order': (0, 1, 0, 13), 'trend': 't', 'var_coef_diff': 0.0431, 'tracking_signal': 7, 'rmse': 133.581, 'mape': 4.0464, 'aic': 301.1629, 'bic': 305.7049}, {'method': 'SARIMA', 'order': (0, 1, 2), 'seasonal_order': (0, 1, 0, 13), 'trend': 't', 'var_coef_diff': 0.0431, 'tracking_signal': 7, 'rmse': 134.039, 'mape': 4.0585, 'aic': 289.3577, 'bic': 293.7219}, {'method': 'SARIMA', 'order': (2, 0, 2), 'seasonal_order': (1, 0, 0, 13), 'trend': 'ct', 'var_coef_diff': 0.0753, 'tracking_signal': 7, 'rmse': 115.4891, 'mape': 4.0593, 'aic': 317.0248, 'bic': 326.4492}, {'method': 'SARIMA', 'order': (2, 0, 1), 'seasonal_order': (1, 0, 1, 13), 'trend': 'n', 'var_coef_diff': 0.0656, 'tracking_signal': 6, 'rmse': 119.1892, 'mape': 4.0693, 'aic': 313.2246, 'bic': 320.2929}]
+INFO:root: = Make predictions for: 00000
+INFO:root: - End sequential cycle
+INFO:root: = Save selected models results - 2020-10-28 07:03:37.891015
+INFO:root:>> END PROGRAM: 2020-10-28 07:03:37.922266
