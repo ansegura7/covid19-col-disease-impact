@@ -4,14 +4,14 @@ GO
 -- Validate indicator data
 SELECT [event],[capital],[department],[year],[week],[date],[value]
   FROM [dbo].[events_data_by_capital]
- WHERE [event] = 'SA'
+ WHERE [event] = 'DM'
  ORDER BY [year], [week];
 GO
 
 -- Validate grouped data
 SELECT [year], COUNT(*), SUM([value])
   FROM [dbo].[events_data_by_capital]
- WHERE [event] = 'SA'
+ WHERE [event] = 'DM'
  GROUP BY [year]
  ORDER BY [year];
 GO
@@ -19,7 +19,7 @@ GO
 -- Validate department list
 SELECT [department], [capital], COUNT(*) AS [count]
   FROM [dbo].[events_data_by_capital]
- WHERE [event] = 'SA'
+ WHERE [event] = 'DM'
   -- AND [capital] <> [department]
  GROUP BY [department], [capital]
  ORDER BY [department];
@@ -38,9 +38,9 @@ SELECT [year], [week], MIN([date]) AS [date]
 			SELECT c.[year], c.[week], d.date
 			  FROM [AC_C19_DATA].[dbo].[events_data] AS c
 			 INNER JOIN
-				   [OVS_DEVOPS_WFS].[dbo].[dim_date] AS d
+				   [DEVOPS].[dbo].[dim_date] AS d
 				ON c.year = d.year AND c.week = d.week_of_year
-			 WHERE [event] = 'EMM') AS t
+			 WHERE [event] = 'DM') AS t
 		 GROUP BY [year], [week]
 		 ORDER BY [year], [week];
 GO
@@ -51,11 +51,11 @@ UPDATE a
   FROM [AC_C19_DATA].[dbo].[events_data_by_capital] AS a
  INNER JOIN
 	(SELECT [year],[week_of_year],MIN([date]) AS [date]
-       FROM [OVS_DEVOPS_WFS].[dbo].[dim_date]
+       FROM [DEVOPS].[dbo].[dim_date]
       GROUP BY [year],[week_of_year]) AS b
   ON a.[week] = b.[week_of_year] AND a.[year] = b.[year]
  WHERE a.[date] IS NULL
-   AND [event] = 'SA';
+   AND [event] = 'DM';
 GO
 
 -- Update Department name
@@ -83,7 +83,15 @@ SELECT [event], [date], COUNT(*) AS [count]
 
 -- Fix min date
 UPDATE [dbo].[events_data_by_capital] 
+   SET [date] = '20171231'
+ WHERE [event] = 'DM'
+   AND [date] = '20180101';
+UPDATE [dbo].[events_data_by_capital] 
+   SET [date] = '20181230'
+ WHERE [event] = 'DM'
+   AND [date] = '20190101';
+UPDATE [dbo].[events_data_by_capital] 
    SET [date] = '20191229'
- WHERE [event] = 'SA'
+ WHERE [event] = 'DM'
    AND [date] = '20200101';
 GO
