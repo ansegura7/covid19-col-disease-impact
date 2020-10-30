@@ -1,0 +1,68 @@
+﻿entity,divipola,type
+COLOMBIA,0,country
+ANTIOQUIA,5000,department
+MEDELLIN,5001,capital
+ATLANTICO,8000,department
+BARRANQUILLA,8001,capital
+BOGOTA,11001,department
+BOGOTA DC,11001,capital
+BOLIVAR,13000,department
+CARTAGENA,13001,capital
+BOYACA,15000,department
+TUNJA,15001,capital
+CALDAS,17000,department
+MANIZALES,17001,capital
+CAQUETA,18000,department
+FLORENCIA,18001,capital
+CAUCA,19000,department
+POPAYAN,19001,capital
+CESAR,20000,department
+VALLEDUPAR,20001,capital
+CORDOBA,23000,department
+MONTERIA,23001,capital
+CUNDINAMARCA,25000,department
+CHOCO,27000,department
+QUIBDO,27001,capital
+HUILA,41000,department
+NEIVA,41001,capital
+LA GUAJIRA,44000,department
+RIOHACHA,44001,capital
+MAGDALENA,47000,department
+SANTA MARTA,47001,capital
+META,50000,department
+VILLAVICENCIO,50001,capital
+NARIÑO,52000,department
+PASTO,52001,capital
+NORTE SANTANDER,54000,department
+CUCUTA,54001,capital
+QUINDIO,63000,department
+ARMENIA,63001,capital
+RISARALDA,66000,department
+PEREIRA,66001,capital
+SANTANDER,68000,department
+BUCARAMANGA,68001,capital
+SUCRE,70000,department
+SINCELEJO,70001,capital
+TOLIMA,73000,department
+IBAGUE,73001,capital
+VALLE DEL CAUCA,76000,department
+CALI,76001,capital
+ARAUCA,81000,department
+ARAUCA CAP,81001,capital
+CASANARE,85000,department
+YOPAL,85001,capital
+PUTUMAYO,86000,department
+MOCOA,86001,capital
+SAN ANDRES,88000,department
+SAN ANDRES CAP,88001,capital
+AMAZONAS,91000,department
+LETICIA,91001,capital
+GUAINIA,94000,department
+PUERTO INIRIDA,94001,capital
+GUAVIARE,95000,department
+SAN JOSE DEL GUAVIARE,95001,capital
+VAUPES,97000,department
+MITU,97001,capital
+VICHADA,99000,department
+PUERTO CARREÑO,99001,capital
+PROCEDENCIA DESCONOCIDA,100000,department

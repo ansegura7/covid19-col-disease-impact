@@ -45,17 +45,25 @@ def read_csv_file(filename, encoding='utf-8', delimiter=','):
     return data
 
 # Get data from CSV file
-def get_full_data(var_column, zero=0):
+def get_full_data(var_column, entity_type, zero=0):
     full_data = []
-    url_file = 'data/raw_data_syspro.csv'
+    url_entity = 'config/divipola.csv'
+    url_data = 'data/raw_data_syspro.csv'
+    
+    # Reading entity list
+    df_entities = pd.read_csv(url_entity)
+    entity_list = df_entities[df_entities['type'] == entity_type]['entity'].unique()
+    print(' = N valid entities:', len(entity_list))
     
     # Reading data from file
-    raw_data = read_csv_file(url_file, encoding='utf-8-sig')
+    raw_data = read_csv_file(url_data, encoding='utf-8-sig')
     
     # Grouping data
     if len(raw_data) > 1:
         df = pd.DataFrame.from_records(raw_data[1:], columns=raw_data[0])
         df['date'] = pd.to_datetime(df['date'])
+        df['week'] = df['week'].astype(int)
+        df[var_column] = df[var_column].astype(int)
 
         # Validate year-week pairs        
         for ix, row in df.iterrows():
@@ -68,51 +76,60 @@ def get_full_data(var_column, zero=0):
                 df.at[ix, 'year'] = curr_date.year + 1
                 df.at[ix, 'week'] = 1
         
+        # Remove non-relevant fields
+        if entity_type == 'department':
+            gr_data = df.drop(columns=['chapter', 'group', 'sub_group', 'diagnosis', 'cod', 'com', 'municipality', 'event_type'])
+            df_col_entity = 'department'
+        else:
+            gr_data = df.drop(columns=['chapter', 'group', 'sub_group', 'diagnosis', 'cod', 'com', 'department', 'event_type'])
+            df_col_entity = 'municipality'
+            
+        # Remove non-relevant rows
+        index_id = gr_data[~gr_data[df_col_entity].isin(entity_list)].index 
+        gr_data.drop(index_id, inplace=True)
+        
         # Grouping data by entity-year-week
-        gr_data = df.drop(columns=['chapter', 'group', 'group', 'diagnosis', 'cod', 'com', 'municipality', 'event_type'])
-        gr_data[var_column] = gr_data[var_column].astype(int)
-        gr_data['week'] = gr_data['week'].astype(int)
-        gr_data = gr_data.groupby(['event', 'sub_event', 'department', 'year', 'week']).agg({var_column:'sum'})
+        gr_data = gr_data.groupby(['event', 'sub_event', df_col_entity, 'year', 'week']).agg({var_column:'sum'})
         gr_data.reset_index(inplace=True)
-        gr_data = gr_data.sort_values(by=['department', 'year', 'week'], ascending=True)
+        gr_data = gr_data.sort_values(by=[df_col_entity, 'year', 'week'], ascending=True)
         
         # Complete data with zero input param
         if len(gr_data):
-            entity_list = gr_data['department'].unique()
+            #entity_list = gr_data[df_col_entity].unique()
             year_list = [2017, 2018, 2019, 2020]
             week_list = [week for week in range(1, 53)]
             
             # Filtering and grouping data by entity
             for entity in entity_list:
-                entity_data = gr_data[gr_data['department'] == entity]
+                entity_data = gr_data[gr_data[df_col_entity] == entity]
                 
                 for year in year_list:
                     for week in week_list:
                         if year < 2020 or week < 17:
                             if len(entity_data[(entity_data['year'] == year) & (entity_data['week'] == week)]) == 0:
                                 gr_data.loc[len(gr_data)] = ['DM', 'DIABETES MELLITUS', entity, year, week, zero]
-        
+            
             # Show results
             print('>> Total rows:', len(gr_data))
             for entity in entity_list:
-            	entity_data = gr_data[gr_data['department'] == entity]
+            	entity_data = gr_data[gr_data[df_col_entity] == entity]
             	print(' - Entity:', entity, ', rows:', len(entity_data))
         
         # Save and sort temp data
         temp_data = gr_data
-        temp_data['entity'] = temp_data['department']
-        temp_data = temp_data.reindex(columns=['event', 'sub_event', 'entity', 'department', 'year', 'week', var_column])
-        temp_data = temp_data.sort_values(by=['department', 'year', 'week'], ascending=True)
+        temp_data['entity'] = temp_data[df_col_entity]
+        temp_data = temp_data.reindex(columns=['event', 'sub_event', 'entity', df_col_entity, 'year', 'week', var_column])
+        temp_data = temp_data.sort_values(by=[df_col_entity, 'year', 'week'], ascending=True)
         
         # Final conversion: from dataframe to array list
         for ix, row in temp_data.iterrows():
-            full_data.append([row['event'], row['sub_event'], row['entity'], row['department'], row['year'], row['week'], row[var_column]])
+            full_data.append([row['event'], row['sub_event'], row['entity'], row[df_col_entity], row['year'], row['week'], row[var_column]])
         
     # Return data
     return full_data
 
 # Save data to database
-def db_save_data(db_login, data_list, save_type):
+def db_save_data(db_login, data_list, entity_type):
     
     if len(data_list) == 0:
         print(' - No data to save')
@@ -128,7 +145,7 @@ def db_save_data(db_login, data_list, save_type):
         
         # Insert many rows
         query = ''
-        if save_type == 'CAPITAL':
+        if entity_type == 'capital':
             query = '''
                         INSERT INTO [dbo].[events_data_by_capital]
                                ([event],[sub_event],[capital],[department],[year],[week],[value])
@@ -162,18 +179,18 @@ def db_save_data(db_login, data_list, save_type):
 #####################
 if __name__ == "__main__":
     print(">> START PROGRAM: " + str(datetime.now()))
-
+    var_column = 'rips_num_attentions'
+    entity_type = 'department' # or capital
+    zero = -1
+    
     # 1. Get database credentials
     db_login = get_db_credentials()
     
     # 2. Get data from CSV file
-    var_column = 'rips_num_attentions'
-    zero = -1
-    data = get_full_data(var_column, zero)
+    data = get_full_data(var_column, entity_type, zero)
     
     # 3. Save data into DB
-    save_type = ''
-    db_save_data(db_login, data, save_type)
+    db_save_data(db_login, data, entity_type)
     
     print(">> END PROGRAM: " + str(datetime.now()))
 #####################
