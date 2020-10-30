@@ -11,7 +11,7 @@ Click <a href="https://github.com/ansegura7/covid19-col-disease-impact/tree/mast
 
 ## Data
 Main sources:
-- <a href="https://www.ins.gov.co/Direcciones/Vigilancia/Paginas/SIVIGILA.aspx" target="_blank">SIVIGILA</a>
+- <a href="http://portalsivigila.ins.gov.co/Paginas/Vigilancia-Rutinaria.aspx" target="_blank">SIVIGILA</a>
 - <a href="https://www.sispro.gov.co/Pages/Home.aspx" target="_blank">SISPRO</a>
 - <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema" target="_blank">DANE</a>
 
