@@ -3,7 +3,7 @@
     Created by: Andres Segura Tinoco
     Version: 1.0.0
     Created on: Oct 14, 2020
-    Updated on: Oct 20, 2020
+    Updated on: Oct 30, 2020
     Description: ETL Process (SYSPRO)
 """
 
