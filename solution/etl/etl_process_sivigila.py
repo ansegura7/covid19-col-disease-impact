@@ -62,7 +62,7 @@ def get_full_data():
     return full_data
 
 # Save data to database
-def db_save_data(db_login, data_list, save_type):
+def db_save_data(db_login, data_list, entity_type):
     
     if len(data_list) == 0:
         print(' - No data to save')
@@ -78,7 +78,7 @@ def db_save_data(db_login, data_list, save_type):
         
         # Insert many rows
         query = ''
-        if save_type == 'CAPITAL':
+        if entity_type == 'capital':
             query = '''
                         INSERT INTO [dbo].[events_data_by_capital]
                                ([event],[sub_event],[capital],[department],[year],[week],[value])
@@ -112,6 +112,7 @@ def db_save_data(db_login, data_list, save_type):
 #####################
 if __name__ == "__main__":
     print(">> START PROGRAM: " + str(datetime.now()))
+    entity_type = 'capital' # or capital
     
     # 1. Get database credentials
     db_login = get_db_credentials()
@@ -120,8 +121,7 @@ if __name__ == "__main__":
     data = get_full_data()
     
     # 3. Save data into DB
-    save_type = 'CAPITAL'
-    db_save_data(db_login, data, save_type)
+    db_save_data(db_login, data, entity_type)
     
     print(">> END PROGRAM: " + str(datetime.now()))
 #####################

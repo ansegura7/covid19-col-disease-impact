@@ -4,14 +4,14 @@ GO
 -- Validate indicator data
 SELECT [event],[capital],[department],[year],[week],[date],[value]
   FROM [dbo].[events_data_by_capital]
- WHERE [event] = 'DM'
+ WHERE [event] = 'EDA'
  ORDER BY [year], [week];
 GO
 
 -- Validate grouped data
 SELECT [year], COUNT(*), SUM([value])
   FROM [dbo].[events_data_by_capital]
- WHERE [event] = 'DM'
+ WHERE [event] = 'EDA'
  GROUP BY [year]
  ORDER BY [year];
 GO
@@ -19,7 +19,7 @@ GO
 -- Validate department list
 SELECT [department], [capital], COUNT(*) AS [count]
   FROM [dbo].[events_data_by_capital]
- WHERE [event] = 'DM'
+ WHERE [event] = 'EDA'
   -- AND [capital] <> [department]
  GROUP BY [department], [capital]
  ORDER BY [department];
@@ -27,9 +27,11 @@ GO
 
 -- Update deparments from entities
 UPDATE [events_data_by_capital]
-   SET [department] = 'VALLE DEL CAUCA' --SELECT * FROM [indicator_data]
- WHERE [capital] = 'CALI'
-   AND [department] = 'VALLE';
+   SET [department] = 'ARAUCA'
+     , [capital]  = 'ARAUCA CAP'
+ WHERE [event] = 'EDA'
+   AND [capital] = 'ARAUCA'
+   AND [department] = 'ARAUCA';
 GO
 
 -- Validate NULLs date
@@ -40,7 +42,7 @@ SELECT [year], [week], MIN([date]) AS [date]
 			 INNER JOIN
 				   [DEVOPS].[dbo].[dim_date] AS d
 				ON c.year = d.year AND c.week = d.week_of_year
-			 WHERE [event] = 'DM') AS t
+			 WHERE [event] = 'EDA') AS t
 		 GROUP BY [year], [week]
 		 ORDER BY [year], [week];
 GO
@@ -55,7 +57,7 @@ UPDATE a
       GROUP BY [year],[week_of_year]) AS b
   ON a.[week] = b.[week_of_year] AND a.[year] = b.[year]
  WHERE a.[date] IS NULL
-   AND [event] = 'DM';
+   AND [event] = 'EDA';
 GO
 
 -- Update Department name
@@ -84,14 +86,14 @@ SELECT [event], [date], COUNT(*) AS [count]
 -- Fix min date
 UPDATE [dbo].[events_data_by_capital] 
    SET [date] = '20171231'
- WHERE [event] = 'DM'
+ WHERE [event] = 'EDA'
    AND [date] = '20180101';
 UPDATE [dbo].[events_data_by_capital] 
    SET [date] = '20181230'
- WHERE [event] = 'DM'
+ WHERE [event] = 'EDA'
    AND [date] = '20190101';
 UPDATE [dbo].[events_data_by_capital] 
    SET [date] = '20191229'
- WHERE [event] = 'DM'
+ WHERE [event] = 'EDA'
    AND [date] = '20200101';
 GO
