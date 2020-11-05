@@ -112,7 +112,7 @@ def db_save_data(db_login, data_list, entity_type):
 #####################
 if __name__ == "__main__":
     print(">> START PROGRAM: " + str(datetime.now()))
-    entity_type = 'capital' # or capital
+    entity_type = 'department' # or capital
     
     # 1. Get database credentials
     db_login = get_db_credentials()

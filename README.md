@@ -6,6 +6,7 @@ Development and evaluation of mathematical and epidemiological models that suppo
 - Infant Mortality (IM)
 - Suicide Attempt (SA)
 - Diabetes Mellitus (DM)
+- Acute Diarrheal Disease (EDA)
 
 Click <a href="https://github.com/ansegura7/covid19-col-disease-impact/tree/master/solution/data" target="_blank">here</a> to see the dataset files.
 
@@ -19,7 +20,7 @@ Main sources:
 The behavior of the predictive engine is configured from an input YALM file.
 
 ```python
-event_list: ['TUBERCULOSIS']       # ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'DIABETES_MELLITUS']
+event_list: ['EDA']                # ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'DIABETES_MELLITUS', 'EDA']
 analysis_list: ['PARTIAL', 'FULL'] # ['PARTIAL', 'FULL']
 entity_filter: []                  # ['COLOMBIA', 'BOGOTA DC', 'ANTIOQUIA', 'CUNDINAMARCA', 'MEDELLIN', 'BARRANQUILLA']
 n_process: 1                       # 2, 4, 8
@@ -36,4 +37,4 @@ The project was carried out with the latest version of <a href="https://www.anac
 ## Author
 - Created by <a href="https://github.com/ansegura7">Andrés Segura Tinoco</a>
 - Created on Jul 25, 2020
-- Last update on Oct 20, 2020
+- Last update on Nov 05, 2020
