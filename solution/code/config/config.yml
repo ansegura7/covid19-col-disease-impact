@@ -1,4 +1,4 @@
-event_list: ['DIABETES_MELLITUS']  # ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'DIABETES_MELLITUS']
+event_list: ['EDA']                # ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'DIABETES_MELLITUS']
 analysis_list: ['PARTIAL', 'FULL'] # ['PARTIAL', 'FULL']
 entity_filter: []                  # ['COLOMBIA', 'BOGOTA DC', 'ANTIOQUIA', 'CUNDINAMARCA', 'MEDELLIN', 'BARRANQUILLA']
 n_process: 1                       # 2, 4, 8
