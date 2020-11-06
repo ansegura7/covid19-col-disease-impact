@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
     Created by: Andres Segura Tinoco
-    Version: 2.0.0
+    Version: 2.1.0
     Created on: Sep 09, 2020
-    Updated on: Oct 13, 2020
+    Updated on: Nov 06, 2020
     Description: Main class of the solution.
 """
 
@@ -146,6 +146,7 @@ def parallel_create_models(data_list, curr_analysis, kwargs):
 
 # Core function - Save to CSV file the hyperparameters of selected models 
 def save_results(curr_event, curr_analysis, best_models, full_data):
+    exec_col = 'exec_date'
     
     # Save best models
     best_models = {k: v for k, v in best_models.items() if v is not None}
@@ -167,6 +168,7 @@ def save_results(curr_event, curr_analysis, best_models, full_data):
         # Remove unused columns
         df.drop("order", axis=1, inplace=True)
         df.drop("seasonal_order", axis=1, inplace=True)
+        df.insert(0, exec_col, str(datetime.now()))
         
         # Persist data
         filename = '../result/' + curr_event + '/model_params_' + curr_analysis + '.csv'
@@ -174,8 +176,14 @@ def save_results(curr_event, curr_analysis, best_models, full_data):
     
     # Save model data results
     if full_data is not None and len(full_data):
+        
+        # Post processing of the data
+        full_data.reset_index(inplace=True)
+        full_data.insert(0, exec_col, str(datetime.now()))
+        
+        # Persist data
         filename = '../result/' + curr_event + '/result_data_' + curr_analysis + '.csv'
-        ul.save_df_to_csv_file(filename, full_data, True)
+        ul.save_df_to_csv_file(filename, full_data, False)
 
 #####################
 ### START PROGRAM ###

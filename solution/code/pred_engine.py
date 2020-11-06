@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
     Created by: Andres Segura Tinoco
-    Version: 1.0.0
+    Version: 1.3.0
     Created on: Sep 09, 2020
-    Updated on: Oct 06, 2020
+    Updated on: Nov 06, 2020
     Description: Predictive engine for both scenarios (partial or w/o COVID and full or w COVID)..
 """
 
@@ -35,13 +35,13 @@ def sarima_configs(seasonal=[13]):
     
     # Define config lists
     p_params = [0, 1, 2]
-    d_params = [0, 1]
+    d_params = [0, 1, 2]
     q_params = [0, 1, 2]
     P_params = [0, 1, 2]
-    D_params = [0, 1]
+    D_params = [0, 1, 2]
     Q_params = [0, 1, 2]
     m_params = seasonal
-    t_params = ['n','c','t','ct']
+    #t_params = ['n','c','t','ct']
     
     # Create config instances
     for p in p_params:
@@ -51,9 +51,9 @@ def sarima_configs(seasonal=[13]):
                     for D in D_params:
                         for Q in Q_params:
                             for m in m_params:
-                                for t in t_params:
-                                    cfg = [(p,d,q), (P,D,Q,m), t]
-                                    models.append(cfg)
+                                #for t in t_params:
+                                cfg = [(p,d,q), (P,D,Q,m), 'n']
+                                models.append(cfg)
     
     return models
 
@@ -65,7 +65,7 @@ def sarima_score_model(series_data, start_date, config, mape_threshold, ts_toler
     try:
         # Create and fit model
         order, sorder, trend = config
-        model = sm.tsa.statespace.SARIMAX(series_data, order=order, seasonal_order=sorder, trend=trend, 
+        model = sm.tsa.statespace.SARIMAX(series_data, order=order, seasonal_order=sorder, #trend=trend, 
                                           enforce_stationarity=False, enforce_invertibility=False)
         model = model.fit()
         
@@ -147,18 +147,31 @@ def sarima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance, par
     return scores
 
 # Core function - Make predictions
-def make_predictions(entity, model, n_forecast, ci_alpha, year):
+def make_predictions(entity, model, n_forecast, ci_alpha, last_year, last_period):
     
     # Get forecast n steps ahead in future (1 year)
     pred = model.get_forecast(steps=n_forecast)
     y_forecasted = np.array([max(round(p), 0) for p in pred.predicted_mean])
     pred_ci = pred.conf_int(alpha=(1 - ci_alpha))
     
+    # Create year-period pairs for prediction
+    period_list = []
+    year_list = []
+    
+    for i in range(1, n_forecast + 1):
+        last_period += 1
+        if last_period == 14:
+            last_period = 1
+            last_year += 1
+        
+        period_list.append(last_period)
+        year_list.append(last_year)
+    
     # Create forecast data with confidence intervals
-    fr_data = {'date': pred.predicted_mean.index, 'entity': entity, 'year': year, 'period': np.arange(1, n_forecast + 1), 
+    fr_data = {'date': pred.predicted_mean.index, 'entity': entity, 'year': year_list, 'period': period_list , 
                'forecast': y_forecasted, 'ci_inf': pred_ci.iloc[:, 0].values, 'ci_sup': pred_ci.iloc[:, 1].values}
     
-    # Create Dataframe
+    # Create Dataframe from (dict) data
     pred_df = pd.DataFrame(fr_data)
     
     # Replace negative values by zero
@@ -177,13 +190,15 @@ def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tol
         logging.info(' = Entity: ' + entity)
         
         # Cooking time-series data with frequency
+        last_year, last_period, last_value = data.iloc[len(data)-1]
         series_data = data['value']
         series_data = series_data.asfreq(freq='4W')
         
         # Filter data (Partial mode)   
         if curr_analysis == 'partial':
+            last_year, last_period = 2019, 13
             filter_date = pd.to_datetime('2019-12-27')
-            series_data = series_data.loc[series_data.index < filter_date]            
+            series_data = series_data.loc[series_data.index < filter_date]
         
         # Begin grid search: Training and testing process
         start_time = timeit.default_timer()
@@ -208,8 +223,7 @@ def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tol
             
             # Make predictions
             logging.info(' = Make predictions for: ' + entity)
-            year = 2020
-            pred_df = make_predictions(entity, model, n_forecast, ci_alpha, year)
+            pred_df = make_predictions(entity, model, n_forecast, ci_alpha, last_year, last_period)
         
     except Exception as e:
         logging.error(' - Error in: ' + entity + ': ' + str(e))
