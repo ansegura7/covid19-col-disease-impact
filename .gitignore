@@ -1,7 +1,7 @@
 *-checkpoint.ipynb
 *.docx
 *\database.yml
-*\others
+*\others-delete
 *_aggr_data.csv
 *_forecast.csv
 *__pycache__*

@@ -100,14 +100,14 @@ def sarima_score_model(series_data, start_date, config, mape_threshold, ts_toler
                 vc_diff = abs(ts_var_coef - pred_var_coef)
             
             # Compute tracking signal (TS) for prediction
-            ts_period = ul.tracking_signal(y_truth, y_forecasted, ts_tolerance)
+            ts_period, ts_total = ul.tracking_signal(y_truth, y_forecasted, ts_tolerance)
             
             # Save result if model MAPE is greater than threshold
             if mape > mape_threshold and ts_period > 0:
                 result = {'method': method, 'order': order, 'seasonal_order': sorder, 'trend': trend, 
-                          'var_coef_diff': round(vc_diff, 4), 'tracking_signal': ts_period,
+                          'var_coef_diff': round(vc_diff, 4), 'tracking_signal': ts_period, 'tracking_signal_total': ts_total, 
                           'rmse': round(rmse, 4), 'mape': round(mape, 4), 'aic': round(model.aic, 4), 'bic': round(model.bic, 4)}
-            
+        
     except Exception as e:
         result = {}
         print(' - Grid Search Error: ' + str(e))

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     Created by: Andres Segura Tinoco
-    Version: 1.1.0
+    Version: 1.2.0
     Created on: Sep 22, 2020
     Updated on: Sep 23, 2020
     Description: Library with utility functions
@@ -71,24 +71,37 @@ def get_interval(y, y_pred, pi=0.99):
 # Util function - Tracking signal monitors any forecasts
 def tracking_signal(y_truth, y_forecasted, ci_tolerance):
     ts_period = 0
-    cv = 0
-    ce = 0
+    ts_total = 0
+    n = len(y_truth)
     
-    # Tracking signal calculation
-    for i in range(len(y_truth)):
-        v = abs(y_truth[i] - y_forecasted[i])
-        cv += v
-        dma = cv / (i + 1)
-        e = y_truth[i] - y_forecasted[i]
-        ce += e
-        ts = ce / dma
+    if n > 0 :
+        cv = 0
+        ce = 0
         
-        # Stop
-        if ts >= ci_tolerance:
-            ts_period = i + 1
-            break
+        # Tracking signal calculation
+        for i in range(n):
+            v = abs(y_truth[i] - y_forecasted[i])
+            cv += v
+            dma = cv / (i + 1)
+            e = y_truth[i] - y_forecasted[i]
+            ce += e
+            ts = ce / dma
+            
+            # Counters
+            if ts <= ci_tolerance:
+                ts_total += 1
+                
+            elif ts_period == 0:
+                ts_period = i
         
-    return ts_period
+        # Calculate total valid periods
+        if ts_total == n:
+            ts_total = 1.0
+            ts_period = n
+        else:
+            ts_total = round(ts_total / n, 4)
+        
+    return ts_period, ts_total
 
 # Util function - Read dict from yaml file
 def get_dict_from_yaml(yaml_path):
@@ -109,7 +122,13 @@ def create_folder(folder_name):
 def save_df_to_csv_file(filename, df, index=True):
     result = ''
     try:
-        df.to_csv(filename, index=index)
+        if os.path.exists(filename):
+            # Append mode without header
+            df.to_csv(filename, index=index, mode='a', header=False)
+        else:
+            # Write mode with header (only first time)
+            df.to_csv(filename, index=index, mode='w', header=True)
+        
     except Exception as e:
         result = ' - Error: ' + str(e)
     return result
