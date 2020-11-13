@@ -1,0 +1,2 @@
+,exec_date,method,trend,var_coef_diff,tracking_signal,tracking_signal_total,rmse,mape,aic,bic,p,d,q,Sp,Sd,Sq,freq
+00000,2020-11-13 14:19:17.626122,SARIMA,n,0.0082,7,0.5833,17026.7141,5.0478,308.2397,311.6294,2.0,0.0,1.0,2.0,0.0,0.0,13.0
