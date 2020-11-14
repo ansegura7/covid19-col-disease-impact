@@ -24,7 +24,7 @@ event_list: ['EDA']                # ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICI
 analysis_list: ['PARTIAL', 'FULL'] # ['PARTIAL', 'FULL']
 entity_filter: []                  # ['COLOMBIA', 'BOGOTA DC', 'ANTIOQUIA', 'CUNDINAMARCA', 'MEDELLIN', 'BARRANQUILLA']
 n_process: 1                       # 2, 4, 8
-perc_test: 0.20                    # 0.1, 0.3
+perc_test: 0.30                    # 0.10, 0.20
 mape_threshold: 4.0                # 5.0, 10.0
 ts_tolerance: 4.0                  # 3.0, 5.0
 n_forecast: 13                     # 6
