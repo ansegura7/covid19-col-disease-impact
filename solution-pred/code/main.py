@@ -3,11 +3,11 @@
     Created by: Andres Segura Tinoco
     Version: 2.1.0
     Created on: Sep 09, 2020
-    Updated on: Nov 06, 2020
-    Description: Main class of the solution.
+    Updated on: Nov 23, 2020
+    Description: Main class of the predictive-engine solution.
 """
 
-# Import Python 
+# Import Python
 import os
 import logging
 import pandas as pd
