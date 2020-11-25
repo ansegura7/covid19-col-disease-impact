@@ -12,7 +12,7 @@ import os
 import logging
 import pandas as pd
 import concurrent.futures
-#import multiprocessing
+from multiprocessing import cpu_count
 from datetime import datetime
 
 # Import custom libraries
@@ -105,7 +105,7 @@ def parallel_create_models(data_list, curr_analysis, kwargs):
     model_data = pd.DataFrame(columns=['date', 'entity', 'forecast', 'ci_inf', 'ci_sup'])
     
     # Read process variables
-    n_process = kwargs['n_process'] # min(kwargs['n_process'], multiprocessing.cpu_count())
+    n_process = max(min(int(kwargs['n_process']), cpu_count() - 1), 1)
     perc_test = kwargs['perc_test']
     mape_threshold = kwargs['mape_threshold']
     ts_tolerance = kwargs['ts_tolerance']
@@ -122,11 +122,9 @@ def parallel_create_models(data_list, curr_analysis, kwargs):
         result_data = []
         if n_process > 1:
             logging.info(' - Start parallel cycle')
-            #with multiprocessing.Pool(processes=n_process) as executor:
-            #    result_data = executor.map(create_models, params)
-                
-            with concurrent.futures.ThreadPoolExecutor(max_workers=n_process) as executor:
-                result_data = executor.map(create_models, params)
+            if __name__ == '__main__':
+                with concurrent.futures.ThreadPoolExecutor(max_workers=n_process) as executor:
+                    result_data = executor.map(create_models, params)
             logging.info(' - End parallel cycle')
         else:
             logging.info(' - Start sequential cycle')

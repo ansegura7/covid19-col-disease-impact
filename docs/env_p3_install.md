@@ -1,4 +1,4 @@
-# Install Python Packages
+# Solution Python Packages
 On Ubuntu 20.04 LTS
 
 ## Commands

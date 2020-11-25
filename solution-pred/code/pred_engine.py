@@ -67,7 +67,7 @@ def sarima_score_model(series_data, start_date, config, mape_threshold, ts_toler
         order, sorder, trend = config
         model = sm.tsa.statespace.SARIMAX(series_data, order=order, seasonal_order=sorder, #trend=trend, 
                                           enforce_stationarity=False, enforce_invertibility=False)
-        model = model.fit(disp=False)
+        model = model.fit(disp=False, iprint=False)
         
         if model.aic > 0 or model.bic > 0:
             
@@ -219,7 +219,8 @@ def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tol
             # Create best model
             best_params = scores[0]
             model = sm.tsa.statespace.SARIMAX(series_data, order=best_params['order'], seasonal_order=best_params['seasonal_order'], 
-                                              trend=best_params['trend'], enforce_stationarity=False, enforce_invertibility=False).fit()
+                                              trend=best_params['trend'], enforce_stationarity=False, enforce_invertibility=False)
+            model = model.fit(disp=False, iprint=False)
             
             # Make predictions
             logging.info(' = Make predictions for: ' + entity)
