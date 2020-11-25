@@ -67,7 +67,7 @@ def sarima_score_model(series_data, start_date, config, mape_threshold, ts_toler
         order, sorder, trend = config
         model = sm.tsa.statespace.SARIMAX(series_data, order=order, seasonal_order=sorder, #trend=trend, 
                                           enforce_stationarity=False, enforce_invertibility=False)
-        model = model.fit()
+        model = model.fit(disp=False)
         
         if model.aic > 0 or model.bic > 0:
             
@@ -202,7 +202,7 @@ def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tol
         
         # Begin grid search: Training and testing process
         start_time = timeit.default_timer()
-        scores = sarima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance, parallel=False)
+        scores = sarima_grid_search(series_data, perc_test, mape_threshold, ts_tolerance, parallel=True)
         elapsed = timeit.default_timer() - start_time
         print(' = n scores:', len(scores))
         logging.info(' - Grid search elapsed time: ' + str(elapsed) + ' s, for: ' + entity + ', n models: ' +  str(len(scores)))
