@@ -11545,3 +11545,12 @@ INFO:root: = Make predictions for: 85001
 INFO:root: - End sequential cycle
 INFO:root: = Save selected models results - 2020-11-13 20:50:06.566098
 INFO:root:>> END PROGRAM: 2020-11-13 20:50:06.722347
+INFO:root:>> START PROGRAM: 2020-12-01 17:21:01.791501
+INFO:root: = Engine params
+INFO:root:{'event_list': ['EXCESS_MORTALITY'], 'analysis_list': ['PARTIAL'], 'entity_filter': ['COLOMBIA'], 'n_process': 1, 'perc_test': 0.2, 'mape_threshold': 4.0, 'ts_tolerance': 4.0, 'n_forecast': 52, 'ci_alpha': 0.9}
+INFO:root: = Event: excess_mortality
+INFO:root: = Read data by entity - 2020-12-01 17:21:01.807121
+INFO:root: = Analysis: partial
+INFO:root: = Create best models >> partial - 2020-12-01 17:21:02.176978
+INFO:root: - Start sequential cycle
+INFO:root: = Entity: 00000
