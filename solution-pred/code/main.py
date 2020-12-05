@@ -143,7 +143,7 @@ def parallel_create_models(data_list, curr_analysis, kwargs):
     return best_models, model_data
 
 # Core function - Save to CSV file the hyperparameters of selected models 
-def save_results(curr_event, curr_analysis, best_models, full_data):
+def save_results(curr_event, curr_analysis, best_models, full_data, exec_date):
     exec_col = 'exec_date'
     
     # Save best models
@@ -166,7 +166,7 @@ def save_results(curr_event, curr_analysis, best_models, full_data):
         # Remove unused columns
         df.drop("order", axis=1, inplace=True)
         df.drop("seasonal_order", axis=1, inplace=True)
-        df.insert(0, exec_col, str(datetime.now()))
+        df.insert(0, exec_col, str(exec_date))
         
         # Persist data
         filename = '../result/' + curr_event + '/model_params_' + curr_analysis + '.csv'
@@ -177,7 +177,7 @@ def save_results(curr_event, curr_analysis, best_models, full_data):
         
         # Post processing of the data
         full_data.reset_index(inplace=True)
-        full_data.insert(0, exec_col, str(datetime.now()))
+        full_data.insert(0, exec_col, str(exec_date))
         
         # Persist data
         filename = '../result/' + curr_event + '/result_data_' + curr_analysis + '.csv'
@@ -216,6 +216,9 @@ if __name__ == "__main__":
         logging.info(' = Read data by entity - ' + str(datetime.now()))
         filename = '../data/' + curr_event + '_dataset.csv'
         data_list, base_data = get_data_by_entity(filename, entity_filter)
+
+        # Get initial execute date
+        exec_date = datetime.now()
         
         # 5. Loop through entities 
         for curr_analysis in analysis_list:
@@ -229,7 +232,7 @@ if __name__ == "__main__":
             # 7. Save hyperparameters of selected models
             logging.info(' = Save selected models results - ' + str(datetime.now()))
             full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
-            save_results(curr_event, curr_analysis, best_models, full_data)
+            save_results(curr_event, curr_analysis, best_models, full_data, exec_date)
     
     logging.info(">> END PROGRAM: " + str(datetime.now()))
     logging.shutdown()
