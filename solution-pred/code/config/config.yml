@@ -1,9 +1,0 @@
-event_list: ['EXCESS_MORTALITY']    # ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'DIABETES_MELLITUS', 'EDA']
-analysis_list: ['PARTIAL']          # ['PARTIAL', 'FULL']
-entity_filter: []                   # ['COLOMBIA', 'BOGOTA DC', 'ANTIOQUIA', 'CUNDINAMARCA', 'MEDELLIN', 'BARRANQUILLA']
-n_process: 1                        # 2, 4, 8
-perc_test: 0.20                     # 0.1, 0.2
-mape_threshold: 5.0                 # 5.0, 10.0
-ts_tolerance: 4.0                   # 3.0, 5.0
-n_forecast: 13                      # 6
-ci_alpha: 0.9                       # 0.8, 0.95

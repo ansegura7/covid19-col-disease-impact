@@ -95,27 +95,28 @@ def get_data_by_entity(filename, entity_filter):
 
 # Core function - Mask to the predictive engine
 def create_models(args):
-    entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha = args
+    entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha, partial_end_date, full_init_date = args
     print(' = Entity: ' + entity + ' - ' + str(datetime.now()))
-    return pe.create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha)
+    return pe.create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha, partial_end_date, full_init_date)
 
 # Core function - Create SARIMA model in Parallel
-def parallel_create_models(data_list, curr_analysis, kwargs):
+def parallel_create_models(data_list, curr_analysis, n_process, kwargs):
     best_models = dict()
     model_data = pd.DataFrame(columns=['date', 'entity', 'forecast', 'ci_inf', 'ci_sup'])
     
-    # Read process variables
-    n_process = max(min(int(kwargs['n_process']), cpu_count() - 1), 1)
+    # Read local event variables
     perc_test = kwargs['perc_test']
     mape_threshold = kwargs['mape_threshold']
     ts_tolerance = kwargs['ts_tolerance']
     n_forecast = kwargs['n_forecast']
     ci_alpha = kwargs['ci_alpha']
+    partial_end_date = kwargs['partial_end_date']
+    full_init_date = kwargs['full_init_date']
     
     # Create list of params for threads
     params = []
     for entity, data in data_list.items():
-        params.append([entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha])
+        params.append([entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha, partial_end_date, full_init_date])
     
     # Start compute cycle
     try:
@@ -190,50 +191,55 @@ if __name__ == "__main__":
     
     # 0. Program variables
     log_path = 'log/log_file.log'
-    yaml_path = 'config/config.yml'
+    config_path = 'config/config.json'
     logging.basicConfig(filename=log_path, level=logging.INFO)
     logging.info('>> START PROGRAM: ' + str(datetime.now()))
     
     # 1. Read config params
-    setup_params = ul.get_dict_from_yaml(yaml_path)
+    setup_params = ul.get_dict_from_json(config_path)
     event_list = setup_params['event_list']
-    analysis_list = setup_params['analysis_list']
     entity_filter = setup_params['entity_filter']
-    
-    # Save execution params
-    logging.info(' = Engine params')
-    logging.info(setup_params)
+    n_process = max(min(int(setup_params['n_process']), cpu_count() - 1), 1)
     
     # 2. Loop through entities 
     for curr_event in event_list:
-        curr_event = curr_event.lower()
-        logging.info(' = Event: ' + curr_event)
+        event_name = curr_event['name'].lower()
         
-        # 3. Create result folders
-        create_result_folders(curr_event)
-        
-        # 4. Get list of datasets by entities
-        logging.info(' = Read data by entity - ' + str(datetime.now()))
-        filename = '../data/' + curr_event + '_dataset.csv'
-        data_list, base_data = get_data_by_entity(filename, entity_filter)
-
-        # Get initial execute date
-        exec_date = datetime.now()
-        
-        # 5. Loop through entities 
-        for curr_analysis in analysis_list:
-            curr_analysis = curr_analysis.lower()
-            logging.info(' = Analysis: ' + curr_analysis)
+        if event_name and curr_event['enabled']:
             
-            # 6. Create best model
-            logging.info(' = Create best models >> ' + curr_analysis + ' - '+ str(datetime.now()))
-            best_models, model_data = parallel_create_models(data_list, curr_analysis, setup_params)
+            # Save event params
+            logging.info(' = Event: ' + event_name)
+            logging.info(curr_event)
             
-            # 7. Save hyperparameters of selected models
-            logging.info(' = Save selected models results - ' + str(datetime.now()))
-            full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
-            save_results(curr_event, curr_analysis, best_models, full_data, exec_date)
+            # 3. Create result folders
+            create_result_folders(event_name)
+            
+            # 4. Get list of datasets by entities
+            logging.info(' = Read data by entity - ' + str(datetime.now()))
+            filename = '../data/' + event_name + '_dataset.csv'
+            data_list, base_data = get_data_by_entity(filename, entity_filter)
     
+            # Get initial execute date
+            exec_date = datetime.now()
+            analysis_list = curr_event['analysis_list']
+            
+            # 5. Loop through entities
+            for curr_analysis in analysis_list:
+                curr_analysis = curr_analysis.lower()
+                logging.info(' = Analysis: ' + curr_analysis)
+                
+                # 6. Create best model
+                logging.info(' = Create best models >> ' + curr_analysis + ' - '+ str(datetime.now()))
+                best_models, model_data = parallel_create_models(data_list, curr_analysis, n_process, curr_event)
+                
+                # 7. Save hyperparameters of selected models
+                logging.info(' = Save selected models results - ' + str(datetime.now()))
+                full_data = ul.merge_data(df1=base_data, df2=model_data, index=['date', 'entity', 'year', 'period'])
+                save_results(event_name, curr_analysis, best_models, full_data, exec_date)
+        else:
+            logging.info(' = Event: ' + event_name + ' will not be processed.')
+            print(' = Event', event_name, 'will not be processed.')
+            
     logging.info(">> END PROGRAM: " + str(datetime.now()))
     logging.shutdown()
 #####################

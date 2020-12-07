@@ -9,6 +9,7 @@
 
 # Import Python
 import os
+import json
 import yaml
 import numpy as np
 import pandas as pd
@@ -103,7 +104,16 @@ def tracking_signal(y_truth, y_forecasted, ci_tolerance):
         
     return ts_period, ts_total
 
-# Util function - Read dict from yaml file
+# Util function - Read dict from JSON file
+def get_dict_from_json(json_path):
+    result = dict()
+    
+    with open(json_path) as f:
+        result = json.load(f)
+    
+    return result
+
+# Util function - Read dict from YAML file
 def get_dict_from_yaml(yaml_path):
     result = dict()
     

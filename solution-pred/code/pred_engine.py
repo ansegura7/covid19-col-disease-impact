@@ -182,7 +182,7 @@ def make_predictions(entity, model, n_forecast, ci_alpha, last_year, last_period
     return pred_df
 
 # Core function - Create models by entities
-def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha):
+def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tolerance, n_forecast, ci_alpha, partial_end_date, full_init_date):
     best_params = None
     pred_df = None
     
@@ -196,8 +196,8 @@ def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tol
         
         # Filter data (Partial mode)   
         if curr_analysis == 'partial':
-            last_year, last_period = 2019, 13
-            filter_date = pd.to_datetime('2019-12-27')
+            filter_date = pd.to_datetime(partial_end_date)
+            last_year, last_period = filter_date.year, 13
             series_data = series_data.loc[series_data.index < filter_date]
         
         # Begin grid search: Training and testing process
