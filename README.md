@@ -7,28 +7,42 @@ Development and evaluation of mathematical and epidemiological models that suppo
 - Suicide Attempt (SA)
 - Diabetes Mellitus (DM)
 - Acute Diarrheal Disease (EDA)
+- Excess Mortality (EM)
 
-Click <a href="https://github.com/ansegura7/covid19-col-disease-impact/tree/master/solution/data" target="_blank">here</a> to see the dataset files.
+Click <a href="https://github.com/ansegura7/covid19-col-disease-impact/tree/master/solution-pred/data" target="_blank">here</a> to see the dataset files.
 
 ## Data
 Main sources:
 - <a href="http://portalsivigila.ins.gov.co/Paginas/Vigilancia-Rutinaria.aspx" target="_blank">SIVIGILA</a>
 - <a href="https://www.sispro.gov.co/Pages/Home.aspx" target="_blank">SISPRO</a>
 - <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema" target="_blank">DANE</a>
+- <a href="https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr" target="_blank">Datos Abiertos</a>
 
 ## Program setup
 The behavior of the predictive engine is configured from an input YALM file.
 
-```python
-event_list: ['EDA']                # ['TUBERCULOSIS', 'INFANT_MORTALITY', 'SUICIDE_ATTEMPT', 'DIABETES_MELLITUS', 'EDA']
-analysis_list: ['PARTIAL', 'FULL'] # ['PARTIAL', 'FULL']
-entity_filter: []                  # ['COLOMBIA', 'BOGOTA DC', 'ANTIOQUIA', 'CUNDINAMARCA', 'MEDELLIN', 'BARRANQUILLA']
-n_process: 1                       # 2, 4, 8
-perc_test: 0.30                    # 0.10, 0.20
-mape_threshold: 4.0                # 5.0, 10.0
-ts_tolerance: 4.0                  # 3.0, 5.0
-n_forecast: 13                     # 6
-ci_alpha: 0.9                      # 0.8, 0.95
+```json
+{
+  "event_list": [
+    {
+      "analysis_list": [ "PARTIAL", "FULL" ],
+      "ci_alpha": 0.9,
+      "enabled": true,
+      "full_init_date": "2017-01-01",
+      "mape_threshold": 4.0,
+      "n_forecast": 13,
+      "name": "TUBERCULOSIS",
+      "partial_end_date": "2019-12-27",
+      "perc_test": 0.20,
+      "ts_tolerance": 4.0
+    },
+    {
+        ...
+    }
+  ],
+  "entity_filter": ["COLOMBIA", "BOGOTA DC", "ANTIOQUIA"],
+  "n_process": 1
+}
 ```
 
 ## Dependencies
