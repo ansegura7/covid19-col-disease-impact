@@ -194,11 +194,16 @@ def create_models(entity, data, curr_analysis, perc_test, mape_threshold, ts_tol
         series_data = data['value']
         series_data = series_data.asfreq(freq='4W')
         
-        # Filter data (Partial mode)   
+        # Filtering data...
         if curr_analysis == 'partial':
+            # Partial mode
             filter_date = pd.to_datetime(partial_end_date)
             last_year, last_period = filter_date.year, 13
             series_data = series_data.loc[series_data.index < filter_date]
+        else:
+            # Full mode
+            filter_date = pd.to_datetime(full_init_date)
+            series_data = series_data.loc[series_data.index >= filter_date]
         
         # Begin grid search: Training and testing process
         start_time = timeit.default_timer()
