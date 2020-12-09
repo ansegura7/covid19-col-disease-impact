@@ -1,0 +1,66 @@
+﻿entity,divipola,type
+CARTAGENA,13001,capital
+TUNJA,15001,capital
+MANIZALES,17001,capital
+FLORENCIA,18001,capital
+POPAYAN,19001,capital
+VALLEDUPAR,20001,capital
+MONTERIA,23001,capital
+QUIBDO,27001,capital
+NEIVA,41001,capital
+RIOHACHA,44001,capital
+SANTA MARTA,47001,capital
+VILLAVICENCIO,50001,capital
+PASTO,52001,capital
+CUCUTA,54001,capital
+ARMENIA,63001,capital
+PEREIRA,66001,capital
+BUCARAMANGA,68001,capital
+SINCELEJO,70001,capital
+IBAGUE,73001,capital
+CALI,76001,capital
+ARAUCA CAP,81001,capital
+YOPAL,85001,capital
+MOCOA,86001,capital
+SAN ANDRES CAP,88001,capital
+LETICIA,91001,capital
+PUERTO INIRIDA,94001,capital
+SAN JOSE DEL GUAVIARE,95001,capital
+MITU,97001,capital
+PUERTO CARREÑO,99001,capital
+MEDELLIN,05001,capital
+BARRANQUILLA,08001,capital
+BOGOTA DC,11001,capital
+COLOMBIA,00000,country
+BOLIVAR,13000,department
+BOYACA,15000,department
+CALDAS,17000,department
+CAQUETA,18000,department
+CAUCA,19000,department
+CESAR,20000,department
+CORDOBA,23000,department
+CUNDINAMARCA,25000,department
+CHOCO,27000,department
+HUILA,41000,department
+LA GUAJIRA,44000,department
+MAGDALENA,47000,department
+META,50000,department
+NARIÑO,52000,department
+NORTE SANTANDER,54000,department
+QUINDIO,63000,department
+RISARALDA,66000,department
+SANTANDER,68000,department
+SUCRE,70000,department
+TOLIMA,73000,department
+VALLE DEL CAUCA,76000,department
+ARAUCA,81000,department
+CASANARE,85000,department
+PUTUMAYO,86000,department
+SAN ANDRES,88000,department
+AMAZONAS,91000,department
+GUAINIA,94000,department
+GUAVIARE,95000,department
+VAUPES,97000,department
+VICHADA,99000,department
+ANTIOQUIA,05000,department
+ATLANTICO,08000,department
