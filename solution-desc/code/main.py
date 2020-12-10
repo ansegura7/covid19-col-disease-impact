@@ -3,7 +3,7 @@
     Created by: Andres Segura Tinoco
     Version: 1.0.0
     Created on: Nov 23, 2020
-    Updated on: Nov 23, 2020
+    Updated on: Dec 10, 2020
     Description: Main class of the descriptive-engine solution.
 """
 
@@ -11,6 +11,7 @@
 import os
 import logging
 import pandas as pd
+import numpy as np
 from datetime import datetime
 
 # Import custom libraries
@@ -65,14 +66,82 @@ def get_data_by_entity(filename, entity_filter):
     
     return data_list
 
+# Core function - Get population by entity and year
+def get_population_by_entity():
+    pop_data = {}
+    
+    raw_data = pd.read_csv('config/population.csv')
+    
+    if len(raw_data):
+        for ix, row in raw_data.iterrows():
+            code = str(row['divipola'])
+            year = str(row['year'])
+            pop_value = row['population']
+            
+            if len(code) == 1:
+                code = '0' + code + '000'
+            elif len(code) == 2:
+                code = code + '000'
+            elif len(code) == 4:
+                code = '0' + code
+            
+            key = code + '_' + year
+            pop_data[key] = pop_value
+            
+    return pop_data
+
 # Core function - Calculate descriptive stats by entity
-def calc_desc_stats(data_list, n_years=10):
-    data = pd.DataFrame(columns=['entity', 'period', 'mean', 'dev', 'min', 'q25', 'q50', 'q75', 'max', 'no_data'])
+def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
+    stats_data = pd.DataFrame(columns=['entity', 'period', 'total', 'mean', 'stdev', 'min', 'p25', 'p50', 'p75', 'max', 'no_data'])
     
-    for entity, data in data_list.items():
-        print(entity, len(data))
-    
-    return data
+    for entity, data in data_list.items():        
+        n_rows = len(data)
+        stats = dict()
+        values = []
+        period = 1
+        no_data = 0
+        
+        for week in range(1, 54):
+            for ix in range(n_rows):
+                year = data.iloc[ix]['year'] 
+                
+                if (len(values) == 4 * n_years and week != 53):
+                    stats[str(period)] = { 'values': values, 'no_data': no_data }
+                    period += 1
+                    values = []
+                    no_data = 0
+                    
+                key = entity + '_' + str(year)
+                entity_pop = pop_data[key]
+                value = round(data.iloc[ix][str(week)] / entity_pop * div, 4)
+                if week != 53 or value > 0:
+                    values.append(value)
+                
+                    if value == 0:
+                        no_data += 1
+        
+        stats[str(period)] = { 'values': values, 'no_data': no_data }
+        
+        # Show stats
+        for key, item in stats.items():
+            values = item['values']
+            values.sort()
+            
+            total = round(sum(values), 4)
+            mean = round(np.mean(values), 4)
+            stdev = round(np.std(values), 4)
+            min_value = min(values)
+            max_value = max(values)
+            p25 = np.percentile(values, 25)
+            p50 = np.percentile(values, 50)
+            p75 = np.percentile(values, 75)
+            
+            # Save row item
+            row_item = {'entity': entity, 'period': key, 'total': total, 'mean': mean, 'stdev': stdev, 
+                        'min': min_value, 'p25': p25, 'p50':p50, 'p75': p75, 'max': max_value, 'no_data': no_data}
+            stats_data = stats_data.append(row_item, ignore_index=True)
+     
+    return stats_data
 
 # Core function - Save to CSV file the result stats by entity
 def save_results(curr_event, full_data, exec_date):
@@ -117,9 +186,12 @@ if __name__ == "__main__":
     filename = '../data/' + event_name + '_dataset.csv'
     data_list = get_data_by_entity(filename, entity_filter)
     
+    # 5. Get population by entity and year
+    pop_data = get_population_by_entity()
+    
     # 5. Calculate descriptive stats
     logging.info(' = Calculate descriptive stats - ' + str(datetime.now()))
-    full_data  = calc_desc_stats(data_list)
+    full_data  = calc_desc_stats(data_list, pop_data)
     
     # 7. Save hyperparameters of selected models
     logging.info(' = Save selected models results - ' + str(datetime.now()))
