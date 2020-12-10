@@ -12,6 +12,7 @@ import os
 import logging
 import pandas as pd
 import numpy as np
+import scipy.stats as ss
 from datetime import datetime
 
 # Import custom libraries
@@ -98,6 +99,7 @@ def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
         n_rows = len(data)
         stats = dict()
         values = []
+        all_values = []
         period = 1
         no_data = 0
         
@@ -114,17 +116,21 @@ def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
                 key = entity + '_' + str(year)
                 entity_pop = pop_data[key]
                 value = round(data.iloc[ix][str(week)] / entity_pop * div, 4)
+                
                 if week != 53 or value > 0:
                     values.append(value)
-                
+                    all_values.append(value)
+                    
                     if value == 0:
                         no_data += 1
         
         stats[str(period)] = { 'values': values, 'no_data': no_data }
+        var_coef = round(100.0 * ss.variation(all_values), 4)
         
         # Show stats
         for key, item in stats.items():
             values = item['values']
+            no_data = item['no_data']
             values.sort()
             
             total = round(sum(values), 4)
@@ -137,8 +143,8 @@ def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
             p75 = np.percentile(values, 75)
             
             # Save row item
-            row_item = {'entity': entity, 'period': key, 'total': total, 'mean': mean, 'stdev': stdev, 
-                        'min': min_value, 'p25': p25, 'p50':p50, 'p75': p75, 'max': max_value, 'no_data': no_data}
+            row_item = {'entity': entity, 'period': key, 'total': total, 'mean': mean, 'stdev': stdev, 'min': min_value, 
+                        'p25': p25, 'p50':p50, 'p75': p75, 'max': max_value, 'no_data': no_data, 'var_coef': var_coef}
             stats_data = stats_data.append(row_item, ignore_index=True)
      
     return stats_data
