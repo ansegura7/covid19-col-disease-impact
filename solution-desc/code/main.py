@@ -76,8 +76,6 @@ def get_population_by_entity():
     if len(raw_data):
         for ix, row in raw_data.iterrows():
             code = str(row['divipola'])
-            year = str(row['year'])
-            pop_value = row['population']
             
             # Apply data quality to code
             if len(code) == 1:
@@ -86,11 +84,16 @@ def get_population_by_entity():
                 code = code + '000'
             elif len(code) == 4:
                 code = '0' + code
+                
+            # Get population data
+            for year in range(2010, 2021):
+                year = str(year)
+                pop_value = row[year]
             
-            # Save key, population pair
-            key = code + '_' + year
-            pop_data[key] = pop_value
-            
+                # Save key, population pair
+                key = code + '_' + year
+                pop_data[key] = pop_value
+    
     return pop_data
 
 # Core function - Calculate descriptive stats by entity and period
