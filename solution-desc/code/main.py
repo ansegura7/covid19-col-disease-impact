@@ -3,7 +3,7 @@
     Created by: Andres Segura Tinoco
     Version: 1.0.0
     Created on: Nov 23, 2020
-    Updated on: Dec 10, 2020
+    Updated on: Dec 11, 2020
     Description: Main class of the descriptive-engine solution.
 """
 
@@ -79,6 +79,7 @@ def get_population_by_entity():
             year = str(row['year'])
             pop_value = row['population']
             
+            # Apply data quality to code
             if len(code) == 1:
                 code = '0' + code + '000'
             elif len(code) == 2:
@@ -86,15 +87,17 @@ def get_population_by_entity():
             elif len(code) == 4:
                 code = '0' + code
             
+            # Save key, population pair
             key = code + '_' + year
             pop_data[key] = pop_value
             
     return pop_data
 
-# Core function - Calculate descriptive stats by entity
+# Core function - Calculate descriptive stats by entity and period
 def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
     stats_data = pd.DataFrame(columns=['entity', 'period', 'total', 'mean', 'stdev', 'min', 'p25', 'p50', 'p75', 'max', 'no_data'])
     
+    # Grouping data by periods
     for entity, data in data_list.items():        
         n_rows = len(data)
         stats = dict()
@@ -127,12 +130,13 @@ def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
         stats[str(period)] = { 'values': values, 'no_data': no_data }
         var_coef = round(100.0 * ss.variation(all_values), 4)
         
-        # Show stats
+        # Loop through periods
         for key, item in stats.items():
             values = item['values']
             no_data = item['no_data']
             values.sort()
             
+            # Calc stats
             total = round(sum(values), 4)
             mean = round(np.mean(values), 4)
             stdev = round(np.std(values), 4)
@@ -176,32 +180,33 @@ if __name__ == "__main__":
     logging.info('>> START PROGRAM: ' + str(datetime.now()))
     
     # 1. Read config params
-    exec_date = datetime.now()
-    event_name = 'TUBERCULOSIS'
+    event_list = ['TUBERCULOSIS']
     entity_filter = []
     
-    # 2. Set current event (from setup file)
-    event_name = event_name.lower()
-    logging.info(' = Event: ' + event_name)
-    
-    # 3. Create result folders
-    create_result_folders(event_name)
-    
-    # 4. Get list of datasets by entities
-    logging.info(' = Read data by entity - ' + str(datetime.now()))
-    filename = '../data/' + event_name + '_dataset.csv'
-    data_list = get_data_by_entity(filename, entity_filter)
-    
-    # 5. Get population by entity and year
-    pop_data = get_population_by_entity()
-    
-    # 5. Calculate descriptive stats
-    logging.info(' = Calculate descriptive stats - ' + str(datetime.now()))
-    full_data  = calc_desc_stats(data_list, pop_data)
-    
-    # 7. Save hyperparameters of selected models
-    logging.info(' = Save selected models results - ' + str(datetime.now()))
-    save_results(event_name, full_data, exec_date)
+    # 2. Loop through entities
+    for curr_event in event_list:
+        event_name = curr_event.lower()
+        exec_date = datetime.now()
+        logging.info(' = Event: ' + event_name + ' - ' + str(exec_date))
+        
+        # 3. Create result folders
+        create_result_folders(event_name)
+        
+        # 4. Get list of datasets by entities
+        logging.info(' = Read data by entity - ' + str(datetime.now()))
+        filename = '../data/' + event_name + '_dataset.csv'
+        data_list = get_data_by_entity(filename, entity_filter)
+        
+        # 5. Get population by entity and year
+        pop_data = get_population_by_entity()
+        
+        # 6. Calculate descriptive stats
+        logging.info(' = Calculate descriptive stats - ' + str(datetime.now()))
+        full_data  = calc_desc_stats(data_list, pop_data)
+        
+        # 7. Save result stats
+        logging.info(' = Save result stats - ' + str(datetime.now()))
+        save_results(event_name, full_data, exec_date)
     
     logging.info(">> END PROGRAM: " + str(datetime.now()))
     logging.shutdown()

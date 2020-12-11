@@ -28,3 +28,9 @@ INFO:root: = Read data by entity - 2020-12-10 16:12:04.818386
 INFO:root: = Calculate descriptive stats - 2020-12-10 16:12:05.216378
 INFO:root: = Save selected models results - 2020-12-10 16:12:18.456859
 INFO:root:>> END PROGRAM: 2020-12-10 16:12:18.469856
+INFO:root:>> START PROGRAM: 2020-12-11 06:38:08.590133
+INFO:root: = Event: tuberculosis - 2020-12-11 06:38:08.590133
+INFO:root: = Read data by entity - 2020-12-11 06:38:08.590133
+INFO:root: = Calculate descriptive stats - 2020-12-11 06:38:08.907670
+INFO:root: = Save result stats - 2020-12-11 06:38:20.291064
+INFO:root:>> END PROGRAM: 2020-12-11 06:38:20.310087
