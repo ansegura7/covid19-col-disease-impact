@@ -97,44 +97,42 @@ def get_population_by_entity():
 def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
     stats_data = pd.DataFrame(columns=['entity', 'period', 'total', 'mean', 'stdev', 'min', 'p25', 'p50', 'p75', 'max', 'no_data'])
     
-    # Grouping data by periods
-    for entity, data in data_list.items():        
+    # Loop through year, weeks
+    for entity, data in data_list.items():
         n_rows = len(data)
-        stats = dict()
+        temp_df = pd.DataFrame(columns=['year', 'period', 'total', 'rate'])
         values = []
-        all_values = []
-        period = 1
-        no_data = 0
+        year = 0
         
-        for week in range(1, 54):
-            for ix in range(n_rows):
-                year = data.iloc[ix]['year'] 
+        # Grouping data by periods
+        for ix in range(n_rows):
+            row_data = data.iloc[ix]
+            year = row_data['year']
+            period = 1
+            key = entity + '_' + str(year)
+            entity_pop = pop_data[key]
+            
+            for week in range(1, 54):
                 
-                if (len(values) == 4 * n_years and week != 53):
-                    stats[str(period)] = { 'values': values, 'no_data': no_data }
+                if (len(values) == 4 and week != 52) or (len(values) == 5 and week == 53):
+                    total = sum(values)
+                    rate = round(total / entity_pop * div, 4)
+                    temp_df.loc[len(temp_df)] = [year, period, total, rate]
                     period += 1
                     values = []
-                    no_data = 0
-                    
-                key = entity + '_' + str(year)
-                entity_pop = pop_data[key]
-                value = round(data.iloc[ix][str(week)] / entity_pop * div, 4)
                 
-                if week != 53 or value > 0:
-                    values.append(value)
-                    all_values.append(value)
-                    
-                    if value == 0:
-                        no_data += 1
+                value = row_data[str(week)]
+                values.append(value)
         
-        stats[str(period)] = { 'values': values, 'no_data': no_data }
-        var_coef = round(100.0 * ss.variation(all_values), 4)
-        
-        # Loop through periods
-        for key, item in stats.items():
-            values = item['values']
-            no_data = item['no_data']
+        # Calculate stats
+        var_coef = round(100.0 * ss.variation(list(temp_df['rate'])), 4)
+        for period in range(1, 14):
+            
+            # Filter data by period
+            values = temp_df[temp_df['period'] == period]['rate']
+            values = [x for x in values if x > 0]
             values.sort()
+            no_data = n_rows - len(values)
             
             # Calc stats
             total = round(sum(values), 4)
@@ -147,10 +145,10 @@ def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
             p75 = np.percentile(values, 75)
             
             # Save row item
-            row_item = {'entity': entity, 'period': key, 'total': total, 'mean': mean, 'stdev': stdev, 'min': min_value, 
+            row_item = {'entity': entity, 'period': period, 'total': total, 'mean': mean, 'stdev': stdev, 'min': min_value, 
                         'p25': p25, 'p50':p50, 'p75': p75, 'max': max_value, 'no_data': no_data, 'var_coef': var_coef}
             stats_data = stats_data.append(row_item, ignore_index=True)
-     
+    
     return stats_data
 
 # Core function - Save to CSV file the result stats by entity
