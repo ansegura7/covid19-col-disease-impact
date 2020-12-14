@@ -47,3 +47,34 @@ INFO:root: = Calculate descriptive stats - 2020-12-11 10:24:06.954174
 INFO:numexpr.utils:NumExpr defaulting to 4 threads.
 INFO:root: = Save result stats - 2020-12-11 10:24:26.575223
 INFO:root:>> END PROGRAM: 2020-12-11 10:24:26.595381
+INFO:root:>> START PROGRAM: 2020-12-14 09:29:43.499798
+INFO:root: = Event: tuberculosis - 2020-12-14 09:29:43.499798
+INFO:root: = Read data by entity - 2020-12-14 09:29:43.515423
+INFO:root: = Calculate descriptive stats - 2020-12-14 09:29:43.947807
+INFO:root: = Save result stats - 2020-12-14 09:30:08.685789
+INFO:root: = Event: infant_mortality - 2020-12-14 09:30:08.701405
+INFO:root: = Read data by entity - 2020-12-14 09:30:08.701405
+INFO:root: = Calculate descriptive stats - 2020-12-14 09:30:09.086892
+INFO:root: = Save result stats - 2020-12-14 09:30:36.741695
+INFO:root:>> END PROGRAM: 2020-12-14 09:30:36.763833
+INFO:root:>> START PROGRAM: 2020-12-14 09:35:29.365497
+INFO:root: = Event: tuberculosis - 2020-12-14 09:35:29.365497
+INFO:root: = Read data by entity - 2020-12-14 09:35:29.365497
+INFO:root: = Calculate descriptive stats - 2020-12-14 09:35:29.735375
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:root: = Save result stats - 2020-12-14 09:35:47.950563
+INFO:root: = Event: infant_mortality - 2020-12-14 09:35:47.966184
+INFO:root: = Read data by entity - 2020-12-14 09:35:47.966184
+INFO:root: = Calculate descriptive stats - 2020-12-14 09:35:48.298256
+INFO:root: = Save result stats - 2020-12-14 09:36:06.687588
+INFO:root:>> END PROGRAM: 2020-12-14 09:36:06.705757
+INFO:root:>> START PROGRAM: 2020-12-14 09:42:21.326453
+INFO:root: = Event: tuberculosis - 2020-12-14 09:42:21.326453
+INFO:root: = Read data by entity - 2020-12-14 09:42:21.326453
+INFO:root: = Calculate descriptive stats - 2020-12-14 09:42:21.674098
+INFO:root: = Save result stats - 2020-12-14 09:42:41.168745
+INFO:root: = Event: infant_mortality - 2020-12-14 09:42:41.192728
+INFO:root: = Read data by entity - 2020-12-14 09:42:41.192728
+INFO:root: = Calculate descriptive stats - 2020-12-14 09:42:41.705565
+INFO:root: = Save result stats - 2020-12-14 09:43:02.210801
+INFO:root:>> END PROGRAM: 2020-12-14 09:43:02.220920

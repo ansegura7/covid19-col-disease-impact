@@ -181,7 +181,7 @@ if __name__ == "__main__":
     logging.info('>> START PROGRAM: ' + str(datetime.now()))
     
     # 1. Read config params
-    event_list = ['TUBERCULOSIS']
+    event_list = ['TUBERCULOSIS', 'INFANT_MORTALITY']
     entity_filter = []
     
     # 2. Loop through entities
