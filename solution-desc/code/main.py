@@ -99,6 +99,7 @@ def get_population_by_entity():
 # Core function - Calculate descriptive stats by entity and period
 def calc_desc_stats(data_list, pop_data, rate_enable, n_years=10):
     stats_data = pd.DataFrame(columns=['entity', 'period', 'total', 'mean', 'stdev', 'min', 'p25', 'p50', 'p75', 'max', 'no_data'])
+    curr_year = 2020
     
     # Loop through year, weeks
     for entity, data in data_list.items():
@@ -111,29 +112,32 @@ def calc_desc_stats(data_list, pop_data, rate_enable, n_years=10):
         for ix in range(n_rows):
             row_data = data.iloc[ix]
             year = row_data['year']
-            period = 1
-            key = entity + '_' + str(year)
-            entity_pop = pop_data[key]
             
-            for week in range(1, 54):
+            # Skip current year
+            if year < curr_year:
+                period = 1
+                key = entity + '_' + str(year)
+                entity_pop = pop_data[key]
                 
-                if (len(values) == 4 and week != 52) or (len(values) == 5 and week == 53):
-                    total = sum(values)
-
-                    # Change totals per rates        
-                    if rate_enable:
-                        div = 100000
-                        rate = round(total / entity_pop * div, 4)
-                        curr_value = rate
-                    else:
-                        curr_value = total
-                        
-                    temp_df.loc[len(temp_df)] = [year, period, curr_value]
-                    period += 1
-                    values = []
-                
-                value = row_data[str(week)]
-                values.append(value)
+                for week in range(1, 54):
+                    
+                    if (len(values) == 4 and week != 52) or (len(values) == 5 and week == 53):
+                        total = sum(values)
+    
+                        # Change totals per rates        
+                        if rate_enable:
+                            div = 100000
+                            rate = round(total / entity_pop * div, 4)
+                            curr_value = rate
+                        else:
+                            curr_value = total
+                            
+                        temp_df.loc[len(temp_df)] = [year, period, curr_value]
+                        period += 1
+                        values = []
+                    
+                    value = row_data[str(week)]
+                    values.append(value)
         
         # Calculate stats
         var_coef = round(100.0 * ss.variation(list(temp_df['value'])), 4)
@@ -143,7 +147,9 @@ def calc_desc_stats(data_list, pop_data, rate_enable, n_years=10):
             values = temp_df[temp_df['period'] == period]['value']
             values = [x for x in values if x > 0]
             values.sort()
-            no_data = n_rows - len(values)
+            
+            # Not taking into account current year
+            no_data = n_rows - len(values) - 1
             
             # Calc stats
             total = round(sum(values), 4)
