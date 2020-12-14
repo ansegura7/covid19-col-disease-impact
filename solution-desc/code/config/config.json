@@ -1,0 +1,15 @@
+{
+  "event_list": [
+    {
+	  "enabled": true,
+      "name": "TUBERCULOSIS",
+      "rate_enable": true
+    },
+    {
+	  "enabled": true,
+      "name": "INFANT_MORTALITY",
+      "rate_enable": false
+    }
+  ],
+  "entity_filter": []
+}

@@ -97,13 +97,13 @@ def get_population_by_entity():
     return pop_data
 
 # Core function - Calculate descriptive stats by entity and period
-def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
+def calc_desc_stats(data_list, pop_data, rate_enable, n_years=10):
     stats_data = pd.DataFrame(columns=['entity', 'period', 'total', 'mean', 'stdev', 'min', 'p25', 'p50', 'p75', 'max', 'no_data'])
     
     # Loop through year, weeks
     for entity, data in data_list.items():
         n_rows = len(data)
-        temp_df = pd.DataFrame(columns=['year', 'period', 'total', 'rate'])
+        temp_df = pd.DataFrame(columns=['year', 'period', 'value'])
         values = []
         year = 0
         
@@ -119,8 +119,16 @@ def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
                 
                 if (len(values) == 4 and week != 52) or (len(values) == 5 and week == 53):
                     total = sum(values)
-                    rate = round(total / entity_pop * div, 4)
-                    temp_df.loc[len(temp_df)] = [year, period, total, rate]
+
+                    # Change totals per rates        
+                    if rate_enable:
+                        div = 100000
+                        rate = round(total / entity_pop * div, 4)
+                        curr_value = rate
+                    else:
+                        curr_value = total
+                        
+                    temp_df.loc[len(temp_df)] = [year, period, curr_value]
                     period += 1
                     values = []
                 
@@ -128,11 +136,11 @@ def calc_desc_stats(data_list, pop_data, n_years=10, div = 100000):
                 values.append(value)
         
         # Calculate stats
-        var_coef = round(100.0 * ss.variation(list(temp_df['rate'])), 4)
+        var_coef = round(100.0 * ss.variation(list(temp_df['value'])), 4)
         for period in range(1, 14):
             
             # Filter data by period
-            values = temp_df[temp_df['period'] == period]['rate']
+            values = temp_df[temp_df['period'] == period]['value']
             values = [x for x in values if x > 0]
             values.sort()
             no_data = n_rows - len(values)
@@ -176,38 +184,45 @@ if __name__ == "__main__":
     
     # 0. Program variables
     log_path = 'log/log_file.log'
-    yaml_path = 'config/config.yml'
+    config_path = 'config/config.json'
     logging.basicConfig(filename=log_path, level=logging.INFO)
     logging.info('>> START PROGRAM: ' + str(datetime.now()))
     
     # 1. Read config params
-    event_list = ['TUBERCULOSIS', 'INFANT_MORTALITY']
-    entity_filter = []
+    setup_params = ul.get_dict_from_json(config_path)
+    event_list = setup_params['event_list']
+    entity_filter = setup_params['entity_filter']
     
     # 2. Loop through entities
     for curr_event in event_list:
-        event_name = curr_event.lower()
-        exec_date = datetime.now()
-        logging.info(' = Event: ' + event_name + ' - ' + str(exec_date))
+        event_name = curr_event['name'].lower()
         
-        # 3. Create result folders
-        create_result_folders(event_name)
-        
-        # 4. Get list of datasets by entities
-        logging.info(' = Read data by entity - ' + str(datetime.now()))
-        filename = '../data/' + event_name + '_dataset.csv'
-        data_list = get_data_by_entity(filename, entity_filter)
-        
-        # 5. Get population by entity and year
-        pop_data = get_population_by_entity()
-        
-        # 6. Calculate descriptive stats
-        logging.info(' = Calculate descriptive stats - ' + str(datetime.now()))
-        full_data  = calc_desc_stats(data_list, pop_data)
-        
-        # 7. Save result stats
-        logging.info(' = Save result stats - ' + str(datetime.now()))
-        save_results(event_name, full_data, exec_date)
+        if event_name and curr_event['enabled']:
+            
+            # Save event params
+            logging.info(' = Event: ' + event_name)
+            logging.info(curr_event)
+            
+            # 3. Create result folders
+            create_result_folders(event_name)
+            
+            # 4. Get list of datasets by entities
+            logging.info(' = Read data by entity - ' + str(datetime.now()))
+            filename = '../data/' + event_name + '_dataset.csv'
+            data_list = get_data_by_entity(filename, entity_filter)
+            
+            # 5. Get population by entity and year
+            pop_data = get_population_by_entity()
+            
+            # 6. Calculate descriptive stats
+            logging.info(' = Calculate descriptive stats - ' + str(datetime.now()))
+            exec_date = datetime.now()
+            rate_enable = curr_event['rate_enable']
+            full_data  = calc_desc_stats(data_list, pop_data, rate_enable)
+            
+            # 7. Save result stats
+            logging.info(' = Save result stats - ' + str(datetime.now()))
+            save_results(event_name, full_data, exec_date)
     
     logging.info(">> END PROGRAM: " + str(datetime.now()))
     logging.shutdown()

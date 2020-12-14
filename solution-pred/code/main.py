@@ -201,7 +201,7 @@ if __name__ == "__main__":
     entity_filter = setup_params['entity_filter']
     n_process = max(min(int(setup_params['n_process']), cpu_count() - 1), 1)
     
-    # 2. Loop through entities 
+    # 2. Loop through entities
     for curr_event in event_list:
         event_name = curr_event['name'].lower()
         
