@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
     Created by: Andres Segura Tinoco
-    Version: 1.0.0
+    Version: 1.1.0
     Created on: Nov 23, 2020
-    Updated on: Dec 11, 2020
+    Updated on: Dec 14, 2020
     Description: Main class of the descriptive-engine solution.
 """
 
@@ -97,9 +97,9 @@ def get_population_by_entity():
     return pop_data
 
 # Core function - Calculate descriptive stats by entity and period
-def calc_desc_stats(data_list, pop_data, rate_enable, n_years=10):
+def calc_desc_stats(data_list, pop_data, rate_enable, max_year):
+    gr_data = pd.DataFrame(columns=['entity', 'year', 'period', 'total'])
     stats_data = pd.DataFrame(columns=['entity', 'period', 'total', 'mean', 'stdev', 'min', 'p25', 'p50', 'p75', 'max', 'no_data'])
-    curr_year = 2020
     
     # Loop through year, weeks
     for entity, data in data_list.items():
@@ -112,39 +112,61 @@ def calc_desc_stats(data_list, pop_data, rate_enable, n_years=10):
         for ix in range(n_rows):
             row_data = data.iloc[ix]
             year = row_data['year']
+            period = 1
+            key = entity + '_' + str(year)
+            entity_pop = pop_data[key]
             
-            # Skip current year
-            if year < curr_year:
-                period = 1
-                key = entity + '_' + str(year)
-                entity_pop = pop_data[key]
+            for week in range(1, 54):
                 
-                for week in range(1, 54):
+                if (len(values) == 4 and week != 52) or (len(values) == 5 and week == 53):
+                    total = sum(values)
+
+                    # Change totals per rates        
+                    if rate_enable:
+                        div = 100000
+                        rate = round(total / entity_pop * div, 4)
+                        curr_value = rate
+                    else:
+                        curr_value = total
                     
-                    if (len(values) == 4 and week != 52) or (len(values) == 5 and week == 53):
-                        total = sum(values)
-    
-                        # Change totals per rates        
-                        if rate_enable:
-                            div = 100000
-                            rate = round(total / entity_pop * div, 4)
-                            curr_value = rate
-                        else:
-                            curr_value = total
-                            
-                        temp_df.loc[len(temp_df)] = [year, period, curr_value]
-                        period += 1
-                        values = []
-                    
-                    value = row_data[str(week)]
-                    values.append(value)
+                    # Save data in memory
+                    gr_data.loc[len(gr_data)] = [entity, year, period, curr_value]
+                    temp_df.loc[len(temp_df)] = [year, period, curr_value]
+                    period += 1
+                    values = []
+                
+                value = row_data[str(week)]
+                values.append(value)
+        
+        # Calculate variation coefficient
+        all_values = list(temp_df[temp_df['year'] < max_year]['value'])
+        var_coef = round(100.0 * ss.variation(all_values ), 4)
         
         # Calculate stats
-        var_coef = round(100.0 * ss.variation(list(temp_df['value'])), 4)
         for period in range(1, 14):
             
+            # Calculate percentage variation by years
+            perc_var_list = []
+            for year in range(max_year, max_year - 5, -1):
+                n1_value = list(temp_df[(temp_df['period'] == period) & (temp_df['year'] == year)]['value'])[0]
+                n2_value = list(temp_df[(temp_df['period'] == period) & (temp_df['year'] == (year - 1))]['value'])[0]
+                perc_var = 0
+                if n1_value > 0 and n2_value > 0:
+                    perc_var = (n1_value - n2_value) / n2_value
+                perc_var_list.append(perc_var)
+                
+            # Percentage variations local variables
+            pv_period = str(max_year) + '-' + str(max_year - 1)
+            pv_value = 0
+            pv_min_lim = 0
+            pv_max_lim = 0
+            if len(perc_var_list) == 5:
+                pv_value = perc_var_list[0]
+                pv_min_lim = min(perc_var_list[1:])
+                pv_max_lim = max(perc_var_list[1:])
+            
             # Filter data by period
-            values = temp_df[temp_df['period'] == period]['value']
+            values = temp_df[(temp_df['period'] == period) & (temp_df['year'] < max_year)]['value']
             values = [x for x in values if x > 0]
             values.sort()
             
@@ -163,25 +185,27 @@ def calc_desc_stats(data_list, pop_data, rate_enable, n_years=10):
             
             # Save row item
             row_item = {'entity': entity, 'period': period, 'total': total, 'mean': mean, 'stdev': stdev, 'min': min_value, 
-                        'p25': p25, 'p50':p50, 'p75': p75, 'max': max_value, 'no_data': no_data, 'var_coef': var_coef}
+                        'p25': p25, 'p50':p50, 'p75': p75, 'max': max_value, 'no_data': no_data, 'var_coef': var_coef,
+                        'pv_period': pv_period, 'pv_value': pv_value, 'pv_min_lim': pv_min_lim, 'pv_max_lim': pv_max_lim}
             stats_data = stats_data.append(row_item, ignore_index=True)
     
-    return stats_data
+    # Return result datasets
+    return gr_data, stats_data
 
 # Core function - Save to CSV file the result stats by entity
-def save_results(curr_event, full_data, exec_date):
+def save_results(curr_event, df, exec_date, file_name):
     exec_col = 'exec_date'
     
     # Save model data results
-    if full_data is not None and len(full_data):
+    if df is not None and len(df):
         
         # Post processing of the data
-        full_data.reset_index(inplace=True)
-        full_data.insert(0, exec_col, str(exec_date))
+        df.reset_index(inplace=True)
+        df.insert(0, exec_col, str(exec_date))
         
         # Persist data
-        filename = '../result/' + curr_event + '/result_data.csv'
-        ul.save_df_to_csv_file(filename, full_data, False)
+        filename = '../result/' + curr_event + '/' + file_name + '.csv'
+        ul.save_df_to_csv_file(filename, df, False)
 
 #####################
 ### START PROGRAM ###
@@ -224,11 +248,16 @@ if __name__ == "__main__":
             logging.info(' = Calculate descriptive stats - ' + str(datetime.now()))
             exec_date = datetime.now()
             rate_enable = curr_event['rate_enable']
-            full_data  = calc_desc_stats(data_list, pop_data, rate_enable)
+            max_year = 2020
+            gr_data, stats_data  = calc_desc_stats(data_list, pop_data, rate_enable, max_year)
             
-            # 7. Save result stats
-            logging.info(' = Save result stats - ' + str(datetime.now()))
-            save_results(event_name, full_data, exec_date)
+            # 7. Save grouped data by entity
+            logging.info(' = Save grouped data by entity - ' + str(datetime.now()))
+            save_results(event_name, gr_data, exec_date, 'raw_data')
+            
+            # 8. Save stats results by entity
+            logging.info(' = Save stats results by entity - ' + str(datetime.now()))
+            save_results(event_name, stats_data, exec_date, 'result_data')
     
     logging.info(">> END PROGRAM: " + str(datetime.now()))
     logging.shutdown()

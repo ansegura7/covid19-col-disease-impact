@@ -103,3 +103,18 @@ INFO:root: = Read data by entity - 2020-12-14 14:56:48.938180
 INFO:root: = Calculate descriptive stats - 2020-12-14 14:56:49.270142
 INFO:root: = Save result stats - 2020-12-14 14:57:09.110261
 INFO:root:>> END PROGRAM: 2020-12-14 14:57:09.128377
+INFO:root:>> START PROGRAM: 2020-12-14 18:52:54.689438
+INFO:root: = Event: tuberculosis
+INFO:root:{'enabled': True, 'name': 'TUBERCULOSIS', 'rate_enable': True}
+INFO:root: = Read data by entity - 2020-12-14 18:52:54.689438
+INFO:root: = Calculate descriptive stats - 2020-12-14 18:52:55.036929
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:root: = Save grouped data by entity - 2020-12-14 18:53:55.800739
+INFO:root: = Save stats results by entity - 2020-12-14 18:53:55.841079
+INFO:root: = Event: infant_mortality
+INFO:root:{'enabled': True, 'name': 'INFANT_MORTALITY', 'rate_enable': False}
+INFO:root: = Read data by entity - 2020-12-14 18:53:55.861255
+INFO:root: = Calculate descriptive stats - 2020-12-14 18:53:56.200330
+INFO:root: = Save grouped data by entity - 2020-12-14 18:55:05.286931
+INFO:root: = Save stats results by entity - 2020-12-14 18:55:05.333804
+INFO:root:>> END PROGRAM: 2020-12-14 18:55:05.355987
