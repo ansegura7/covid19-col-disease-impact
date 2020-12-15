@@ -99,7 +99,7 @@ def get_population_by_entity():
 # Core function - Calculate descriptive stats by entity and period
 def calc_desc_stats(data_list, pop_data, rate_enable, max_year):
     gr_data = pd.DataFrame(columns=['entity', 'year', 'period', 'total'])
-    stats_data = pd.DataFrame(columns=['entity', 'period', 'total', 'mean', 'stdev', 'min', 'p25', 'p50', 'p75', 'max', 'no_data'])
+    stats_data = pd.DataFrame(columns=['entity', 'period', 'total', 'mean', 'stdev', 'min', 'p25', 'p50', 'p75', 'max', 'no_data', 'pv_period', 'pv_value', 'pv_min_lim', 'pv_max_lim'])
     
     # Loop through year, weeks
     for entity, data in data_list.items():
@@ -148,11 +148,16 @@ def calc_desc_stats(data_list, pop_data, rate_enable, max_year):
             # Calculate percentage variation by years
             perc_var_list = []
             for year in range(max_year, max_year - 5, -1):
-                n1_value = list(temp_df[(temp_df['period'] == period) & (temp_df['year'] == year)]['value'])[0]
-                n2_value = list(temp_df[(temp_df['period'] == period) & (temp_df['year'] == (year - 1))]['value'])[0]
+                n1_values = list(temp_df[(temp_df['period'] == period) & (temp_df['year'] == year)]['value'])
+                n2_values = list(temp_df[(temp_df['period'] == period) & (temp_df['year'] == (year - 1))]['value'])
                 perc_var = 0
-                if n1_value > 0 and n2_value > 0:
-                    perc_var = (n1_value - n2_value) / n2_value
+                
+                if len(n1_values) and len(n2_values):
+                    n1_value = n1_values[0]
+                    n2_value = n2_values[0]
+                    if n1_value > 0 and n2_value > 0:
+                        perc_var = (n1_value - n2_value) / n2_value
+                
                 perc_var_list.append(perc_var)
                 
             # Percentage variations local variables
@@ -161,27 +166,39 @@ def calc_desc_stats(data_list, pop_data, rate_enable, max_year):
             pv_min_lim = 0
             pv_max_lim = 0
             if len(perc_var_list) == 5:
-                pv_value = perc_var_list[0]
-                pv_min_lim = min(perc_var_list[1:])
-                pv_max_lim = max(perc_var_list[1:])
+                pv_value = round(perc_var_list[0], 4)
+                pv_min_lim = round(min(perc_var_list[1:]), 4)
+                pv_max_lim = round(max(perc_var_list[1:]), 4)
             
             # Filter data by period
             values = temp_df[(temp_df['period'] == period) & (temp_df['year'] < max_year)]['value']
             values = [x for x in values if x > 0]
-            values.sort()
+            
+            # Entity-period vars
+            total = 0
+            mean = 0
+            stdev = 0
+            min_value = 0
+            max_value = 0
+            p25 = 0
+            p50 = 0
+            p75 = 0
             
             # Not taking into account current year
             no_data = n_rows - len(values) - 1
             
-            # Calc stats
-            total = round(sum(values), 4)
-            mean = round(np.mean(values), 4)
-            stdev = round(np.std(values), 4)
-            min_value = min(values)
-            max_value = max(values)
-            p25 = np.percentile(values, 25)
-            p50 = np.percentile(values, 50)
-            p75 = np.percentile(values, 75)
+            if len(values) > 0:
+                values.sort()
+                
+                # Calc stats
+                total = round(sum(values), 4)
+                mean = round(np.mean(values), 4)
+                stdev = round(np.std(values), 4)
+                min_value = round(min(values), 4)
+                max_value = round(max(values), 4)
+                p25 = round(np.percentile(values, 25), 4)
+                p50 = round(np.percentile(values, 50), 4)
+                p75 = round(np.percentile(values, 75), 4)
             
             # Save row item
             row_item = {'entity': entity, 'period': period, 'total': total, 'mean': mean, 'stdev': stdev, 'min': min_value, 

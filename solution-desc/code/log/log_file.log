@@ -118,3 +118,24 @@ INFO:root: = Calculate descriptive stats - 2020-12-14 18:53:56.200330
 INFO:root: = Save grouped data by entity - 2020-12-14 18:55:05.286931
 INFO:root: = Save stats results by entity - 2020-12-14 18:55:05.333804
 INFO:root:>> END PROGRAM: 2020-12-14 18:55:05.355987
+INFO:root:>> START PROGRAM: 2020-12-15 09:25:50.288106
+INFO:root: = Event: tuberculosis
+INFO:root:{'enabled': True, 'name': 'TUBERCULOSIS', 'rate_enable': True}
+INFO:root: = Read data by entity - 2020-12-15 09:25:50.288106
+INFO:root: = Calculate descriptive stats - 2020-12-15 09:25:50.657935
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:root: = Save grouped data by entity - 2020-12-15 09:27:08.928887
+INFO:root: = Save stats results by entity - 2020-12-15 09:27:08.967893
+INFO:root: = Event: infant_mortality
+INFO:root:{'enabled': True, 'name': 'INFANT_MORTALITY', 'rate_enable': False}
+INFO:root: = Read data by entity - 2020-12-15 09:27:08.987888
+INFO:root: = Calculate descriptive stats - 2020-12-15 09:27:09.551373
+INFO:root: = Save grouped data by entity - 2020-12-15 09:28:27.091093
+INFO:root: = Save stats results by entity - 2020-12-15 09:28:27.122070
+INFO:root: = Event: suicide_attempt
+INFO:root:{'enabled': True, 'name': 'SUICIDE_ATTEMPT', 'rate_enable': True}
+INFO:root: = Read data by entity - 2020-12-15 09:28:27.139779
+INFO:root: = Calculate descriptive stats - 2020-12-15 09:28:27.532046
+INFO:root: = Save grouped data by entity - 2020-12-15 09:29:07.381058
+INFO:root: = Save stats results by entity - 2020-12-15 09:29:07.396668
+INFO:root:>> END PROGRAM: 2020-12-15 09:29:07.418835

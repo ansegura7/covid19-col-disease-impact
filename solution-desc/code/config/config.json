@@ -9,6 +9,11 @@
 	  "enabled": true,
       "name": "INFANT_MORTALITY",
       "rate_enable": false
+    },
+    {
+	  "enabled": true,
+      "name": "SUICIDE_ATTEMPT",
+      "rate_enable": true
     }
   ],
   "entity_filter": []
