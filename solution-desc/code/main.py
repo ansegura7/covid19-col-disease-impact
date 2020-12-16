@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
     Created by: Andres Segura Tinoco
-    Version: 1.1.0
+    Version: 1.2.0
     Created on: Nov 23, 2020
-    Updated on: Dec 14, 2020
+    Updated on: Dec 16, 2020
     Description: Main class of the descriptive-engine solution.
 """
 
@@ -125,7 +125,7 @@ def get_population_by_entity():
     return pop_data
 
 # Core function - Calculate descriptive stats by entity and period
-def calc_desc_stats(data_list, pop_data, rate_enable, max_year):
+def calc_desc_stats(data_list, pop_data, rate_enable, max_year, skip_years):
     gr_data = pd.DataFrame(columns=['entity', 'year', 'period', 'total'])
     stats_data = pd.DataFrame(columns=['entity', 'period', 'total', 'mean', 'stdev', 'min', 'p25', 'p50', 'p75', 'max', 'no_data', 'pv_period', 'pv_value', 'pv_min_lim', 'pv_max_lim'])
     
@@ -151,10 +151,11 @@ def calc_desc_stats(data_list, pop_data, rate_enable, max_year):
                     curr_value = rate
                 else:
                     curr_value = total
-                    
+                
                 # Save data in memory
                 gr_data.loc[len(gr_data)] = [entity, year, period, curr_value]
-                temp_df.loc[len(temp_df)] = [year, period, curr_value]
+                if not year in skip_years:
+                    temp_df.loc[len(temp_df)] = [year, period, curr_value]
         
         # Calculate variation coefficient
         all_values = list(temp_df[temp_df['year'] < max_year]['value'])
@@ -283,8 +284,9 @@ if __name__ == "__main__":
             logging.info(' = Calculate descriptive stats - ' + str(datetime.now()))
             exec_date = datetime.now()
             rate_enable = curr_event['rate_enable']
+            skip_years = curr_event['skip_years']
             max_year = 2020
-            gr_data, stats_data = calc_desc_stats(data_list, pop_data, rate_enable, max_year)
+            gr_data, stats_data = calc_desc_stats(data_list, pop_data, rate_enable, max_year, skip_years)
             
             # 7. Save grouped data by entity
             logging.info(' = Save grouped data by entity - ' + str(datetime.now()))

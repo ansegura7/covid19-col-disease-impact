@@ -179,3 +179,36 @@ INFO:root: = Calculate descriptive stats - 2020-12-16 11:41:36.399962
 INFO:root: = Save grouped data by entity - 2020-12-16 11:41:57.400454
 INFO:root: = Save stats results by entity - 2020-12-16 11:41:57.411455
 INFO:root:>> END PROGRAM: 2020-12-16 11:41:57.420477
+INFO:root:>> START PROGRAM: 2020-12-16 11:59:43.043003
+INFO:root: = Event: tuberculosis
+INFO:root:{'enabled': True, 'frequency': 'weekly', 'name': 'TUBERCULOSIS', 'rate_enable': True, 'skip_years': []}
+INFO:root: = Read data by entity - 2020-12-16 11:59:43.043003
+INFO:root: = Calculate descriptive stats - 2020-12-16 11:59:48.065344
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:root: = Save grouped data by entity - 2020-12-16 12:00:55.802741
+INFO:root: = Save stats results by entity - 2020-12-16 12:00:55.837717
+INFO:root: = Event: infant_mortality
+INFO:root:{'enabled': True, 'frequency': 'weekly', 'name': 'INFANT_MORTALITY', 'rate_enable': False, 'skip_years': []}
+INFO:root: = Read data by entity - 2020-12-16 12:00:55.855741
+INFO:root: = Calculate descriptive stats - 2020-12-16 12:00:59.826382
+INFO:root: = Save grouped data by entity - 2020-12-16 12:02:06.703183
+INFO:root: = Save stats results by entity - 2020-12-16 12:02:06.731184
+INFO:root: = Event: suicide_attempt
+INFO:root:{'enabled': True, 'frequency': 'weekly', 'name': 'SUICIDE_ATTEMPT', 'rate_enable': True, 'skip_years': []}
+INFO:root: = Read data by entity - 2020-12-16 12:02:06.746179
+INFO:root: = Calculate descriptive stats - 2020-12-16 12:02:08.752991
+INFO:root: = Save grouped data by entity - 2020-12-16 12:02:42.452005
+INFO:root: = Save stats results by entity - 2020-12-16 12:02:42.470006
+INFO:root: = Event: eda
+INFO:root:{'enabled': True, 'frequency': 'periodically', 'name': 'EDA', 'rate_enable': True, 'skip_years': []}
+INFO:root: = Read data by entity - 2020-12-16 12:02:42.488008
+INFO:root: = Calculate descriptive stats - 2020-12-16 12:02:42.808909
+INFO:root: = Save grouped data by entity - 2020-12-16 12:03:42.235497
+INFO:root: = Save stats results by entity - 2020-12-16 12:03:42.266745
+INFO:root: = Event: excess_mortality
+INFO:root:{'enabled': True, 'frequency': 'weekly', 'name': 'EXCESS_MORTALITY', 'rate_enable': False, 'skip_years': [2010, 2013, 2018]}
+INFO:root: = Read data by entity - 2020-12-16 12:03:42.282373
+INFO:root: = Calculate descriptive stats - 2020-12-16 12:03:43.551843
+INFO:root: = Save grouped data by entity - 2020-12-16 12:04:02.130593
+INFO:root: = Save stats results by entity - 2020-12-16 12:04:02.148770
+INFO:root:>> END PROGRAM: 2020-12-16 12:04:02.160855

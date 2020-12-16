@@ -4,31 +4,36 @@
       "enabled": true,
       "frequency": "weekly",
       "name": "TUBERCULOSIS",
-      "rate_enable": true
+      "rate_enable": true,
+      "skip_years": []
     },
     {
       "enabled": true,
       "frequency": "weekly",
       "name": "INFANT_MORTALITY",
-      "rate_enable": false
+      "rate_enable": false,
+      "skip_years": []
     },
     {
       "enabled": true,
       "frequency": "weekly",
       "name": "SUICIDE_ATTEMPT",
-      "rate_enable": true
+      "rate_enable": true,
+      "skip_years": []
     },
     {
       "enabled": true,
       "frequency": "periodically",
       "name": "EDA",
-      "rate_enable": true
+      "rate_enable": true,
+      "skip_years": []
     },
     {
       "enabled": true,
       "frequency": "weekly",
       "name": "EXCESS_MORTALITY",
-      "rate_enable": false
+      "rate_enable": false,
+      "skip_years": [2010, 2013, 2018]
     }
   ],
   "entity_filter": []
