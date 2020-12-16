@@ -28,7 +28,7 @@ def create_result_folders(folder_name):
     ul.create_folder(folder_path)
 
 # Core function - Read the CSV dataset and convert it to a dictionary by entity
-def get_data_by_entity(filename, entity_filter):
+def get_data_by_entity(filename, entity_filter, frequency):
     data_list = dict()
     
     # Validation
@@ -57,11 +57,39 @@ def get_data_by_entity(filename, entity_filter):
                 if (len(entity_filter) == 0 or entity in entity_filter) and (entity in divipola_code.keys()):
                     entity_code = str(divipola_code[entity]).zfill(5)
                     
+                    # Filter data by entity
                     entity_data = raw_data[raw_data['entity'] == entity]
                     entity_data = entity_data.groupby(['entity', 'year']).agg('sum')
                     entity_data.reset_index(inplace=True)
-                    data_list[entity_code] = entity_data
-                    print((entity, entity_code), '->', len(entity_data))
+                    
+                    # Grouping data by frequency
+                    if frequency == 'weekly':
+                        temp_data = pd.DataFrame(columns=['entity', 'year', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'])                   
+                        
+                        # Grouping data by periods
+                        for ix, row_data in entity_data.iterrows():
+                            year = row_data['year']
+                            values = []
+                            periods = []
+                            
+                            for week in range(1, 54):
+                                value = row_data[str(week)]
+                                values.append(value)
+                                
+                                if (len(values) == 4 and week != 52) or (len(values) == 5 and week == 53):
+                                    total = sum(values)
+                                    periods.append(total)
+                                    values = []
+                            
+                            # Save data row
+                            temp_data.loc[len(temp_data)] = [entity, year] + periods
+                    
+                    elif frequency == 'periodically':
+                        temp_data = entity_data.copy()
+                    
+                    # Save data
+                    data_list[entity_code] = temp_data
+                    print((entity, entity_code), '->', len(temp_data))
                 else:
                     print(' = Entity without permission to be processed: ' + entity)
     
@@ -105,38 +133,28 @@ def calc_desc_stats(data_list, pop_data, rate_enable, max_year):
     for entity, data in data_list.items():
         n_rows = len(data)
         temp_df = pd.DataFrame(columns=['year', 'period', 'value'])
-        values = []
-        year = 0
         
         # Grouping data by periods
         for ix in range(n_rows):
             row_data = data.iloc[ix]
             year = row_data['year']
-            period = 1
             key = entity + '_' + str(year)
             entity_pop = pop_data[key]
             
-            for week in range(1, 54):
-                
-                if (len(values) == 4 and week != 52) or (len(values) == 5 and week == 53):
-                    total = sum(values)
+            for period in range(1, 14):
+                total = row_data[str(period)]
 
-                    # Change totals per rates        
-                    if rate_enable:
-                        div = 100000
-                        rate = round(total / entity_pop * div, 4)
-                        curr_value = rate
-                    else:
-                        curr_value = total
+                # Change totals per rates
+                if rate_enable:
+                    div = 100000
+                    rate = round(total / entity_pop * div, 4)
+                    curr_value = rate
+                else:
+                    curr_value = total
                     
-                    # Save data in memory
-                    gr_data.loc[len(gr_data)] = [entity, year, period, curr_value]
-                    temp_df.loc[len(temp_df)] = [year, period, curr_value]
-                    period += 1
-                    values = []
-                
-                value = row_data[str(week)]
-                values.append(value)
+                # Save data in memory
+                gr_data.loc[len(gr_data)] = [entity, year, period, curr_value]
+                temp_df.loc[len(temp_df)] = [year, period, curr_value]
         
         # Calculate variation coefficient
         all_values = list(temp_df[temp_df['year'] < max_year]['value'])
@@ -256,7 +274,7 @@ if __name__ == "__main__":
             # 4. Get list of datasets by entities
             logging.info(' = Read data by entity - ' + str(datetime.now()))
             filename = '../data/' + event_name + '_dataset.csv'
-            data_list = get_data_by_entity(filename, entity_filter)
+            data_list = get_data_by_entity(filename, entity_filter, curr_event['frequency'])
             
             # 5. Get population by entity and year
             pop_data = get_population_by_entity()
@@ -266,7 +284,7 @@ if __name__ == "__main__":
             exec_date = datetime.now()
             rate_enable = curr_event['rate_enable']
             max_year = 2020
-            gr_data, stats_data  = calc_desc_stats(data_list, pop_data, rate_enable, max_year)
+            gr_data, stats_data = calc_desc_stats(data_list, pop_data, rate_enable, max_year)
             
             # 7. Save grouped data by entity
             logging.info(' = Save grouped data by entity - ' + str(datetime.now()))

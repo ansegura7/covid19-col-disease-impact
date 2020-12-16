@@ -147,3 +147,35 @@ INFO:root: = Calculate descriptive stats - 2020-12-16 08:37:32.041980
 INFO:root: = Save grouped data by entity - 2020-12-16 08:37:53.655021
 INFO:root: = Save stats results by entity - 2020-12-16 08:37:53.670651
 INFO:root:>> END PROGRAM: 2020-12-16 08:37:53.686275
+INFO:root:>> START PROGRAM: 2020-12-16 11:37:36.022660
+INFO:root: = Event: tuberculosis
+INFO:root:{'enabled': True, 'frequency': 'weekly', 'name': 'TUBERCULOSIS', 'rate_enable': True}
+INFO:root: = Read data by entity - 2020-12-16 11:37:36.022660
+INFO:root: = Calculate descriptive stats - 2020-12-16 11:37:40.049849
+INFO:root: = Save grouped data by entity - 2020-12-16 11:38:37.970376
+INFO:root: = Save stats results by entity - 2020-12-16 11:38:38.003099
+INFO:root: = Event: infant_mortality
+INFO:root:{'enabled': True, 'frequency': 'weekly', 'name': 'INFANT_MORTALITY', 'rate_enable': False}
+INFO:root: = Read data by entity - 2020-12-16 11:38:38.034359
+INFO:root: = Calculate descriptive stats - 2020-12-16 11:38:41.992881
+INFO:root: = Save grouped data by entity - 2020-12-16 11:39:42.548781
+INFO:root: = Save stats results by entity - 2020-12-16 11:39:42.577784
+INFO:root: = Event: suicide_attempt
+INFO:root:{'enabled': True, 'frequency': 'weekly', 'name': 'SUICIDE_ATTEMPT', 'rate_enable': True}
+INFO:root: = Read data by entity - 2020-12-16 11:39:42.593781
+INFO:root: = Calculate descriptive stats - 2020-12-16 11:39:44.631710
+INFO:root: = Save grouped data by entity - 2020-12-16 11:40:22.191831
+INFO:root: = Save stats results by entity - 2020-12-16 11:40:22.207441
+INFO:root: = Event: eda
+INFO:root:{'enabled': True, 'frequency': 'periodically', 'name': 'EDA', 'rate_enable': True}
+INFO:root: = Read data by entity - 2020-12-16 11:40:22.213978
+INFO:root: = Calculate descriptive stats - 2020-12-16 11:40:22.537824
+INFO:root: = Save grouped data by entity - 2020-12-16 11:41:35.094016
+INFO:root: = Save stats results by entity - 2020-12-16 11:41:35.128995
+INFO:root: = Event: excess_mortality
+INFO:root:{'enabled': True, 'frequency': 'weekly', 'name': 'EXCESS_MORTALITY', 'rate_enable': False}
+INFO:root: = Read data by entity - 2020-12-16 11:41:35.146993
+INFO:root: = Calculate descriptive stats - 2020-12-16 11:41:36.399962
+INFO:root: = Save grouped data by entity - 2020-12-16 11:41:57.400454
+INFO:root: = Save stats results by entity - 2020-12-16 11:41:57.411455
+INFO:root:>> END PROGRAM: 2020-12-16 11:41:57.420477

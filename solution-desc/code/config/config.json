@@ -1,21 +1,27 @@
 {
   "event_list": [
     {
-      "enabled": false,
+      "enabled": true,
       "frequency": "weekly",
       "name": "TUBERCULOSIS",
       "rate_enable": true
     },
     {
-      "enabled": false,
+      "enabled": true,
       "frequency": "weekly",
       "name": "INFANT_MORTALITY",
       "rate_enable": false
     },
     {
-      "enabled": false,
+      "enabled": true,
       "frequency": "weekly",
       "name": "SUICIDE_ATTEMPT",
+      "rate_enable": true
+    },
+    {
+      "enabled": true,
+      "frequency": "periodically",
+      "name": "EDA",
       "rate_enable": true
     },
     {
