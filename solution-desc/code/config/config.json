@@ -23,6 +23,13 @@
     },
     {
       "enabled": true,
+      "frequency": "weekly",
+      "name": "DIABETES_MELLITUS",
+      "rate_enable": true,
+      "skip_years": []
+    },
+    {
+      "enabled": true,
       "frequency": "periodically",
       "name": "EDA",
       "rate_enable": true,

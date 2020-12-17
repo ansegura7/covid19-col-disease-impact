@@ -212,3 +212,11 @@ INFO:root: = Calculate descriptive stats - 2020-12-16 12:03:43.551843
 INFO:root: = Save grouped data by entity - 2020-12-16 12:04:02.130593
 INFO:root: = Save stats results by entity - 2020-12-16 12:04:02.148770
 INFO:root:>> END PROGRAM: 2020-12-16 12:04:02.160855
+INFO:root:>> START PROGRAM: 2020-12-16 16:47:32.316340
+INFO:root: = Event: diabetes_mellitus
+INFO:root:{'enabled': True, 'frequency': 'weekly', 'name': 'DIABETES_MELLITUS', 'rate_enable': True, 'skip_years': []}
+INFO:root: = Read data by entity - 2020-12-16 16:47:32.317340
+INFO:root: = Calculate descriptive stats - 2020-12-16 16:47:38.421518
+INFO:root: = Save grouped data by entity - 2020-12-16 16:48:54.751976
+INFO:root: = Save stats results by entity - 2020-12-16 16:48:54.795982
+INFO:root:>> END PROGRAM: 2020-12-16 16:48:54.818002
