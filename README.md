@@ -18,37 +18,19 @@ Main sources:
 - <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema" target="_blank">DANE</a>
 - <a href="https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr" target="_blank">Datos Abiertos</a>
 
-## Program setup
-The behavior of the predictive engine is configured from an input JSON file.
-
-```json
-{
-  "event_list": [
-    {
-      "analysis_list": [ "PARTIAL", "FULL" ],
-      "ci_alpha": 0.9,
-      "enabled": true,
-      "full_init_date": "2017-01-01",
-      "mape_threshold": 4.0,
-      "n_forecast": 13,
-      "name": "TUBERCULOSIS",
-      "partial_end_date": "2019-12-27",
-      "perc_test": 0.20,
-      "ts_tolerance": 4.0
-    },
-    {
-    
-    }
-  ],
-  "entity_filter": ["COLOMBIA", "BOGOTA DC", "ANTIOQUIA"],
-  "n_process": 1
-}
-```
-
 ## Dependencies
 The project was carried out with the latest version of <a href="https://www.anaconda.com/products/individual" target="_blank" >Anaconda</a> on Windows.
 
+```python
+sudo apt install
+sudo add-apt-repository universe
+sudo apt-get update
+sudo apt install python3-pandas
+sudo apt install python3-sklearn
+sudo apt install python3-statsmodels
+```
+
 ## Author
 - Created by <a href="https://github.com/ansegura7">Andrés Segura Tinoco</a>
-- Created on Jul 25, 2020
+- Created on Jul 15, 2020
 - Last update on Dec 08, 2020
