@@ -9,10 +9,12 @@ Development and evaluation of mathematical and epidemiological models that suppo
 - Acute Diarrheal Disease (EDA)
 - Excess Mortality (EM)
 
-Click <a href="https://github.com/ansegura7/covid19-col-disease-impact/tree/master/solution-pred/data" target="_blank">here</a> to see the dataset files.
+Click <a href="https://github.com/ansegura7/covid19-col-disease-impact/tree/master/solution-desc/data" target="_blank">here</a> to view the dataset files for the descriptive solution.
+
+Click <a href="https://github.com/ansegura7/covid19-col-disease-impact/tree/master/solution-pred/data" target="_blank">here</a> to view the dataset files for the predictive solution.
 
 ## Data
-Main sources:
+Primary sources:
 - <a href="http://portalsivigila.ins.gov.co/Paginas/Vigilancia-Rutinaria.aspx" target="_blank">SIVIGILA</a>
 - <a href="https://www.sispro.gov.co/Pages/Home.aspx" target="_blank">SISPRO</a>
 - <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema" target="_blank">DANE</a>
@@ -21,6 +23,7 @@ Main sources:
 ## Dependencies
 The project was carried out with the latest version of <a href="https://www.anaconda.com/products/individual" target="_blank" >Anaconda</a> on Windows.
 
+The program can also be run on Linux with Python 3.7.x (or higher) by previously installing the following libraries:
 ```python
 sudo apt install
 sudo add-apt-repository universe
