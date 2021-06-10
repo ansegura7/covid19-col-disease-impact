@@ -105,12 +105,14 @@ def tracking_signal(y_truth, y_forecasted, ci_tolerance):
     return ts_period, ts_total
 
 # Util function - Read dict from JSON file
-def get_dict_from_json(json_path):
+def get_dict_from_json(json_path, encoding="UTF-8"):
     result = dict()
-    
-    with open(json_path) as f:
-        result = json.load(f)
-    
+    try:
+        with open(json_path, encoding=encoding) as f:
+            result = json.load(f)
+    except Exception as e:
+        print(e)
+        
     return result
 
 # Util function - Read dict from YAML file
