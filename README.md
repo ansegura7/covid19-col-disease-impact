@@ -45,3 +45,6 @@ sudo apt install python3-statsmodels
 - Created by <a href="https://github.com/ansegura7">Andrés Segura Tinoco</a>
 - Created on Jul 15, 2020
 - Last update on Sep 06, 2021
+
+## Acknowledgements
+We would like to make a special acknowledgement to the National Health Institute of Colombia.
