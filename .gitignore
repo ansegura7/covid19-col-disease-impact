@@ -5,4 +5,4 @@
 *_aggr_data.csv
 *_forecast.csv
 *__pycache__*
-article/*
+docs/article/*
