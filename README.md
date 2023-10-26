@@ -1,8 +1,13 @@
-# Impact of Covid-19 in Colombia
-Development and evaluation of mathematical and epidemiological models that support decision-making in response to the Covid-19 emergency in Colombia. The project was approached from the perspective of data science, using Data Analytics and Machine Learning techniques.
+# Analytical reference framework to analyze non‑COVID‑19 events
+
+## Impact of Covid-19 in Colombia
+Development and evaluation of mathematical and epidemiological models that support decision-making in response to the Covid-19 emergency in Colombia. The project was approached from the perspective of data science, using data analytics and machine learning techniques.
+
+## Papers
+This work has been published as an article in the journal Population Health Metrics. A draft of the paper can be found <a href="https://github.com/argrecsys/arg-miner/tree/main/papers/giq23">here</a> and the online version <a href="https://pophealthmetrics.biomedcentral.com/articles/10.1186/s12963-023-00316-8">here</a>.
 
 ## Framework
-The analytical framework proposed and implemented in this work, named ANE from “Analytics for NoCOVID Events” adapts the ASUM-DM (Analytics Solutions Unified Method for Data Mining) methodology to include and handle specific characteristic of health events and its data. The proposed framework can be seen in the following image.
+The framework proposed and implemented in this work, named “Analytics for Non-COVID-19 Events” (ANE, from now on), adapts the ASUM-DM (Analytics Solutions Unified Method for Data Mining) methodology to include and handle specific characteristics of health events and their underlying data. The proposed framework can be seen in the following image.
 
 ![analytical-framework](https://github.com/ansegura7/covid19-col-disease-impact/blob/master/images/framework.png?raw=true)
 
@@ -12,7 +17,7 @@ The proposed analytical framework was mainly implemented in 2 software component
 2. <a href="https://github.com/ansegura7/covid19-col-disease-impact/tree/master/solution-pred">Predictive Engine</a>
 
 ## Events / Diseases
-The selected events on which the proposed framework was applied are:
+The selected events to which we applied the proposed framework are:
 1. Tuberculosis (TB)
 2. Suicide Attempt (SA)
 3. Infant Mortality (IM)
